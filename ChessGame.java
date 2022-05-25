@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class ChessGame{
   private Player[] players;
-  private Board board;
+  private ChessBoard board;
   private Player currentTurn;
   private boolean status;
   private ArrayList<Move> scoreSheet;
