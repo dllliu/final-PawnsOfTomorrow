@@ -1,27 +1,29 @@
 
 public abstract class Piece{
 
-  private String color;
-  private String type;
+  private boolean white = false;
+  private boolean captured = false;
 
-  public Piece(String type, String color){
-    this.type = type;
-    this.color = color;
+
+  public Piece(boolean isWhite){
+    this.setWhite(white);
   }
 
-  public String getColor(String color){
-    return this.color;
+  public boolean isWhite(){
+    return this.white;
   }
 
-  public String getType(String type){
-    return this.type;
+  public void setWhite(boolean white){
+    this.white = white;
   }
 
-  public String setType(String type){
-    this.type = type;
+  public boolean isCaptured(){
+    return this.captured;
   }
 
-  public int getValue(){
-    return this.type.getValue();
+  public void setCaptured(boolean killed){
+     this.captured = captured;
   }
+
+  public abstract boolean canMove(board board, int initialX, int initialY);
 }
