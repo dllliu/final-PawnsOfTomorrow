@@ -6,6 +6,13 @@ public class King extends Piece{
     super(white);
   }
 
+  @Override
+     public String toString(){
+         if(this.isWhite() == true) return "♔";
+        return "♚";
+     }
+
+
   public boolean isCastleDone(){
     return this.hasCastled;
   }
@@ -14,7 +21,8 @@ public class King extends Piece{
     this.hasCastled = hasCastled;
   }
 
-  public boolean canMove(board board, Square initial, Square dest){
+@Override
+  public boolean canMove(ChessBoard board, Square initial, Square dest){
     if (dest.getPiece().isWhite() == this.isWhite()){
       return false;
     }
@@ -26,10 +34,11 @@ public class King extends Piece{
       return this.isValidCastle(board, initial, dest);
     }
 
-    private boolean isValidCastle(board board, Square start, Square end){
+    private boolean isValidCastle(ChessBoard board, Square start, Square end){
       if(this.isCastleDone()){
         return false;
       }
       //code for returning true or false for castle
-    }
+      return true;
+}
 }

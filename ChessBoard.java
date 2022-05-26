@@ -2,7 +2,7 @@
 import java.util.*;
 
 public class ChessBoard{
-  private String[][] board;
+  private Square[][] board;
   private ArrayList<String> removedPieces;
   private ArrayList<String> currentPieces;
 
@@ -20,7 +20,7 @@ public class ChessBoard{
     System.out.println("__________________");
     System.out.println("__________________");
 
-    c.updateMove("N", 1, 2, 3, 3);
+    //c.updateMove("N", 1, 2, 3, 3);
     c.printBoard(true);
     System.out.println("__________________");
     System.out.println("__________________");
@@ -31,12 +31,7 @@ public class ChessBoard{
 
   //Constructor
   public ChessBoard(){
-    board=new String[8][8];
-    for (int i=0;i<board.length;i++){
-      for (int j=0;j<board[i].length;j++){
-        board[i][j]=" ";
-      }
-    }
+    board=new Square[8][8];
     removedPieces=new ArrayList<String>();
     //Need to create separate currentPieces for white and black
     currentPieces=new ArrayList<String>();
@@ -78,18 +73,27 @@ public class ChessBoard{
     board[6][6]= new Square(6,6,new Pawn(false));
     board[6][7]= new Square(6,7,new Pawn(false));
 
-    for(int i=2; i<= 6; i++){
+    for(int i=2; i< 6; i++){
       for(int j=0; j<8; j++){
         board[i][j] = new Square(i,j, null);
       }
     }
   }
 
+  public Square getSquare(int x, int y){
+      if (x < 0 || x > 7 || y < 0 || y > 7) {
+          throw new IllegalArgumentException("Index out of bounds");
+      }
+      return board[x][y];
+  }
+
   //Makes move given piece and coordinates
+
+/*
   public boolean updateMove(String piece, int initialX, int initialY, int finalX, int finalY){
     if (board[initialX-1][initialY-1].equals(piece)){ //and it is a legal move
-      board[initialX-1][initialY-1]=" ";
-      if (!(board[finalX-1][finalY-1].equals(" "))){
+      board[initialX-1][initialY-1]=null;
+      if (!(board[finalX-1][finalY-1].equals(null))){
         removedPieces.add(board[finalX-1][finalY-1]);
         currentPieces.remove(board[finalX-1][finalY-1]);
       }
@@ -98,6 +102,7 @@ public class ChessBoard{
     }
     return false;
   }
+*/
 
   //Displays board given side to display from
   public void printBoard(boolean whiteView){
@@ -107,7 +112,7 @@ public class ChessBoard{
         System.out.print(k);
         k--;
         for (int j=0;j<board[i].length;j++){
-          System.out.print(" "+board[i][j]);
+          System.out.print(" "+ board[i][j].getPiece().toString());
         }
         System.out.println();
       }
@@ -118,7 +123,7 @@ public class ChessBoard{
       for (int i=0;i<board.length;i++){
         System.out.print(i+1);
         for (int j=board[i].length-1;j>=0;j--){
-          System.out.print(" "+board[i][j]);
+          System.out.print(" "+ board[i][j].getPiece().toString());
         }
         System.out.println();
       }

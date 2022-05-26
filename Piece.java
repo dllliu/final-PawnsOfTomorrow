@@ -26,4 +26,7 @@ public abstract class Piece{
   }
 
   public abstract boolean canMove(ChessBoard board, Square initialX, Square initialY);
+
+  public abstract String toString();
+
 }
