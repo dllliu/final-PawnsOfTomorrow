@@ -5,6 +5,15 @@ public class ChessBoard{
   private String[][] board;
   private ArrayList<String> removedPieces;
   private ArrayList<String> currentPieces;
+  private Player p1 = new Player();
+
+  public ArrayList<String> getRemovedPieces(){
+    return removedPieces;
+  }
+
+  public ArrayList<String> getCurrentPieces(){
+    return currentPieces;
+  }
 
   public static void main(String[] args){
     ChessBoard c = new ChessBoard();
@@ -20,12 +29,11 @@ public class ChessBoard{
     System.out.println("__________________");
     System.out.println("__________________");
 
-    c.updateMove("N", 1, 2, 3, 3);
+    c.updateMove("N", 2, 1, 3, 3);
     c.printBoard(true);
     System.out.println("__________________");
     System.out.println("__________________");
     System.out.println("__________________");
-
     c.printBoard(false);
   }
 
@@ -51,7 +59,7 @@ public class ChessBoard{
     board[0][6]="N";
     board[0][7]="R";
 
-    board[1][0]="P";
+    board[1][0]="♕";
     board[1][1]="P";
     board[1][2]="P";
     board[1][3]="P";
@@ -81,13 +89,13 @@ public class ChessBoard{
 
   //Makes move given piece and coordinates
   public boolean updateMove(String piece, int initialX, int initialY, int finalX, int finalY){
-    if (board[initialX-1][initialY-1].equals(piece)){ //and it is a legal move
-      board[initialX-1][initialY-1]=" ";
-      if (!(board[finalX-1][finalY-1].equals(" "))){
-        removedPieces.add(board[finalX-1][finalY-1]);
-        currentPieces.remove(board[finalX-1][finalY-1]);
+    if (p1.canMove( piece,  initialX,  initialY,  finalX,  finalY,  board)&&board[board.length-initialY][initialX-1].equals(piece)){ //and it is a legal move
+      board[board.length-initialY][initialX-1]=" ";
+      if (!(board[board.length-finalY][finalX-1].equals(" "))){
+        removedPieces.add(board[board.length-finalY][finalX-1]);
+        currentPieces.remove(board[board.length-finalY][finalX-1]);
       }
-      board[finalX-1] [finalY-1]=piece;
+      board[board.length-finalY] [finalX-1]=piece;
       return true;
     }
     return false;
@@ -109,8 +117,10 @@ public class ChessBoard{
       System.out.println();
     }
     else{
-      for (int i=0;i<board.length;i++){
-        System.out.print(i+1);
+      int m =1;
+      for (int i=board.length-1;i>=0;i--){
+        System.out.print(m);
+        m++;
         for (int j=board[i].length-1;j>=0;j--){
           System.out.print(" "+board[i][j]);
         }
