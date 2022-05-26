@@ -3,6 +3,7 @@ public class Knight extends Piece{
     super(isWhite);
   }
 
+  @Override
   public boolean canMove(ChessBoard board, Square initial, Square dest){
     if (dest.getPiece().isWhite() == this.isWhite()){
       return false;
