@@ -25,7 +25,7 @@ public abstract class Piece{
      this.captured = captured;
   }
 
-  public abstract boolean canMove(ChessBoard board, Square initialX, Square initialY);
+  public abstract boolean canMove(ChessBoard board, Square initial, Square dest);
 
   public abstract String toString();
 
