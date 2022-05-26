@@ -36,6 +36,12 @@ public class ChessBoard{
     //Need to create separate currentPieces for white and black
     currentPieces=new ArrayList<String>();
 
+    for(int i=2; i< 6; i++){
+      for(int j=0; j<8; j++){
+        board[i][j] = new Square(i,j,new Pawn(false)); //need a better solution
+      }
+    }
+
     //Board is initialized from white's perspective
     board[0][0]= new Square(0,0, new Rook(true));
     board[0][1]= new Square(0,1,new Knight(true));
@@ -72,12 +78,6 @@ public class ChessBoard{
     board[6][5]= new Square(6,5,new Pawn(false));
     board[6][6]= new Square(6,6,new Pawn(false));
     board[6][7]= new Square(6,7,new Pawn(false));
-
-    for(int i=2; i< 6; i++){
-      for(int j=0; j<8; j++){
-        board[i][j] = new Square(i,j, null);
-      }
-    }
   }
 
   public Square getSquare(int x, int y){

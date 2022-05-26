@@ -6,7 +6,7 @@ public abstract class Piece{
 
 
   public Piece(boolean isWhite){
-    this.setWhite(white);
+    this.setWhite(isWhite);
   }
 
   public boolean isWhite(){
