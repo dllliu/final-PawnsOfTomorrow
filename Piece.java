@@ -5,6 +5,7 @@ public abstract class Piece{
   private boolean captured = false;
   private boolean hasMoved;
   private boolean emPassanAble;
+  private ChessBoard board;
 
 
   public Piece(boolean isWhite){

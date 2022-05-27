@@ -11,9 +11,9 @@ public class Bishop extends Piece{
 
   @Override
   public boolean canMove(ChessBoard board, Square initial, Square dest){
-    if (Math.abs(initial.getY() == dest.getY()) && Math.abs(initial.getX() == dest.getX())){
+    if ((initial.getY() == dest.getY() && initial.getX() == dest.getX())) {
       return false;
-    }else if (Math.abs(initial.getY() - dest.getY()) != Math.abs(initial.getX() - dest.getX())){
+    }else if (Math.abs(initial.getY() - dest.getY()) != (Math.abs(initial.getX() - dest.getX()))) {
       return false;
     }
     int rowInc = 0;
@@ -30,10 +30,12 @@ public class Bishop extends Piece{
     }
     int totalInc = rowInc + colInc;
     for(int x= initial.getX() + rowInc; x<dest.getX(); x+= rowInc){
+    /*
       if(!(board[x][y]).equals(" ")) { //check if its not blank class
         return false;
       }
-      totInc += colInc;
+      */
+      totalInc += colInc;
     }
     return true;
 }

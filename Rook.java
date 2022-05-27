@@ -23,11 +23,14 @@ public class Rook extends Piece{
       }else{
         inc = -1;
       }
+      /*
     for (int x = initial.getX() + inc; x < dest.getX(); x+= inc){
-      if (!(board[x][dest.getY()]).equals(" ")) { //check if its not blank class
+
+      if (!(ChessBoard.board[x][dest.getY()]).equals(" ")) { //check if its not blank class
         return false;
       }
     }
+    */
     }
     if(dest.getY() != initial.getY()){
       if(dest.getY() > initial.getY()){
@@ -35,11 +38,15 @@ public class Rook extends Piece{
       }else{
         inc = -1;
       }
+      /*
     for (int y = initial.getY() + inc; y < dest.getY(); y+= inc){
-      if(!(board[dest.getX()][y]).equals(" ")) { //check if its not blank class
+
+      if(!(ChessBoard.board[dest.getX()][y]).equals(" ")) { //check if its not blank class
         return false;
       }
+
     }
+    */
     }
     return true;
 }

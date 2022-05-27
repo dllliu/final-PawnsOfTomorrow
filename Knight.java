@@ -20,7 +20,6 @@ public class Knight extends Piece{
 		if(Math.abs(dest.getX() - initial.getX()) == 1 && Math.abs(dest.getY() - initial.getY()) == 2){
 			return true;
 		}
-
 		return false;
     }
 }
