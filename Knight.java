@@ -14,9 +14,14 @@ public class Knight extends Piece{
     if (dest.getPiece().isWhite() == this.isWhite()){
       return false;
     }else{
-      int x = Math.abs(initial.getX() - dest.getX()); //horizontal distance from initial to destination
-      int y = Math.abs(initial.getY() - dest.getY()); //vertical distance from initial to destination
-      return (x*y) == 2;
+      if(Math.abs(dest.getX() - initial.getX()) == 2 && (dest.getY() - initial.getY() == 1)){
+			return true;
+		}
+		if(Math.abs(dest.getX() - initial.getX()) == 1 && Math.abs(dest.getY() - initial.getY()) == 2){
+			return true;
+		}
+
+		return false;
     }
 }
 }

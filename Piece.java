@@ -3,6 +3,8 @@ public abstract class Piece{
 
   private boolean white = false;
   private boolean captured = false;
+  private boolean hasMoved;
+  private boolean emPassanAble;
 
 
   public Piece(boolean isWhite){
