@@ -1,9 +1,9 @@
 
 public abstract class Piece{
 
-  private boolean isWhite;
+  public boolean isWhite;
   private boolean captured = false;
-  private boolean hasMoved;
+  public boolean hasMoved;
   private boolean emPassanAble;
   private ChessBoard board;
 
