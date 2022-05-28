@@ -1,7 +1,7 @@
 
 public abstract class Piece{
 
-  private boolean white = false;
+  private boolean isWhite;
   private boolean captured = false;
   private boolean hasMoved;
   private boolean emPassanAble;
@@ -13,11 +13,11 @@ public abstract class Piece{
   }
 
   public boolean isWhite(){
-    return this.white;
+    return this.isWhite;
   }
 
   public void setWhite(boolean white){
-    this.white = white;
+    this.isWhite = white;
   }
 
   public boolean isCaptured(){
@@ -28,7 +28,7 @@ public abstract class Piece{
      this.captured = captured;
   }
 
-  public abstract boolean canMove(ChessBoard board, Square initial, Square dest);
+  public abstract boolean canMove(Piece[][] board, int initialX, int initialY, int destX, int destY);
 
   public abstract String toString();
 

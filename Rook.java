@@ -10,43 +10,36 @@ public class Rook extends Piece{
    }
 
   @Override
-  public boolean canMove(ChessBoard board, Square initial, Square dest){
-    if (dest.getPiece().isWhite() == this.isWhite()){
-      return false;
-    }if (initial.getX() != dest.getX() || initial.getY() != dest.getY()){
+  public boolean canMove(Piece[][] board, int initialX, int initialY, int destX, int destY){
+    if (initialX != destX || initialY != initialX){
       return false;
     }
+
     int inc = 0;
-    if(dest.getX() != initial.getX()){
-      if(dest.getX() > initial.getX()){
+    if (initialX != destX){
+      if(initialX < destX){
         inc = 1;
       }else{
         inc = -1;
       }
-      /*
-    for (int x = initial.getX() + inc; x < dest.getX(); x+= inc){
+    for (int x = initialX + inc; x < destX; x+= inc){
 
-      if (!(ChessBoard.board[x][dest.getY()]).equals(" ")) { //check if its not blank class
+      if (board[x][destY] == null) { //check if its not blank class
         return false;
       }
     }
-    */
     }
-    if(dest.getY() != initial.getY()){
-      if(dest.getY() > initial.getY()){
+    if (destY != initialY) {
+      if(destY > initialY){
         inc = 1;
       }else{
         inc = -1;
       }
-      /*
-    for (int y = initial.getY() + inc; y < dest.getY(); y+= inc){
-
-      if(!(ChessBoard.board[dest.getX()][y]).equals(" ")) { //check if its not blank class
+    for (int y = initialY + inc; y < destY; y+= inc){
+      if(board[destX][y] == null) {
         return false;
       }
-
     }
-    */
     }
     return true;
 }
