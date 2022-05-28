@@ -14,7 +14,7 @@ private void newGame(Player p0, Player p1){
   status = false;
   players[0] = p0;
   players[1] = p1;
-  board.reset();
+  board = new ChessBoard();
   if(p0.isWhiteSide()){
     this.currentTurn = p0;
   }else{
@@ -57,7 +57,7 @@ private void newGame(Player p0, Player p1){
     move.getEnd().setPiece(move.getStart().getPiece());
     move.getStart.setPiece(null);
 
-    if(this.currentTurn = players[0]){
+    if(this.currentTurn == players[0]){
       this.currentTurn = players[1];
     }else{
       this.currentTurn = players[0];

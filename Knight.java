@@ -3,13 +3,20 @@ public class Knight extends Piece{
     super(isWhite);
   }
 
-  public boolean canMove(ChessBoard board, Square initial, Square dest){
-    if (dest.getPiece().isWhite() == this.isWhite()){
-      return false;
-    }else{
-      int x = Math.abs(initial.getX() - dest.getX()); //horizontal distance from initial to destination
-      int y = Math.abs(initial.getY() - dest.getY()); //vertical distance from initial to destination
-      return (x*y) == 2;
+@Override
+   public String toString(){
+       if(this.isWhite() == true) return "♘";
+       return "♞";
+   }
+
+  @Override
+  public boolean canMove(Piece[][] board, int initialX, int initialY, int destX, int destY){
+      if(Math.abs(destX - initialX) == 2 && Math.abs(destY - initialY) == 1) {
+			return true;
+		}
+		if(Math.abs(destX - initialX) == 1 && Math.abs(destY - initialY) == 2){
+			return true;
+		}
+		return false;
     }
-}
 }
