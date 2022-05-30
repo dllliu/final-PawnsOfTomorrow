@@ -1,23 +1,23 @@
 
 public abstract class Piece{
 
-  public boolean isWhite;
   private boolean captured = false;
   public boolean hasMoved;
-  private boolean emPassanAble;
+  public boolean emPassanAble;
   private ChessBoard board;
+  public String color;
 
 
-  public Piece(boolean isWhite){
-    this.setWhite(isWhite);
+  public Piece(String color){
+    this.setColor(color);
   }
 
-  public boolean isWhite(){
-    return this.isWhite;
+  public String getColor(){
+    return this.color;
   }
 
-  public void setWhite(boolean white){
-    this.isWhite = white;
+  public void setColor(String color){
+    this.color = color;
   }
 
   public boolean isCaptured(){

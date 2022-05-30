@@ -1,17 +1,17 @@
 public class Pawn extends Piece{
-  public Pawn(boolean white){
-    super(white);
+  public Pawn(String color){
+    super(color);
   }
 
   @Override
      public String toString(){
-         if(this.isWhite() == true) return "♙";
+         if(getColor().equals("white")) return "♙";
         return "♟︎";
      }
 
    @Override
      public boolean canMove(Piece[][] board, int initialX, int initialY, int destX, int destY){
-       if (isWhite){
+       if (getColor().equals("white")) {
          if(initialX > destX){ //cant go to left or right
            return false;
          }
@@ -25,7 +25,7 @@ public class Pawn extends Piece{
        }else if (Math.abs(destX - initialX) == 2){
          if (hasMoved){
            return false;
-         }if (isWhite){
+         }if (getColor().equals("white")) {
            if(board[initialX + 2][initialY] != null){
             return false;
           }else if (board[initialX - 2][initialY] != null){
@@ -41,4 +41,4 @@ public class Pawn extends Piece{
        }
        return true;
      }
-}
+   }

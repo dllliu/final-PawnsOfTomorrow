@@ -1,16 +1,16 @@
 public class Queen extends Piece{
-  public Queen(boolean isWhite){
-    super(isWhite);
+  public Queen(String color){
+    super(color);
   }
 
 @Override
    public String toString(){
-       if(this.isWhite() == true) return "♕";
+       if (getColor().equals("white")) return "♕";
         return "♛";
    }
 
   @Override
   public boolean canMove(Piece[][] board, int initialX, int initialY, int destX, int destY){
-    return new Rook(isWhite).canMove(board, initialX, initialY, destX, destY) || new Bishop(isWhite).canMove(board, initialX, initialY, destX, destY);
+    return new Rook(getColor()).canMove(board, initialX, initialY, destX, destY) || new Bishop(getColor()).canMove(board, initialX, initialY, destX, destY);
 }
 }

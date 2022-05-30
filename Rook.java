@@ -1,11 +1,11 @@
 public class Rook extends Piece{
-  public Rook(boolean isWhite){
-    super(isWhite);
+  public Rook(String color){
+    super(color);
   }
 
 @Override
    public String toString(){
-       if(this.isWhite() == true) return "♖";
+       if (getColor().equals("white")) return "♖";
         return "♜";
    }
 
