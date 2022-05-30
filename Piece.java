@@ -9,15 +9,11 @@ public abstract class Piece{
 
 
   public Piece(String color){
-    this.setColor(color);
+    this.color = color;
   }
 
   public String getColor(){
     return this.color;
-  }
-
-  public void setColor(String color){
-    this.color = color;
   }
 
   public boolean isCaptured(){

@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.*;
 import java.io.IOException;
@@ -37,7 +36,7 @@ public static void main(String[] args) {
     Piece[][] oldBoard = newBoard.board.clone();
   if(!newBoard.canAnyMove(otherColor(color))){
     if(!newBoard.canAnyMove(otherColor(color))){
-      System.out.println("color" + " checkmated " + otherColor(color));
+      System.out.println(color + " checkmated " + otherColor(color));
     }else{
       System.out.println("Game has ended in a stalemate");
     }

@@ -59,6 +59,49 @@ public class ChessBoard{
     return false;
   }
 
+  public static int charToInt(char c){
+      switch(c){
+        case 'a': return 0;
+        case 'b':  return 1;
+        case 'c':  return 2;
+        case 'd':  return 3;
+        case 'e':  return 4;
+        case 'f':  return 5;
+        case 'g':  return 6;
+        case 'h':  return 7;
+        default: return 8;
+      }
+    }
+    
+  public static int[] parse(String move){
+     int[] output = new int[4];
+     String[] split = move.split(" ");
+     output[1] = charToInt(Character.toLowerCase(split[0].charAt(0)));
+     output[0] = Integer.parseInt(move.charAt(1) + "") - 1;
+     output[3] = charToInt(Character.toLowerCase(split[1].charAt(0)));
+     output[2] = Integer.parseInt(split[1].charAt(1) + "") - 1;
+     return output;
+   }
+
+   private int[] getKingPos(String color){
+   int r = 0;
+   int c = 0;
+   for(int i =0; i<board.length; i++){
+     for(int j=0; j<board[0].length; j++){
+       if(board[i][j] != null){
+         if(board[i][j].getClass().isInstance(new King("white")) && board[i][j].getColor().equals(color)){
+           r = i;
+           c = j;
+         }
+       }
+     }
+   }
+   int[] out = new int[2];
+   out[0] = r;
+   out[1] = c;
+   return out;
+ }
+
   public void makeMove(String move, String color, boolean willMove) throws IOException {
     int[] moveArr = parse(move);
 
@@ -128,52 +171,7 @@ public class ChessBoard{
     }
   }
 }
-  }
-
-
-  public static int[] parse(String move){
-    int[] output = new int[4];
-    String[] split = move.split(" ");
-    output[1] = charToInt(Character.toLowerCase(split[0].charAt(0)));
-    output[0] = Integer.parseInt(move.charAt(1) + "") - 1;
-    output[3] = charToInt(Character.toLowerCase(split[1].charAt(0)));
-    output[2] = Integer.parseInt(split[1].charAt(1) + "") - 1;
-    return output;
-  }
-
-    public static int charToInt(char c){
-      switch(c){
-        case 'a': return 0;
-        case 'b':  return 1;
-        case 'c':  return 2;
-        case 'd':  return 3;
-        case 'e':  return 4;
-        case 'f':  return 5;
-        case 'g':  return 6;
-        case 'h':  return 7;
-        default: return 8;
-      }
-    }
-
-     private int[] getKingPos(String color){
-       int r = 0;
-       int c = 0;
-       for(int i =0; i<board.length; i++){
-         for(int j=0; j<board[0].length; j++){
-           if(board[i][j] != null){
-             if(board[i][j].getClass().isInstance(new King("white")) && board[i][j].getColor().equals(color)){
-               r = i;
-               c = j;
-             }
-           }
-         }
-       }
-       int[] out = new int[2];
-       out[0] = r;
-       out[1] = c;
-       return out;
-     }
-
+}
      public boolean canAnyMove(String color){
         Piece[][] oldBoard = board.clone();
         for(int i =0; i<board.length; i++){

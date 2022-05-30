@@ -19,4 +19,9 @@ public class Knight extends Piece{
 		}
 		return false;
     }
+
+    public String getColor(){
+		return this.color;
+	}
+  
 }

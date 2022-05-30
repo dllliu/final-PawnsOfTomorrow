@@ -13,4 +13,8 @@ public class Queen extends Piece{
   public boolean canMove(Piece[][] board, int initialX, int initialY, int destX, int destY){
     return new Rook(getColor()).canMove(board, initialX, initialY, destX, destY) || new Bishop(getColor()).canMove(board, initialX, initialY, destX, destY);
 }
+
+public String getColor(){
+		return this.color;
+	}
 }

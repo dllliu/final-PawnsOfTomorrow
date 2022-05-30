@@ -41,4 +41,9 @@ public class Pawn extends Piece{
        }
        return true;
      }
+
+     public String getColor(){
+		return this.color;
+	}
+  
    }

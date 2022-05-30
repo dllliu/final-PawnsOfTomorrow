@@ -43,4 +43,8 @@ public class Rook extends Piece{
     }
     return true;
 }
+
+public String getColor(){
+		return this.color;
+	}
 }

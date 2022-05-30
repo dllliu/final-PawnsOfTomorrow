@@ -24,6 +24,10 @@ public class King extends Piece{
     this.hasCastled = hasCastled;
   }
 
+  public String getColor(){
+		return this.color;
+	}
+
 
 @Override
   public boolean canMove(Piece[][] board, int initialX, int initialY, int destX, int destY){
