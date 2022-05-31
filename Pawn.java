@@ -22,7 +22,8 @@ public class Pawn extends Piece{
        }
        if (Math.abs(destX - initialX) > 2){
          return false;
-       }else if (Math.abs(destX - initialX) == 2){
+        }
+       else if (Math.abs(destX - initialX) == 2){
          if (hasMoved){
            return false;
          }if (getColor().equals("white")) {
@@ -39,11 +40,17 @@ public class Pawn extends Piece{
            return false;
          }
        }
+       if (Math.abs(destX-initialX)==1&&Math.abs(destY-destX)==1){
+         if (board[initialX-2][initialY]!=board[initialX-1][initialY]||board[initialX][initialY]!= board[initialX-1][initialY]){
+           return true;
+         }
+       }
        return true;
      }
 
      public String getColor(){
 		return this.color;
+
 	}
 
    }
