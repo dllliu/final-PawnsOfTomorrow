@@ -6,7 +6,7 @@ public class Pawn extends Piece{
   public Pawn(boolean isWhite){
     name="Pawn";
     value=1;
-    jumpTwo=true;
+    jumpTwo=true; 
   }
 
   public boolean promote(Pawn piece, int initialX,int initialY, int finalX, int finalY, board, Piece newPiece){
