@@ -35,7 +35,7 @@ public class King extends Piece{
       if(hasMoved == true){
         return false;
       }
-      if(Math.abs(destY - initialY) == 2 && initialX == destX){
+      if(Math.abs(destY - initialY) == 2||Math.abs(destY - initialY) == 3 && initialY == destY){
         if (board[destX][destY + 1] != null || board[destX][destY + 2] != null){ //if Pieces between
           hasCastled = false;
           return false;
