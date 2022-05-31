@@ -15,22 +15,22 @@ public static void main(String[] args) {
     Scanner in = new Scanner(System.in);
     String move = in.nextLine();
 
-    if(possibleStalemate){
+    if (move.contains("resign")){
+      System.out.println(color + " reigns");
+      System.out.println(otherColor(color) + " wins");
+      return;
+    }if(possibleStalemate){
       if(move.toLowerCase().contains("draw") || move.toLowerCase().contains("stalemate")){
         System.out.println("The game has ended in a draw");
         return;
       }else{
         possibleStalemate = false;
       }
-    } if (move.contains("resign")){
-      System.out.println(color + " reigns");
-      System.out.println(otherColor(color) + " wins");
-      return;
-    }try{
+    } try{
       newBoard.makeMove(move, color, true);
-    }catch(IOException e){
+    }catch(IllegalArgumentException e){
       e.printStackTrace();
-      System.out.println("Invalid move");
+      System.out.println("Invalid move: Enter Moves in following format: Character+number + space + Character+number");
       continue;
     }
 
