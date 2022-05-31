@@ -12,52 +12,36 @@ public class Pawn extends Piece{
         return "♟︎";
      }
 
-  public Pawn(boolean isWhite){
-    name="Pawn";
-    value=1;
-    jumpTwo=true;
-  }
-
-  public boolean canMove(ChessBoard board, Square initial, Square dest){
-    //Not same color
-    if (dest.getPiece().isWhite() == this.isWhite()){
-      return false;
-    }
-    //Capture one
-    if (dest.getX()==initial.getX()+1||dest.getX()==initial.getX()-1&&dest.getY()-initial.getY()==1&&dest.getPiece()!=Blank){
-      return true;
-    }
-    //Enpassant
-    if (scoreSheet.get(scoreSheet.size()-1).getDist()==2){
-      if (dist.getY()==initial.getY()&&dist.getX()==initial.getX()+1||dist.getX()==initial.getX()-1){//make sure next square is not same pawn
-        return true;
-      }
-    }
-    //Empty
-    if(dest.getPiece()) != Blank){
-      return false;
-    }
-    //JumpTwo
-    if(jumpTwo&&dest.getY()-initial.getY()==2){
-      return true;
-    }
-    //jumpOne
-    if(dest.getY()-initial.getY()==1){
-      return true;
-    }
-  }
-
-  public boolean promote(ChessBoard board, Square initial, Square dest){
-    if (White){
-      if (initial.getY()==7&&dest.getY()==8&&(dest.getY()==BLANK)){
-        return true;
-      }
-    }
-    if (!isWhite){
-      if (initial.getY()==2&&dest.getY()==1&&dest.getY()==BLANK){
-        return true;
-      }
-    }
-    return false;
-  }
+   @Override
+     public boolean canMove(Piece[][] board, int initialX, int initialY, int destX, int destY){
+       if (isWhite){
+         if(initialX > destX){ //cant go to left or right
+           return false;
+         }
+       }else{
+         if (destX > initialX){
+           return false;
+         }
+       }
+       if (Math.abs(destX - initialX) > 2){
+         return false;
+       }else if (Math.abs(destX - initialX) == 2){
+         if (hasMoved){
+           return false;
+         }if (isWhite){
+           if(board[initialX + 2][initialY] != null){
+            return false;
+          }else if (board[initialX - 2][initialY] != null){
+            return false;
+          }
+         }
+       }else{
+         if (Math.abs(destY - initialY) != 1 || Math.abs(destX - initialX) != 1){
+           return false;
+         } if (board[destX][destY] == null){
+           return false;
+         }
+       }
+       return true;
+     }
 }

@@ -10,13 +10,7 @@ public class Queen extends Piece{
    }
 
   @Override
-  public boolean canMove(ChessBoard board, Square initial, Square dest){
-    if (dest.getPiece().isWhite() == this.isWhite()){
-      return false;
-    }
-      if(Math.abs(initial.getY() - dest.getY()) == Math.abs(initial.getX() - dest.getX())){
-        return true;
-    }
-    return (Math.abs(initial.getY() - dest.getY())) == 0 || (Math.abs(initial.getX() - dest.getX())) == 0;
+  public boolean canMove(Piece[][] board, int initialX, int initialY, int destX, int destY){
+    return new Rook(isWhite).canMove(board, initialX, initialY, destX, destY) || new Bishop(isWhite).canMove(board, initialX, initialY, destX, destY);
 }
 }
