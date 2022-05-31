@@ -72,7 +72,7 @@ public class ChessBoard{
         default: return 8;
       }
     }
-    
+
   public static int[] parse(String move){
      int[] output = new int[4];
      String[] split = move.split(" ");
@@ -269,41 +269,29 @@ public class ChessBoard{
   }
 */
 
-  public String toString(){
-    String string = "";
-    int count1 = 0;
-    for(Piece[] pieces: board){
-      int count2 = 0;
-      for(Piece piece: pieces){
-          if(piece==null){
-              if(count1%2 == 0){
-                if(count2%2 == 0){
-                  string += "##";
-                }else{
-                  string += "  ";
-                }
-              }else{
-                  if(count2%2 == 0){
-                    string += "  ";
-              }else{
-                  string += "##";
-                }
-              }
-            }else{
-              string += piece;
-            } string += " ";
-            count2 ++;
-          }count1 ++;
-          string += "\n";
-        }
-      String reverseString = "";
-      reverseString += "  a  b  c  d  e  f  g  h \n";
-      String[] stringSplit = string.split("\n");
-      for(int x = stringSplit.length-1; x >= 0; x--){
-          reverseString += x+1 + " " + stringSplit[x] + "\n";
+public String toString(){
+  String string = "";
+  int count1 = 0;
+  for(Piece[] pieces: board){
+    int count2 = 0;
+    for(Piece piece: pieces){
+        if(piece==null){
+            string += "  ";
+          }else{
+            string += piece;
+            }
+            string += " ";
+          }
+        string += "\n";
       }
-      return reverseString;
-  }
+    String reverseString = "";
+    String[] stringSplit = string.split("\n");
+    for(int x = stringSplit.length-1; x >= 0; x--){
+        reverseString += x+1 + " " + stringSplit[x] + "\n";
+    }
+    reverseString += "  a b c d e f g h \n";
+    return reverseString;
+}
 
 
 }
