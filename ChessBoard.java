@@ -60,54 +60,56 @@ public class ChessBoard{
   }
 
   public static int charToInt(char c){
-      switch(c){
-        case 'a': return 0;
-        case 'b':  return 1;
-        case 'c':  return 2;
-        case 'd':  return 3;
-        case 'e':  return 4;
-        case 'f':  return 5;
-        case 'g':  return 6;
-        case 'h':  return 7;
-        default: return 8;
-      }
+    switch(c){
+      case 'a': return 0;
+      case 'b':  return 1;
+      case 'c':  return 2;
+      case 'd':  return 3;
+      case 'e':  return 4;
+      case 'f':  return 5;
+      case 'g':  return 6;
+      case 'h':  return 7;
+      default: return 8;
     }
+  }
 
   public static int[] parse(String move){
-     int[] output = new int[4];
-     String[] split = move.split(" ");
-     output[1] = charToInt(Character.toLowerCase(split[0].charAt(0)));
-     output[0] = Integer.parseInt(move.charAt(1) + "") - 1;
-     output[3] = charToInt(Character.toLowerCase(split[1].charAt(0)));
-     output[2] = Integer.parseInt(split[1].charAt(1) + "") - 1;
-     return output;
-   }
+    int[] output = new int[4];
+    String[] split = move.split(" ");
+    output[1] = charToInt(Character.toLowerCase(split[0].charAt(0)));
+    output[0] = Integer.parseInt(move.charAt(1) + "") - 1;
+    output[3] = charToInt(Character.toLowerCase(split[1].charAt(0)));
+    output[2] = Integer.parseInt(split[1].charAt(1) + "") - 1;
+    return output;
+  }
 
-   private int[] getKingPos(String color){
-   int r = 0;
-   int c = 0;
-   for(int i =0; i<board.length; i++){
-     for(int j=0; j<board[0].length; j++){
-       if(board[i][j] != null){
-         if(board[i][j].getClass().isInstance(new King("white")) && board[i][j].getColor().equals(color)){
-           r = i;
-           c = j;
-         }
-       }
-     }
-   }
-   int[] out = new int[2];
-   out[0] = r;
-   out[1] = c;
-   return out;
- }
+  private int[] getKingPos(String color){
+    int r = 0;
+    int c = 0;
+    for(int i =0; i<board.length; i++){
+      for(int j=0; j<board[0].length; j++){
+        if(board[i][j] != null){
+          if(board[i][j].getClass().isInstance(new King("white")) && board[i][j].getColor().equals(color)){
+            r = i;
+            c = j;
+          }
+        }
+      }
+    }
+    int[] out = new int[2];
+    out[0] = r;
+    out[1] = c;
+    return out;
+  }
 
   public void makeMove(String move, String color, boolean willMove) throws IOException {
     int[] moveArr = parse(move);
 
     if(board[moveArr[0]][moveArr[1]] == null){
       throw new IOException();
-    } if(board[moveArr[0]][moveArr[1]].getColor().equals(color)){
+    } if(!(board[moveArr[0]][moveArr[1]].getColor().equals(color))) {
+      System.out.println(board[moveArr[0]][moveArr[1]].getColor());
+      System.out.println(color);
       throw new IOException();
     }if(board[moveArr[2]][moveArr[3]] != null){
       if (board[moveArr[2]][moveArr[3]].getColor().equals(color)){
@@ -125,7 +127,7 @@ public class ChessBoard{
           if(willMove){
             ((King) board[moveArr[2]][moveArr[3]]).hasMoved = true;
           }
-          if  (((King) board[moveArr[2]][moveArr[3]]).hasCastled) {
+          if (((King) board[moveArr[2]][moveArr[3]]).hasCastled) {
             if(moveArr[3] - moveArr[1] == 2){
               board[moveArr[2]][moveArr[3]-1] = board[moveArr[2]][moveArr[3]+1];
               board[moveArr[2]][moveArr[3]+1] = null;
@@ -159,114 +161,114 @@ public class ChessBoard{
               }board[moveArr[2]][moveArr[3]] = replacement;
             }
           }else{
-             if(moveArr[2] == 0){
-               switch(move.split(" ")[2].charAt(0)){
-                 case 'N': replacement = new Knight("black"); break;
-                 case 'B': replacement = new Bishop("black"); break;
+            if(moveArr[2] == 0){
+              switch(move.split(" ")[2].charAt(0)){
+                case 'N': replacement = new Knight("black"); break;
+                case 'B': replacement = new Bishop("black"); break;
                 default: replacement = new Queen("black"); break;
+              }
+              board[moveArr[2]][moveArr[3]] = replacement;
+            }
           }
-          board[moveArr[2]][moveArr[3]] = replacement;
         }
       }
     }
   }
-}
-}
-     public boolean canAnyMove(String color){
-        Piece[][] oldBoard = board.clone();
-        for(int i =0; i<board.length; i++){
-          for(int j=0; j<board[0].length; j++){
-            for(int x =0; x<board.length; x++){
-              for(int y=0; y<board[0].length; y++){
-                try{
-                  if (board[i][j] != null){
-                     if(board[i][j].getColor().equals(color)){
-                        makeMove(convertMoveString(i, j, x, y), board[x][y].getColor(), false);
-                         board = oldBoard;
-                         return true;
-                  }
+  public boolean canAnyMove(String color){
+    Piece[][] oldBoard = board.clone();
+    for(int i =0; i<board.length; i++){
+      for(int j=0; j<board[0].length; j++){
+        for(int x =0; x<board.length; x++){
+          for(int y=0; y<board[0].length; y++){
+            try{
+              if (board[i][j] != null){
+                if(board[i][j].getColor().equals(color)){
+                  makeMove(convertMoveString(i, j, x, y), board[x][y].getColor(), false);
+                  board = oldBoard;
+                  return true;
                 }
-                board = oldBoard;
-              } catch (Exception e){
-                board = oldBoard;
               }
+              board = oldBoard;
+            } catch (Exception e){
+              board = oldBoard;
             }
           }
         }
-     }
-     board = oldBoard;
-     return false;
-   }
-
-   private String convertMoveString(int r, int c, int destR, int destC){
-     String output = "";
-      switch(c){
-        case 0: output += 'a'; break;
-        case 1: output += 'b'; break;
-        case 2: output += 'c'; break;
-        case 3: output += 'd'; break;
-        case 4: output += 'e'; break;
-        case 5: output += 'f'; break;
-        case 6: output += 'g'; break;
-        case 7: output += 'h'; break;
-        default: output += 'a'; break;
       }
-
-        int temp = r + 1;
-        output += temp + "";
-        output += " ";
-
-        switch(destC){
-          case 0: output += 'a'; break;
-          case 1: output += 'b'; break;
-          case 2: output += 'c'; break;
-          case 3: output += 'd'; break;
-          case 4: output += 'e'; break;
-          case 5: output += 'f'; break;
-          case 6: output += 'g'; break;
-          case 7: output += 'h'; break;
-          default: output += 'a'; break;
-        }
-
-        int t = destR + 1;
-        output += t + "";
-        return output;
-   }
-
-   public boolean staleMate(String color){
-      return false;
     }
+    board = oldBoard;
+    return false;
+  }
+
+  private String convertMoveString(int r, int c, int destR, int destC){
+    String output = "";
+    switch(c){
+      case 0: output += 'a'; break;
+      case 1: output += 'b'; break;
+      case 2: output += 'c'; break;
+      case 3: output += 'd'; break;
+      case 4: output += 'e'; break;
+      case 5: output += 'f'; break;
+      case 6: output += 'g'; break;
+      case 7: output += 'h'; break;
+      default: output += 'a'; break;
+    }
+
+    int temp = r + 1;
+    output += temp + "";
+    output += " ";
+
+    switch(destC){
+      case 0: output += 'a'; break;
+      case 1: output += 'b'; break;
+      case 2: output += 'c'; break;
+      case 3: output += 'd'; break;
+      case 4: output += 'e'; break;
+      case 5: output += 'f'; break;
+      case 6: output += 'g'; break;
+      case 7: output += 'h'; break;
+      default: output += 'a'; break;
+    }
+
+    int t = destR + 1;
+    output += t + "";
+    return output;
+  }
+
+  public boolean staleMate(String color){
+    return false;
+  }
 
 
 
 
   //Displays board given side to display from
-/*
+  /*
   public String toString(){
-     int k=8;
-     for (int i=0;i<8;i++){
-       System.out.print(k);
-       k--;
-       for (int j=0;j<board[i].length;j++){
-         System.out.print(" "+ board[i][j]);
-       }
-       System.out.println();
-     }
-     System.out.print("  a b c d e f g h");
-     System.out.println();
+  int k=8;
+  for (int i=0;i<8;i++){
+  System.out.print(k);
+  k--;
+  for (int j=0;j<board[i].length;j++){
+  System.out.print(" "+ board[i][j]);
+}
+System.out.println();
+}
+System.out.print("  a b c d e f g h");
+System.out.println();
 
- }
-  else{
-    for (int i=0;i<board.length;i++){
-      System.out.print(i+1);
-      for (int j=board[i].length-1;j>=0;j--){
-        System.out.print(" "+ board[i][j]);
-      }
-      System.out.println();
-    }
-    System.out.print("  h g f e d c b a");
-    System.out.println();
-  }
+}
+else{
+for (int i=0;i<board.length;i++){
+System.out.print(i+1);
+for (int j=board[i].length-1;j>=0;j--){
+System.out.print(" "+ board[i][j]);
+}
+System.out.println();
+}
+System.out.print("  h g f e d c b a");
+System.out.println();
+}
 */
 
 public String toString(){
@@ -275,23 +277,21 @@ public String toString(){
   for(Piece[] pieces: board){
     int count2 = 0;
     for(Piece piece: pieces){
-        if(piece==null){
-            string += "  ";
-          }else{
-            string += piece;
-            }
-            string += " ";
-          }
-        string += "\n";
+      if(piece==null){
+        string += "  ";
+      }else{
+        string += piece;
       }
-    String reverseString = "";
-    String[] stringSplit = string.split("\n");
-    for(int x = stringSplit.length-1; x >= 0; x--){
-        reverseString += x+1 + " " + stringSplit[x] + "\n";
+      string += " ";
     }
-    reverseString += "  a b c d e f g h \n";
-    return reverseString;
+    string += "\n";
+  }
+  String reverseString = "";
+  String[] stringSplit = string.split("\n");
+  for(int x = stringSplit.length-1; x >= 0; x--){
+    reverseString += x+1 + " " + stringSplit[x] + "\n";
+  }
+  reverseString += "  a b c d e f g h \n";
+  return reverseString;
 }
-
-
 }

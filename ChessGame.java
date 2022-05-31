@@ -29,6 +29,7 @@ public static void main(String[] args) {
     }try{
       newBoard.makeMove(move, color, true);
     }catch(IOException e){
+      e.printStackTrace();
       System.out.println("Invalid move");
       continue;
     }

@@ -50,7 +50,6 @@ public class Pawn extends Piece{
 
      public String getColor(){
 		return this.color;
-
 	}
 
    }
