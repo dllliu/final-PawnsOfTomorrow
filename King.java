@@ -1,35 +1,55 @@
 public class King extends Piece{
 
-  private boolean hasCastled = false;
+  public boolean hasCastled;
+  public boolean hasMoved;
 
-  public King(boolean white){
-    super(white);
+  public King(String color){
+    super(color);
+    this.hasMoved = false;
+    this.hasCastled = false;
   }
+
+  @Override
+     public String toString(){
+         if (getColor().equals("white")) return "♔";
+        return "♚";
+     }
+
 
   public boolean isCastleDone(){
     return this.hasCastled;
   }
 
-  public void setCastle(){
+  public void setCastle(boolean hasCastled){
     this.hasCastled = hasCastled;
   }
 
-  public boolean canMove(board board, Square initial, Square dest){
-    if (dest.getPiece().isWhite() == this.isWhite()){
-      return false;
-    }
-      int x = Math.abs(initial.getX() - dest.getX()); //horizontal distance from initial to destination
-      int y = Math.abs(initial.getY() - dest.getY()); //vertical distance from initial to destination
-      if(x+y == 1){ //check if move is safe for king
-        return true;
-      }
-      return this.isValidCastle(board, initial, dest);
-    }
+  public String getColor(){
+		return this.color;
+	}
 
-    private boolean isValidCastle(board board, Square start, Square end){
-      if(this.isCastleDone()){
+
+@Override
+  public boolean canMove(Piece[][] board, int initialX, int initialY, int destX, int destY){
+    if (Math.abs(initialX - initialY) > 1 || Math.abs(destY - destX) > 1){
+      if(hasMoved == true){
         return false;
       }
-      //code for returning true or false for castle
+      if(Math.abs(destY - initialY) == 2 && initialX == destX){
+        if (board[destX][destY + 1] != null || board[destX][destY + 2] != null){ //if Pieces between
+          hasCastled = false;
+          return false;
+        }
+      } else if (Math.abs(destY - initialY) == 3 && destX == initialX){
+        if (board[destX][destY - 1] != null || board[destX][destY - 2] != null ||  board[destX][destY - 3] != null){
+          hasCastled = false;
+          return false;
+        }
+      }else{
+        hasCastled = false;
+        return false;
+      }
     }
+    return true;
+  }
 }

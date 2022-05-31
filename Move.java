@@ -7,17 +7,17 @@ public class Move{
   private boolean castled = false;
 
   public Move(Player p, Square start, Square dest){
-    this.p = player;
-    this.start = start;
-    this.dest = end;
+    p = player;
+    start = start;
+    dest = end;
     this.pieceMoved = start.getPiece();
   }
 
   public boolean isCastlingMove(){
-    return this.castled();
+    return castled;
   }
 
-  public void setCastlingMove(boolean move){
-    this.move = castled;
+  public void setCastlingMove(boolean castle){
+    castle = castled;
   }
 }
