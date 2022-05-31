@@ -6,7 +6,7 @@ public class Bishop extends Piece{
   @Override
      public String toString(){
          if (getColor().equals("white")) return "♗";
-          return " ";
+          return "♝";
      }
 
   @Override
