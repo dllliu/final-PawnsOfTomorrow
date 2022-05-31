@@ -1,11 +1,11 @@
 public class Knight extends Piece{
-  public Knight(boolean isWhite){
-    super(isWhite);
+  public Knight(String color){
+    super(color);
   }
 
 @Override
    public String toString(){
-       if(this.isWhite() == true) return "♘";
+       if (getColor().equals("white")) return "♘";
        return "♞";
    }
 
@@ -19,4 +19,9 @@ public class Knight extends Piece{
 		}
 		return false;
     }
+
+    public String getColor(){
+		return this.color;
+	}
+  
 }

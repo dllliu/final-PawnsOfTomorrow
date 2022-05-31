@@ -1,11 +1,11 @@
 public class Bishop extends Piece{
-  public Bishop(boolean isWhite){
-    super(isWhite);
+  public Bishop(String color){
+    super(color);
   }
 
   @Override
      public String toString(){
-         if(this.isWhite() == true) return "♗";
+         if (getColor().equals("white")) return "♗";
           return "♝";
      }
 
@@ -37,4 +37,8 @@ public class Bishop extends Piece{
     }
     return true;
 }
+
+public String getColor(){
+		return this.color;
+	}
 }

@@ -1,17 +1,17 @@
 public class King extends Piece{
 
-  private boolean hasCastled;
-  private boolean hasMoved;
+  public boolean hasCastled;
+  public boolean hasMoved;
 
-  public King(boolean white){
-    super(white);
+  public King(String color){
+    super(color);
     this.hasMoved = false;
     this.hasCastled = false;
   }
 
   @Override
      public String toString(){
-         if(this.isWhite() == true) return "♔";
+         if (getColor().equals("white")) return "♔";
         return "♚";
      }
 
@@ -23,7 +23,11 @@ public class King extends Piece{
   public void setCastle(boolean hasCastled){
     this.hasCastled = hasCastled;
   }
-  
+
+  public String getColor(){
+		return this.color;
+	}
+
 
 @Override
   public boolean canMove(Piece[][] board, int initialX, int initialY, int destX, int destY){
