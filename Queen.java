@@ -1,6 +1,7 @@
+
 public class Queen extends Piece{
   public Queen(String color){
-    super(color);
+    this.color = color;
   }
 
 @Override

@@ -1,6 +1,7 @@
+
 public class Knight extends Piece{
   public Knight(String color){
-    super(color);
+    this.color = color;
   }
 
 @Override
@@ -23,5 +24,5 @@ public class Knight extends Piece{
     public String getColor(){
 		return this.color;
 	}
-  
+
 }

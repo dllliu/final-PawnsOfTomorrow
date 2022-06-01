@@ -1,10 +1,11 @@
+
 public class King extends Piece{
 
   public boolean hasCastled;
   public boolean hasMoved;
 
   public King(String color){
-    super(color);
+    this.color = color;
     this.hasMoved = false;
     this.hasCastled = false;
   }
