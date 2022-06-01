@@ -306,7 +306,7 @@ public String toString(){
     int count2 = 0;
     for(Piece piece: pieces){
       if(piece==null){
-        str += "  ";
+        str += " ";
       }else{
         str += piece;
       }
