@@ -84,7 +84,7 @@ public class Pawn extends Piece{
            return false;
          }
        }
-
+       hasMoved = true;
        return true;
      }
 
