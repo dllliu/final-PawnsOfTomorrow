@@ -16,4 +16,6 @@ Daniel Liu (5/28): Updated canMove for King and Rook. Added new feature for cast
 
 Daniel Liu (5/30): Tested makeMove and deleted instance variables that were not used, deleted placeholder test for toString for Chess Board. Worked on parsing commands entered by the user with helper methods for converting characters and added getColor method for every piece subclass.
 
-Daniel Liu(5/31): Added prototype Doc in ReadMe. Worked on debugging using stackTrace, fixed toString so that it outputs a baord with the correct pieces and format. Deleted Move class, added tests for resign, stalemate, check, and checkmate. Fixed pawn canMove, conditions for moving two squares at the beginning if the pawn has not yet moved. Merged into main.
+Daniel Liu (5/31): Added prototype Doc in ReadMe. Worked on debugging using stackTrace, fixed toString so that it outputs a baord with the correct pieces and format. Deleted Move class, added tests for resign, stalemate, check, and checkmate. Fixed pawn canMove, conditions for moving two squares at the beginning if the pawn has not yet moved. Merged into main.
+
+Daniel Liu (6/1): Fixed big where pawn hasMoved was not updated when it moved, allowing it to move 2 squares multiple times. Tried to fix castle for king and rook, but does not work queen side. Tested and made sure capture and resign work properly, verified movement of all other pieces.
