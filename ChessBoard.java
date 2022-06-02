@@ -14,30 +14,30 @@ public class ChessBoard {
       }
     }
 
-    board[0][0]= new Rook("black");
-    board[0][1]= new Knight("black");
-    board[0][2]= new Bishop("black");
-    board[0][3]= new Queen("black");
-    board[0][4]= new King("black");
-    board[0][5]= new Bishop("black");
-    board[0][6]= new Knight("black");
-    board[0][7]= new Rook("black");
+    board[0][0]= new Rook("white");
+    board[0][1]= new Knight("white");
+    board[0][2]= new Bishop("white");
+    board[0][3]= new Queen("white");
+    board[0][4]= new King("white");
+    board[0][5]= new Bishop("white");
+    board[0][6]= new Knight("white");
+    board[0][7]= new Rook("white");
 
     for(int y=0; y<=7; y++){
-      board[1][y] = new Pawn("black");
+      board[1][y] = new Pawn("white");
     }
 
-    board[7][0]= new Rook("white");
-    board[7][1]= new Knight("white");
-    board[7][2]= new Bishop("white");
-    board[7][3]= new Queen("white");
-    board[7][4]= new King("white");
-    board[7][5]= new Bishop("white");
-    board[7][6]= new Knight("white");
-    board[7][7]= new Rook("white");
+    board[7][0]= new Rook("black");
+    board[7][1]= new Knight("black");
+    board[7][2]= new Bishop("black");
+    board[7][3]= new Queen("black");
+    board[7][4]= new King("black");
+    board[7][5]= new Bishop("black");
+    board[7][6]= new Knight("black");
+    board[7][7]= new Rook("black");
 
     for(int y=0; y<=7; y++){
-      board[6][y] = new Pawn("white");
+      board[6][y] = new Pawn("black");
     }
   }
 
