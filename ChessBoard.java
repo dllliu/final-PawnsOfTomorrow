@@ -14,32 +14,31 @@ public class ChessBoard {
       }
     }
 
-    board[0][0]= new Rook("white");
-    board[0][1]= new Knight("white");
-    board[0][2]= new Bishop("white");
-    board[0][3]= new Queen("white");
-    board[0][4]= new King("white");
-    board[0][5]= new Bishop("white");
-    board[0][6]= new Knight("white");
-    board[0][7]= new Rook("white");
+    board[0][0]= new Rook("black");
+    board[0][1]= new Knight("black");
+    board[0][2]= new Bishop("black");
+    board[0][3]= new Queen("black");
+    board[0][4]= new King("black");
+    board[0][5]= new Bishop("black");
+    board[0][6]= new Knight("black");
+    board[0][7]= new Rook("black");
 
     for(int y=0; y<=7; y++){
-      board[1][y] = new Pawn("white");
+      board[1][y] = new Pawn("black");
     }
 
-    board[7][0]= new Rook("black");
-    board[7][1]= new Knight("black");
-    board[7][2]= new Bishop("black");
-    board[7][3]= new Queen("black");
-    board[7][4]= new King("black");
+    board[7][0]= new Rook("white");
+    board[7][1]= new Knight("white");
+    board[7][2]= new Bishop("white");
+    board[7][3]= new Queen("white");
+    board[7][4]= new King("white");
     board[7][5]= new Bishop("black");
     board[7][6]= new Knight("black");
-    board[7][7]= new Rook("black");
+    board[7][7]= new Rook("white");
 
     for(int y=0; y<=7; y++){
-      board[6][y] = new Pawn("black");
+      board[6][y] = new Pawn("white");
     }
-
   }
 
   public boolean isChecked(String color){
@@ -50,6 +49,7 @@ public class ChessBoard {
     for(int i = 0; i<board.length; i++){
       for(int j = 0; j<board[0].length; j++){
         if(board[i][j] != null){
+          //just bc it can be checked doesn't mean it will
           if(board[i][j].canMove(board, i, j, row, col) && !board[i][j].getColor().equals(color)){
             return true;
           }
@@ -93,6 +93,7 @@ public class ChessBoard {
     for(int i = 0; i<board.length; i++){
       for(int j = 0; j<board[0].length; j++){
         if(board[i][j] != null){
+          //why only white
           if(board[i][j].getClass().isInstance(new King("white")) && board[i][j].getColor().equals(color)){
             row = i;
             col = j;
@@ -112,26 +113,29 @@ public class ChessBoard {
     int[] arrOfMoves = parseScanner(move);
 
     if(board[arrOfMoves[0]][arrOfMoves[1]] == null){
-      throw new IllegalArgumentException("Input needs to be valid. letter + number. Space. letter + number");
+      throw new IllegalArgumentException("Input needs to be valid. Make sure starting square has a piece on it");
     }
 
     if(!board[arrOfMoves[0]][arrOfMoves[1]].getColor().equals(color)){
-      throw new IllegalArgumentException("Colors should match");
+      throw new IllegalArgumentException("Color for initial square should match player color");
     }
 
+    //move hasn't been made yet
     if(board[arrOfMoves[2]][arrOfMoves[3]] != null){
       if(board[arrOfMoves[2]][arrOfMoves[3]].getColor().equals(color)){
-        throw new IllegalArgumentException("Colors should not match if square is occupied");
+        throw new IllegalArgumentException("Color for final square should not match if square is occupied");
       }
     }
 
     if(board[arrOfMoves[0]][arrOfMoves[1]].canMove(board, arrOfMoves[0], arrOfMoves[1], arrOfMoves[2], arrOfMoves[3])){
 
       if(isChecked(color)){
+        //need to code this
         throw new IllegalArgumentException("Player is in check");
       }
 
       if(moveCompleted){
+        //fails enpassant and castle
         //Switch
         board[arrOfMoves[2]][arrOfMoves[3]] = board[arrOfMoves[0]][arrOfMoves[1]];
         board[arrOfMoves[0]][arrOfMoves[1]] = null;
@@ -139,11 +143,12 @@ public class ChessBoard {
 
       if(board[arrOfMoves[2]][arrOfMoves[3]] != null){
         if(board[arrOfMoves[2]][arrOfMoves[3]].getClass().isInstance(new King("white"))){
-          if(moveCompleted){
+          if(moveCompleted){ //king moves
             ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasMoved = true;
           }
-
+//where does it set hasCastled to true
           if(((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled){
+            //what is this
             if(arrOfMoves[3] - arrOfMoves[1] == 2){
               board[arrOfMoves[2]][arrOfMoves[3] - 1] = board[arrOfMoves[2]][arrOfMoves[3] + 1];
               board[arrOfMoves[2]][arrOfMoves[3] + 1] = null;
@@ -161,6 +166,7 @@ public class ChessBoard {
     }
 
     //for pawns
+    //what is moveCompleted
     if(moveCompleted){
       Piece piece = board[arrOfMoves[2]][arrOfMoves[3]];
       if(piece != null){
@@ -177,6 +183,7 @@ public class ChessBoard {
               switch(move.split(" ")[2].charAt(0)){
                 case 'B': replacement = new Bishop("white"); break;
                 case 'N': replacement = new Knight("white"); break;
+                case 'R': replacement = new Rook("white"); break;
                 default: replacement = new Queen("white"); break;
               }
               board[arrOfMoves[2]][arrOfMoves[3]] = replacement;
@@ -186,6 +193,7 @@ public class ChessBoard {
               switch(move.split(" ")[2].charAt(0)){
                 case 'B': replacement = new Bishop("black"); break;
                 case 'N': replacement = new Knight("black"); break;
+                case 'R': replacement = new Rook("black"); break;
                 default: replacement = new Queen("black"); break;
               }
               board[arrOfMoves[2]][arrOfMoves[3]] = replacement;
@@ -236,6 +244,7 @@ public class ChessBoard {
     return outputStr;
   }
 
+//Confused
   public boolean canAnyMove(String color){
     Piece[][] oldBoard = board.clone();
 
@@ -268,6 +277,23 @@ public class ChessBoard {
   }
 
   public boolean staleMate(String color){
+    if (board.canAnyMove(color)==false){
+      return true;
+    }
+    return false;
+  }
+
+  public boolean checkMate(String color){
+    if (board.canAnyMove(color)==false){
+      for (int i=0;i<board.length;i++){
+        for (int k=0;k<board[i].length;k++){
+          if (canMove(board, board.getKingPosition(color)[0], board.getKingPosition(color)[1], k, i)){
+            return false;
+          }
+        }
+      }
+      return true;
+    }
     return false;
   }
 
