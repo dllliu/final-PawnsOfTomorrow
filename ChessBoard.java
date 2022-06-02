@@ -94,7 +94,7 @@ public class ChessBoard {
       for(int j = 0; j<board[0].length; j++){
         if(board[i][j] != null){
           //why only white
-          if(board[i][j].getClass().isInstance(new King("white")) && board[i][j].getColor().equals(color)){
+          if(board[i][j].getClass().isInstance(new King(color)) && board[i][j].getColor().equals(color)){
             row = i;
             col = j;
           }
@@ -142,7 +142,7 @@ public class ChessBoard {
       }
 
       if(board[arrOfMoves[2]][arrOfMoves[3]] != null){
-        if(board[arrOfMoves[2]][arrOfMoves[3]].getClass().isInstance(new King("white"))){
+        if(board[arrOfMoves[2]][arrOfMoves[3]].getClass().isInstance(new King(color))){
           if(moveCompleted){ //king moves
             ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasMoved = true;
           }
@@ -170,7 +170,7 @@ public class ChessBoard {
     if(moveCompleted){
       Piece piece = board[arrOfMoves[2]][arrOfMoves[3]];
       if(piece != null){
-        if(piece.getClass().isInstance(new Pawn("white"))){
+        if(piece.getClass().isInstance(new Pawn(color))){
           piece.hasMoved = true;
 
           //promote
@@ -178,7 +178,7 @@ public class ChessBoard {
           if(move.split(" ").length < 3){
             move += " s";
           }
-          if(piece.getColor().equals("white")){
+          if(piece.getColor().equals(color)){
             if(arrOfMoves[2] == 7){
               switch(move.split(" ")[2].charAt(0)){
                 case 'B': replacement = new Bishop("white"); break;
