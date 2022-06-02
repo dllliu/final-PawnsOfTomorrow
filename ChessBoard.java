@@ -49,7 +49,6 @@ public class ChessBoard {
     for(int i = 0; i<board.length; i++){
       for(int j = 0; j<board[0].length; j++){
         if(board[i][j] != null){
-          //just bc it can be checked doesn't mean it will
           if(board[i][j].canMove(board, i, j, row, col) && !board[i][j].getColor().equals(color)){
             return true;
           }
@@ -93,7 +92,6 @@ public class ChessBoard {
     for(int i = 0; i<board.length; i++){
       for(int j = 0; j<board[0].length; j++){
         if(board[i][j] != null){
-          //why only white
           if(board[i][j].getClass().isInstance(new King(color)) && board[i][j].getColor().equals(color)){
             row = i;
             col = j;
@@ -120,7 +118,6 @@ public class ChessBoard {
       throw new IllegalArgumentException("Color for initial square should match player color");
     }
 
-    //move hasn't been made yet
     if(board[arrOfMoves[2]][arrOfMoves[3]] != null){
       if(board[arrOfMoves[2]][arrOfMoves[3]].getColor().equals(color)){
         throw new IllegalArgumentException("Color for final square should not match if square is occupied");
