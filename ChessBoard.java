@@ -32,8 +32,8 @@ public class ChessBoard {
     board[7][2]= new Bishop("white");
     board[7][3]= new Queen("white");
     board[7][4]= new King("white");
-    board[7][5]= new Bishop("black");
-    board[7][6]= new Knight("black");
+    board[7][5]= new Bishop("white");
+    board[7][6]= new Knight("white");
     board[7][7]= new Rook("white");
 
     for(int y=0; y<=7; y++){
@@ -276,7 +276,7 @@ public class ChessBoard {
     return false;
   }
 
-  public boolean staleMate(String color){
+  /*public boolean staleMate(String color){
     if (board.canAnyMove(color)==false){
       return true;
     }
@@ -296,6 +296,7 @@ public class ChessBoard {
     }
     return false;
   }
+*/
 
   //Displays board given side to display from
   /*
