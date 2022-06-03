@@ -16,6 +16,7 @@ public class ChessBoard {
     }
 
     board[0][0]= new Rook("white");
+
     board[0][1]= new Knight("white");
     board[0][2]= new Bishop("white");
     board[0][3]= new Queen("white");
@@ -40,6 +41,7 @@ public class ChessBoard {
     for(int y=0; y<=7; y++){
       board[6][y] = new Pawn("black");
     }
+    
   }
 }
 
@@ -161,8 +163,6 @@ public class ChessBoard {
         }
       }
 
-    }else{
-      throw new IllegalArgumentException("Input needs to be valid. letter + number. Space. letter + number");
     }
 
     //for pawns
