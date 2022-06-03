@@ -19,3 +19,5 @@ Daniel Liu (5/30): Tested makeMove and deleted instance variables that were not 
 Daniel Liu (5/31): Added prototype Doc in ReadMe. Worked on debugging using stackTrace, fixed toString so that it outputs a baord with the correct pieces and format. Deleted Move class, added tests for resign, stalemate, check, and checkmate. Fixed pawn canMove, conditions for moving two squares at the beginning if the pawn has not yet moved. Merged into main.
 
 Daniel Liu (6/1): Fixed big where pawn hasMoved was not updated when it moved, allowing it to move 2 squares multiple times. Tried to fix castle for king and rook, but does not work queen side. Tested and made sure capture and resign work properly, verified movement of all other pieces.
+
+Daniel Liu (6/2): Reverted back to a previous version, features pushed to main broke essential chess features like moving. Worked further on debugging castle and king moves, plan to finish tomorrow and begin on different modes/animation.
