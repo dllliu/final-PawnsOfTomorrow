@@ -1,5 +1,7 @@
 
 public class Queen extends Piece{
+  public String color;
+
   public Queen(String color){
     this.color = color;
   }
@@ -12,7 +14,7 @@ public class Queen extends Piece{
 
   @Override
   public boolean canMove(Piece[][] board, int initialX, int initialY, int destX, int destY){
-    return new Rook(getColor()).canMove(board, initialX, initialY, destX, destY) || new Bishop(getColor()).canMove(board, initialX, initialY, destX, destY);
+    return new Rook(color).canMove(board, initialX, initialY, destX, destY) || new Bishop(color).canMove(board, initialX, initialY, destX, destY);
 }
 
 public String getColor(){

@@ -12,7 +12,7 @@ public class Rook extends Piece{
 
   @Override
   public boolean canMove(Piece[][] board, int initialX, int initialY, int destX, int destY){
-    if (initialX != destX || initialY != initialX){
+    if (initialX != destX && initialY != initialX){
       return false;
     }
 
@@ -23,26 +23,26 @@ public class Rook extends Piece{
       }else{
         inc = -1;
       }
-    for (int x = initialX + inc; x < destX; x+= inc){
+    for (int x = initialX + inc; x != destX; x+= inc){
 
-      if (board[x][destY] == null) { //check if its not blank class
+      if (board[x][initialY] == null) { //check if its not blank
         return false;
       }
     }
     }
+
     if (destY != initialY) {
       if(destY > initialY){
         inc = 1;
       }else{
         inc = -1;
       }
-    for (int y = initialY + inc; y < destY; y+= inc){
-      if(board[destX][y] == null) {
+    for (int y = initialY + inc; y != destY; y+= inc){
+      if(board[initialX][y] == null) {
         return false;
       }
     }
-  }
-    hasMoved = true;
+    }
     return true;
 }
 

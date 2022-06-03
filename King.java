@@ -1,4 +1,3 @@
-
 public class King extends Piece{
 
   public boolean hasCastled;
@@ -29,35 +28,30 @@ public class King extends Piece{
 		return this.color;
 	}
 
+
 @Override
   public boolean canMove(Piece[][] board, int initialX, int initialY, int destX, int destY){
+    if (Math.abs(initialX - initialY) > 1 || Math.abs(destY - destX) > 1){
+     if(hasMoved == true){
+       return false;
+     }
+     if(Math.abs(destY - initialY) == 2 && initialX == destX){
+       if (board[destX][destY + 1] != null || board[destX][destY + 2] != null){ //if Pieces between
+         hasCastled = false;
+         return false;
+       }
+     } else if (Math.abs(destY - initialY) == 3 && destX == initialX){
+       if (board[destX][destY - 1] != null || board[destX][destY - 2] != null ||  board[destX][destY - 3] != null){
+         hasCastled = false;
+         return false;
+       }
+     }else{
+       hasCastled = false;
+       return false;
+     }
+   }
+   return true;
+ }
 
-    if(Math.abs(destX - initialX) > 1 || Math.abs(destY - initialY) > 1){
-      if(hasMoved){
-        return false;
-      }
 
-      if(destY - initialY == 2 && initialX == destX){
-        //Castle king side
-        if(board[destX][initialY + 1] != null || board[destX][initialY + 2] != null){
-          hasCastled = false;
-          return false;
-        }
-        //castle queen side
-      }else if(initialY - destY == 2 && initialX == destX){
-        if(board[destX][initialY - 1] != null || board[destX][initialY - 2] != null){
-          hasCastled = false;
-          return false;
-        }
-
-      }else{
-        hasCastled = false;
-        return false;
-      }
-      hasCastled = true;
-    }
-
-    hasMoved = true;
-    return true;
-  }
 }
