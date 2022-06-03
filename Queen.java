@@ -11,8 +11,9 @@ public class Queen extends Piece{
    }
 
   @Override
-  public boolean canMove(Piece[][] board, int initialX, int initialY, int destX, int destY){
-    return new Rook(getColor()).canMove(board, initialX, initialY, destX, destY) || new Bishop(getColor()).canMove(board, initialX, initialY, destX, destY);
+  public boolean canMove(ChessBoard cb, int initialX, int initialY, int destX, int destY){
+    Piece[][] board=cb.board;
+        return new Rook(getColor()).canMove(cb, initialX, initialY, destX, destY) || new Bishop(getColor()).canMove(cb, initialX, initialY, destX, destY);
 }
 
 public String getColor(){

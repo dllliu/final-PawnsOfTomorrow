@@ -4,8 +4,9 @@ import java.util.*;
 public class ChessBoard {
 
   public Piece[][] board;
+  public ArrayList<String> scoreSheet=new ArrayList<String>();
 
-  public ChessBoard(){ 
+  public ChessBoard(){
     board=new Piece[8][8];
 
     for(int i=2; i< 6; i++){
@@ -40,6 +41,7 @@ public class ChessBoard {
       board[6][y] = new Pawn("black");
     }
   }
+}
 
   public boolean isChecked(String color){
     int[] kingPos = getKingPosition(color);
@@ -49,7 +51,7 @@ public class ChessBoard {
     for(int i = 0; i<board.length; i++){
       for(int j = 0; j<board[0].length; j++){
         if(board[i][j] != null){
-          if(board[i][j].canMove(board, i, j, row, col) && !board[i][j].getColor().equals(color)){
+          if(board[i][j].canMove(this, i, j, row, col) && !board[i][j].getColor().equals(color)){
             return true;
           }
         }
@@ -124,7 +126,7 @@ public class ChessBoard {
       }
     }
 
-    if(board[arrOfMoves[0]][arrOfMoves[1]].canMove(board, arrOfMoves[0], arrOfMoves[1], arrOfMoves[2], arrOfMoves[3])){
+    if(board[arrOfMoves[0]][arrOfMoves[1]].canMove(this, arrOfMoves[0], arrOfMoves[1], arrOfMoves[2], arrOfMoves[3])){
 
       if(isChecked(color)){
         //need to code this
@@ -136,6 +138,7 @@ public class ChessBoard {
         //Switch
         board[arrOfMoves[2]][arrOfMoves[3]] = board[arrOfMoves[0]][arrOfMoves[1]];
         board[arrOfMoves[0]][arrOfMoves[1]] = null;
+        scoreSheet.add(move);
       }
 
       if(board[arrOfMoves[2]][arrOfMoves[3]] != null){
@@ -165,10 +168,17 @@ public class ChessBoard {
     //for pawns
     //what is moveCompleted
     if(moveCompleted){
-      Piece piece = board[arrOfMoves[2]][arrOfMoves[3]];
-      if(piece != null){
-        if(piece.getClass().isInstance(new Pawn(color))){
+      Piece temp2 = board[arrOfMoves[2]][arrOfMoves[3]];
+      if(temp2 != null){
+        if(temp2.getClass().isInstance(new Pawn(color))){
+          Pawn piece=(Pawn) temp2;
           piece.hasMoved = true;
+
+          if (piece.emPassanAble){
+            int[] prevMove= parseScanner(scoreSheet.get(scoreSheet.size()-2));
+            board[prevMove[2]][prevMove[3]]=null;
+            piece.emPassanAble=false;
+          }
 
           //promote
           Piece replacement;

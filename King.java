@@ -31,8 +31,9 @@ public class King extends Piece{
 
 
 @Override
-  public boolean canMove(Piece[][] board, int initialX, int initialY, int destX, int destY){
-    if (Math.abs(initialX - initialY) > 1 || Math.abs(destY - destX) > 1){
+public boolean canMove(ChessBoard cb, int initialX, int initialY, int destX, int destY){
+  Piece[][] board=cb.board;
+      if (Math.abs(initialX - initialY) > 1 || Math.abs(destY - destX) > 1){
       if(hasMoved == true){
         return false;
       }

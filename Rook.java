@@ -11,8 +11,9 @@ public class Rook extends Piece{
    }
 
   @Override
-  public boolean canMove(Piece[][] board, int initialX, int initialY, int destX, int destY){
-    if (initialX != destX || initialY != initialX){
+  public boolean canMove(ChessBoard cb, int initialX, int initialY, int destX, int destY){
+    Piece[][] board=cb.board;
+        if (initialX != destX || initialY != initialX){
       return false;
     }
 

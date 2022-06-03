@@ -10,6 +10,7 @@ public static void main(String[] args) {
   String color = "white";
 
   while(true){
+    System.out.println (newBoard.scoreSheet.toString());
     System.out.println(newBoard);
     System.out.println(color + " enter your move");
     Scanner in = new Scanner(System.in);
