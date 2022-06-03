@@ -41,7 +41,7 @@ public class ChessBoard {
     for(int y=0; y<=7; y++){
       board[6][y] = new Pawn("black");
     }
-    
+
   }
 }
 
@@ -128,45 +128,6 @@ public class ChessBoard {
       }
     }
 
-    if(board[arrOfMoves[0]][arrOfMoves[1]].canMove(this, arrOfMoves[0], arrOfMoves[1], arrOfMoves[2], arrOfMoves[3])){
-
-      if(isChecked(color)){
-        //need to code this
-        throw new IllegalArgumentException("Player is in check");
-      }
-
-      if(moveCompleted){
-        //fails enpassant and castle
-        //Switch
-        board[arrOfMoves[2]][arrOfMoves[3]] = board[arrOfMoves[0]][arrOfMoves[1]];
-        board[arrOfMoves[0]][arrOfMoves[1]] = null;
-        scoreSheet.add(move);
-      }
-
-      if(board[arrOfMoves[2]][arrOfMoves[3]] != null){
-        if(board[arrOfMoves[2]][arrOfMoves[3]].getClass().isInstance(new King(color))){
-          if(moveCompleted){ //king moves
-            ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasMoved = true;
-          }
-//where does it set hasCastled to true
-          if(((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled){
-            //what is this
-            if(arrOfMoves[3] - arrOfMoves[1] == 2){
-              board[arrOfMoves[2]][arrOfMoves[3] - 1] = board[arrOfMoves[2]][arrOfMoves[3] + 1];
-              board[arrOfMoves[2]][arrOfMoves[3] + 1] = null;
-            }else{
-              board[arrOfMoves[2]][arrOfMoves[3] + 1] = board[arrOfMoves[2]][arrOfMoves[3] - 2];
-              board[arrOfMoves[2]][arrOfMoves[3] - 2] = null;
-            }
-            ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled = false;
-          }
-        }
-      }
-
-    }
-
-    //for pawns
-    //what is moveCompleted
     if(moveCompleted){
       Piece temp2 = board[arrOfMoves[2]][arrOfMoves[3]];
       if(temp2 != null){
@@ -209,6 +170,48 @@ public class ChessBoard {
         }
       }
     }
+
+    if(board[arrOfMoves[0]][arrOfMoves[1]].canMove(this, arrOfMoves[0], arrOfMoves[1], arrOfMoves[2], arrOfMoves[3])){
+
+      if(isChecked(color)){
+        //need to code this
+        throw new IllegalArgumentException("Player is in check");
+      }
+
+      if(moveCompleted){
+        //fails enpassant and castle
+        //Switch
+        board[arrOfMoves[2]][arrOfMoves[3]] = board[arrOfMoves[0]][arrOfMoves[1]];
+        board[arrOfMoves[0]][arrOfMoves[1]] = null;
+        scoreSheet.add(move);
+      }
+
+      if(board[arrOfMoves[2]][arrOfMoves[3]] != null){
+        if(board[arrOfMoves[2]][arrOfMoves[3]].getClass().isInstance(new King(color))){
+          if(moveCompleted){ //king moves
+            ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasMoved = true;
+          }
+//where does it set hasCastled to true
+          if(((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled){
+            //what is this
+            if(arrOfMoves[3] - arrOfMoves[1] == 2){
+              board[arrOfMoves[2]][arrOfMoves[3] - 1] = board[arrOfMoves[2]][arrOfMoves[3] + 1];
+              board[arrOfMoves[2]][arrOfMoves[3] + 1] = null;
+            }else{
+              board[arrOfMoves[2]][arrOfMoves[3] + 1] = board[arrOfMoves[2]][arrOfMoves[3] - 2];
+              board[arrOfMoves[2]][arrOfMoves[3] - 2] = null;
+            }
+            ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled = false;
+          }
+        }
+      }
+
+    }else{
+      throw new IllegalArgumentException();
+    }
+
+    //for pawns
+    //what is moveCompleted
   }
 
   private String convertCoord(int initialX, int initialY, int destX, int destY){

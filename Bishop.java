@@ -30,8 +30,8 @@ public class Bishop extends Piece{
       colInc = -1;
     }
     int totalInc = rowInc + colInc;
-    for(int x= initialX + rowInc; x<destX; x+= rowInc){
-      if(board[x][totalInc] == null) {
+    for(int x= initialX + rowInc; x != destX; x+= rowInc){
+      if(board[x][totalInc] != null) {
         return false;
       }
       totalInc += colInc;
