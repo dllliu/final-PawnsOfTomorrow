@@ -150,8 +150,8 @@ public class ChessBoard {
               board[arrOfMoves[2]][arrOfMoves[3] - 1] = board[arrOfMoves[2]][arrOfMoves[3] + 1];
               board[arrOfMoves[2]][arrOfMoves[3] + 1] = null;
             }else{
-              board[arrOfMoves[2]][arrOfMoves[3] + 1] = board[arrOfMoves[2]][arrOfMoves[3] - 1];
-              board[arrOfMoves[2]][arrOfMoves[3] - 1] = null;
+              board[arrOfMoves[2]][arrOfMoves[3] + 1] = board[arrOfMoves[2]][arrOfMoves[3] - 2];
+              board[arrOfMoves[2]][arrOfMoves[3] - 2] = null;
             }
             ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled = false;
           }
