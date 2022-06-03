@@ -5,13 +5,13 @@ public class ChessBoard {
 
   public Piece[][] board;
 
-  public ChessBoard(){
+  public ChessBoard(){ 
     board=new Piece[8][8];
 
     for(int i=2; i< 6; i++){
       for(int j=0; j<8; j++){
         board[i][j] = null;
-      }
+
     }
 
     board[0][0]= new Rook("white");
