@@ -15,6 +15,9 @@ public class Bishop extends Piece{
         if ((initialY == destY && initialX == destX)) {
       return false;
     }else if (Math.abs(initialY - destY) != (Math.abs(initialX - destX))) {
+      System.out.println("Test");
+      System.out.println(Math.abs(initialY - destY));
+      System.out.println(Math.abs(initialX - destX));
       return false;
     }
     int rowInc = 0;
