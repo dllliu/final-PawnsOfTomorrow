@@ -137,18 +137,41 @@ public class ChessBoard {
       }
     }
 
+
+
+
+    if(board[arrOfMoves[0]][arrOfMoves[1]].canMove(this, arrOfMoves[0], arrOfMoves[1], arrOfMoves[2], arrOfMoves[3])){
+      Piece[][] oldBoard=new Piece[board.length][board.length];
+      for (int i=0;i<board.length;i++){
+        for (int k=0;k<board.length;k++){
+          oldBoard[i][k]=board[i][k];
+        }
+      }
+      board[arrOfMoves[2]][arrOfMoves[3]] = board[arrOfMoves[0]][arrOfMoves[1]];
+      board[arrOfMoves[0]][arrOfMoves[1]] = null;
+      if(moveCompleted){
+        //fails enpassant and castle
+        //Switch
+        scoreSheet.add(move);
+       }
+
       Piece temp2 = board[arrOfMoves[2]][arrOfMoves[3]];
+      System.out.println("1 "+moveCompleted);
+
       if(temp2 != null){
+        System.out.println("2 "+moveCompleted);
+
         if(temp2.getClass().isInstance(new Pawn(color))){
           Pawn piece=(Pawn) temp2;
-
-System.out.println(piece.emPassanAble);
-System.out.println("moveCompleted: "+moveCompleted);
           if (piece.emPassanAble){
-            int[] prevMove= parseScanner(scoreSheet.get(scoreSheet.size()-1));
+            int[] prevMove;
+            if (moveCompleted){
+
+          prevMove= parseScanner(scoreSheet.get(scoreSheet.size()-2));}
+            else {prevMove= parseScanner(scoreSheet.get(scoreSheet.size()-1));}
             board[prevMove[2]][prevMove[3]]=null;
             if(moveCompleted)
-{piece.emPassanAble=false;}
+      {piece.emPassanAble=false;}
           }
 
           //promote
@@ -180,27 +203,13 @@ System.out.println("moveCompleted: "+moveCompleted);
         }
       }
 
-
-    if(board[arrOfMoves[0]][arrOfMoves[1]].canMove(this, arrOfMoves[0], arrOfMoves[1], arrOfMoves[2], arrOfMoves[3])){
-      Piece[][] oldBoard=new Piece[board.length][board.length];
-      for (int i=0;i<board.length;i++){
-        for (int k=0;k<board.length;k++){
-          oldBoard[i][k]=board[i][k];
-        }
-      }
-      board[arrOfMoves[2]][arrOfMoves[3]] = board[arrOfMoves[0]][arrOfMoves[1]];
-      board[arrOfMoves[0]][arrOfMoves[1]] = null;
-      if(moveCompleted){
-        //fails enpassant and castle
-        //Switch
-        scoreSheet.add(move);
-       }
       if(isChecked(color)){
         for (int i=0;i<board.length;i++){
           for (int k=0;k<board.length;k++){
             board[i][k]=oldBoard[i][k];
           }
         }
+        if (moveCompleted){scoreSheet.remove(scoreSheet.size()-1);}
         throw new IllegalArgumentException("Player is in check");
       }
 
