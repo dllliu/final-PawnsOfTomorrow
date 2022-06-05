@@ -20,14 +20,20 @@ public class ChessBoard {
     board[0][1]= new Knight("white");
     board[0][2]= new Bishop("white");
     board[0][3]= new Queen("white");
+
     board[0][4]= new King("white");
+
+
     board[0][5]= new Bishop("white");
     board[0][6]= new Knight("white");
+
     board[0][7]= new Rook("white");
+
 
     for(int y=0; y<=7; y++){
       board[1][y] = new Pawn("white");
     }
+
 
     board[7][0]= new Rook("black");
     board[7][1]= new Knight("black");
@@ -124,7 +130,7 @@ public class ChessBoard {
 
     if(board[arrOfMoves[2]][arrOfMoves[3]] != null){
       if(board[arrOfMoves[2]][arrOfMoves[3]].getColor().equals(color)){
-        throw new IllegalArgumentException("Color for final square should not match if square is occupied");
+        throw new IllegalArgumentException("Square is occupied");
       }
     }
 
@@ -186,32 +192,28 @@ public class ChessBoard {
         scoreSheet.add(move);
       }
 
-      if(board[arrOfMoves[2]][arrOfMoves[3]] != null){
-        if(board[arrOfMoves[2]][arrOfMoves[3]].getClass().isInstance(new King(color))){
+      if(board[arrOfMoves[2]][arrOfMoves[3]] != null){ //if there is a rook there
+        if(board[arrOfMoves[2]][arrOfMoves[3]].getClass().isInstance(new King(color))){ //new King
           if(moveCompleted){ //king moves
             ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasMoved = true;
           }
-//where does it set hasCastled to true
+          //set hasCastled to true
           if(((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled){
-            //what is this
-            if(arrOfMoves[3] - arrOfMoves[1] == 2){
-              board[arrOfMoves[2]][arrOfMoves[3] - 1] = board[arrOfMoves[2]][arrOfMoves[3] + 1];
+            if((arrOfMoves[3] - arrOfMoves[1] == 2)) { //if the difference in row number is 2
+              board[arrOfMoves[2]][arrOfMoves[3] - 1] = board[arrOfMoves[2]][arrOfMoves[3] + 1]; //
               board[arrOfMoves[2]][arrOfMoves[3] + 1] = null;
-            }else{
-              board[arrOfMoves[2]][arrOfMoves[3] + 1] = board[arrOfMoves[2]][arrOfMoves[3] - 2];
-              board[arrOfMoves[2]][arrOfMoves[3] - 2] = null;
+            }
+            else{
+              board[arrOfMoves[2]][arrOfMoves[3] + 1] = board[arrOfMoves[2]][arrOfMoves[3] - 1];
+              board[arrOfMoves[2]][arrOfMoves[3] - 1] = null;
             }
             ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled = false;
           }
         }
       }
-
     }else{
       throw new IllegalArgumentException();
     }
-
-    //for pawns
-    //what is moveCompleted
   }
 
   private String convertCoord(int initialX, int initialY, int destX, int destY){
@@ -254,7 +256,6 @@ public class ChessBoard {
     return outputStr;
   }
 
-//Confused
   public boolean canAnyMove(String color){
     Piece[][] oldBoard = board.clone();
 
