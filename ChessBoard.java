@@ -134,17 +134,19 @@ public class ChessBoard {
       }
     }
 
-    if(moveCompleted){
       Piece temp2 = board[arrOfMoves[2]][arrOfMoves[3]];
       if(temp2 != null){
         if(temp2.getClass().isInstance(new Pawn(color))){
           Pawn piece=(Pawn) temp2;
-          piece.hasMoved = true;
+          if(moveCompleted)
+{
+          piece.hasMoved = true;}
 
           if (piece.emPassanAble){
             int[] prevMove= parseScanner(scoreSheet.get(scoreSheet.size()-2));
             board[prevMove[2]][prevMove[3]]=null;
-            piece.emPassanAble=false;
+            if(moveCompleted)
+{piece.emPassanAble=false;}
           }
 
           //promote
@@ -175,21 +177,29 @@ public class ChessBoard {
           }
         }
       }
-    }
+
 
     if(board[arrOfMoves[0]][arrOfMoves[1]].canMove(this, arrOfMoves[0], arrOfMoves[1], arrOfMoves[2], arrOfMoves[3])){
-
-      if(isChecked(color)){
-        //need to code this
-        throw new IllegalArgumentException("Player is in check");
+      Piece[][] oldBoard=new Piece[board.length][board.length];
+      for (int i=0;i<board.length;i++){
+        for (int k=0;k<board.length;k++){
+          oldBoard[i][k]=board[i][k];
+        }
       }
-
+      board[arrOfMoves[2]][arrOfMoves[3]] = board[arrOfMoves[0]][arrOfMoves[1]];
+      board[arrOfMoves[0]][arrOfMoves[1]] = null;
       if(moveCompleted){
         //fails enpassant and castle
         //Switch
-        board[arrOfMoves[2]][arrOfMoves[3]] = board[arrOfMoves[0]][arrOfMoves[1]];
-        board[arrOfMoves[0]][arrOfMoves[1]] = null;
         scoreSheet.add(move);
+       }
+      if(isChecked(color)){
+        for (int i=0;i<board.length;i++){
+          for (int k=0;k<board.length;k++){
+            board[i][k]=oldBoard[i][k];
+          }
+        }
+        throw new IllegalArgumentException("Player is in check");
       }
 
       if(board[arrOfMoves[2]][arrOfMoves[3]] != null){ //if there is a rook there
@@ -207,7 +217,8 @@ public class ChessBoard {
               board[arrOfMoves[2]][arrOfMoves[3] + 1] = board[arrOfMoves[2]][arrOfMoves[3] - 2];
               board[arrOfMoves[2]][arrOfMoves[3] - 2] = null;
             }
-            ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled = false;
+            if(moveCompleted)
+{((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled = false;}
           }
         }
       }
@@ -257,8 +268,12 @@ public class ChessBoard {
   }
 
   public boolean canAnyMove(String color){
-    Piece[][] oldBoard = board.clone();
-
+    Piece[][] oldBoard=new Piece[board.length][board.length];
+    for (int i=0;i<board.length;i++){
+      for (int k=0;k<board.length;k++){
+        oldBoard[i][k]=board[i][k];
+      }
+    }
     for(int i = 0; i<board.length; i++){
       for(int j = 0; j<board[0].length; j++){
 
@@ -270,21 +285,37 @@ public class ChessBoard {
               if(board[i][j] != null){
                 if(board[i][j].getColor().equals(color)){
                   makeMove(convertCoord(i, j, k, l), board[i][j].getColor(), false);
-                  board = oldBoard;
-                  return true;
+                    for (int m=0;m<board.length;m++){
+                      for (int n=0;n<board.length;n++){
+                        board[m][n]=oldBoard[m][n];
+                      }
+                    }
+                    return true;
+
                 }
               }
-              board = oldBoard;
-            } catch(Exception e){
-              board = oldBoard;
-            }
+              for (int m=0;m<board.length;m++){
+                for (int n=0;n<board.length;n++){
+                  board[m][n]=oldBoard[m][n];
+                }
+              }
+                        } catch(Exception e){
+                          for (int m=0;m<board.length;m++){
+                            for (int n=0;n<board.length;n++){
+                              board[m][n]=oldBoard[m][n];
+                            }
+                          }
+                                    }
           }
         }
       }
     }
 
-    board = oldBoard;
-    return false;
+    for (int m=0;m<board.length;m++){
+      for (int n=0;n<board.length;n++){
+        board[m][n]=oldBoard[m][n];
+      }
+    }    return false;
   }
 
   /*public boolean staleMate(String color){
