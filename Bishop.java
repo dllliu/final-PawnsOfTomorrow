@@ -12,12 +12,9 @@ public class Bishop extends Piece{
   @Override
   public boolean canMove(ChessBoard cb, int initialX, int initialY, int destX, int destY){
     Piece[][] board=cb.board;
-        if ((initialY == destY && initialX == destX)) {
+        if ((initialY == destY || initialX == destX)) {
       return false;
     }else if (Math.abs(initialY - destY) != (Math.abs(initialX - destX))) {
-      System.out.println("Test");
-      System.out.println(Math.abs(initialY - destY));
-      System.out.println(Math.abs(initialX - destX));
       return false;
     }
     int rowInc = 0;
@@ -32,9 +29,9 @@ public class Bishop extends Piece{
     }else{
       colInc = -1;
     }
-    int totalInc = rowInc + colInc;
-    for(int x= initialX + rowInc; x<destX; x+= rowInc){
-      if(board[x][totalInc] == null) {
+    int totalInc = initialY + colInc;
+    for(int x= initialX + rowInc; x != destX; x+= rowInc){
+      if(board[x][totalInc] != null) {
         return false;
       }
       totalInc += colInc;
