@@ -147,11 +147,12 @@ public class ChessBoard {
             ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasMoved = true;
           }
 //where does it set hasCastled to true
-          if(((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled){
+          if(!(((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled)){
             //what is this
             if(arrOfMoves[3] - arrOfMoves[1] == 2){
               board[arrOfMoves[2]][arrOfMoves[3] - 1] = board[arrOfMoves[2]][arrOfMoves[3] + 1];
               board[arrOfMoves[2]][arrOfMoves[3] + 1] = null;
+
             }else{
               board[arrOfMoves[2]][arrOfMoves[3] + 1] = board[arrOfMoves[2]][arrOfMoves[3] - 2];
               board[arrOfMoves[2]][arrOfMoves[3] - 2] = null;
@@ -161,8 +162,6 @@ public class ChessBoard {
         }
       }
 
-    }else{
-      throw new IllegalArgumentException("Input needs to be valid. letter + number. Space. letter + number");
     }
 
     //for pawns
