@@ -130,51 +130,8 @@ public class ChessBoard {
 
     if(board[arrOfMoves[2]][arrOfMoves[3]] != null){
       if(board[arrOfMoves[2]][arrOfMoves[3]].getColor().equals(color)){
-<<<<<<< HEAD
-        throw new IllegalArgumentException("Color for final square should not match if square is occupied");
-      }
-    }
-
-    if(board[arrOfMoves[0]][arrOfMoves[1]].canMove(this, arrOfMoves[0], arrOfMoves[1], arrOfMoves[2], arrOfMoves[3])){
-
-      if(isChecked(color)){
-        //need to code this
-        throw new IllegalArgumentException("Player is in check");
-      }
-
-      if(moveCompleted){
-        //fails enpassant and castle
-        //Switch
-        board[arrOfMoves[2]][arrOfMoves[3]] = board[arrOfMoves[0]][arrOfMoves[1]];
-        board[arrOfMoves[0]][arrOfMoves[1]] = null;
-        scoreSheet.add(move);
-      }
-
-      if(board[arrOfMoves[2]][arrOfMoves[3]] != null){
-        if(board[arrOfMoves[2]][arrOfMoves[3]].getClass().isInstance(new King(color))){
-          if(moveCompleted){ //king moves
-            ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasMoved = true;
-          }
-//where does it set hasCastled to true
-          if(!(((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled)){
-            //what is this
-            if(arrOfMoves[3] - arrOfMoves[1] == 2){
-              board[arrOfMoves[2]][arrOfMoves[3] - 1] = board[arrOfMoves[2]][arrOfMoves[3] + 1];
-              board[arrOfMoves[2]][arrOfMoves[3] + 1] = null;
-
-            }else{
-              board[arrOfMoves[2]][arrOfMoves[3] + 1] = board[arrOfMoves[2]][arrOfMoves[3] - 2];
-              board[arrOfMoves[2]][arrOfMoves[3] - 2] = null;
-            }
-            ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled = false;
-          }
-        }
-      }
-
-=======
         throw new IllegalArgumentException("Square is occupied");
       }
->>>>>>> 691c75a92109d843ce997e165700c95486818065
     }
 
     if(moveCompleted){
@@ -247,8 +204,8 @@ public class ChessBoard {
               board[arrOfMoves[2]][arrOfMoves[3] + 1] = null;
             }
             else{
-              board[arrOfMoves[2]][arrOfMoves[3] + 1] = board[arrOfMoves[2]][arrOfMoves[3] - 1];
-              board[arrOfMoves[2]][arrOfMoves[3] - 1] = null;
+              board[arrOfMoves[2]][arrOfMoves[3] + 1] = board[arrOfMoves[2]][arrOfMoves[3] - 2];
+              board[arrOfMoves[2]][arrOfMoves[3] - 2] = null;
             }
             ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled = false;
           }
@@ -336,6 +293,7 @@ public class ChessBoard {
     }
     return false;
   }
+
   public boolean checkMate(String color){
     if (board.canAnyMove(color)==false){
       for (int i=0;i<board.length;i++){
