@@ -156,11 +156,8 @@ public class ChessBoard {
        }
 
       Piece temp2 = board[arrOfMoves[2]][arrOfMoves[3]];
-      System.out.println("1 "+moveCompleted);
 
       if(temp2 != null){
-        System.out.println("2 "+moveCompleted);
-
         if(temp2.getClass().isInstance(new Pawn(color))){
           Pawn piece=(Pawn) temp2;
           if (piece.emPassanAble){
