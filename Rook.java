@@ -1,7 +1,9 @@
 public class Rook extends Piece{
+  public boolean hasMoved;
 
   public Rook(String color){
     this.color = color;
+    this.hasMoved=false;
   }
 
 @Override

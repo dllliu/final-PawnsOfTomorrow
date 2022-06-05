@@ -15,6 +15,9 @@ public class ChessBoard {
 
     }
 
+
+
+
     board[0][0]= new Rook("white");
 
     board[0][1]= new Knight("white");
@@ -138,12 +141,11 @@ public class ChessBoard {
       if(temp2 != null){
         if(temp2.getClass().isInstance(new Pawn(color))){
           Pawn piece=(Pawn) temp2;
-          if(moveCompleted)
-{
-          piece.hasMoved = true;}
 
+System.out.println(piece.emPassanAble);
+System.out.println("moveCompleted: "+moveCompleted);
           if (piece.emPassanAble){
-            int[] prevMove= parseScanner(scoreSheet.get(scoreSheet.size()-2));
+            int[] prevMove= parseScanner(scoreSheet.get(scoreSheet.size()-1));
             board[prevMove[2]][prevMove[3]]=null;
             if(moveCompleted)
 {piece.emPassanAble=false;}
@@ -204,9 +206,7 @@ public class ChessBoard {
 
       if(board[arrOfMoves[2]][arrOfMoves[3]] != null){ //if there is a rook there
         if(board[arrOfMoves[2]][arrOfMoves[3]].getClass().isInstance(new King(color))){ //new King
-          if(moveCompleted){ //king moves
-            ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasMoved = true;
-          }
+
           //set hasCastled to true
           if(((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled){
             if((arrOfMoves[3] - arrOfMoves[1] == 2)) { //if the difference in row number is 2
@@ -222,9 +222,12 @@ public class ChessBoard {
           }
         }
       }
-    }else{
+    }
+    else{
       throw new IllegalArgumentException();
     }
+    if (moveCompleted){
+    board[arrOfMoves[2]][arrOfMoves[3]].hasMoved=true;}
   }
 
   private String convertCoord(int initialX, int initialY, int destX, int destY){

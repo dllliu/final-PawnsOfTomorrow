@@ -42,7 +42,7 @@ public boolean canMove(ChessBoard cb, int initialX, int initialY, int destX, int
     if(destY - initialY == 2 && initialX == destX){
       //Castle king side
 
-      if(board[destX][initialY + 1] != null || board[destX][initialY + 2] != null){
+      if(board[destX][initialY + 1] != null || board[destX][initialY + 2] != null||board[destX][initialY+3].hasMoved){
         hasCastled = false;
         return false;
       }
@@ -57,7 +57,7 @@ public boolean canMove(ChessBoard cb, int initialX, int initialY, int destX, int
       }
       //Castle Queen side
     }else if(initialY - destY == 2 && initialX == destX && (destY < initialY)){
-      if(board[destX][initialY - 1] != null || board[destX][initialY - 2] != null || board[destX][initialY - 3] != null){
+      if(board[destX][initialY - 1] != null || board[destX][initialY - 2] != null || board[destX][initialY - 3] != null||board[destX][initialY-4].hasMoved){
         hasCastled = false;
         return false;
       }
