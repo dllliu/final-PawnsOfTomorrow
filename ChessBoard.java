@@ -4,6 +4,7 @@ import java.util.*;
 public class ChessBoard {
 
   public Piece[][] board;
+  public ArrayList<String> scoreSheet=new ArrayList<String>();
 
   public ChessBoard(){
     board=new Piece[8][8];
@@ -11,52 +12,51 @@ public class ChessBoard {
     for(int i=2; i< 6; i++){
       for(int j=0; j<8; j++){
         board[i][j] = null;
-      }
+
     }
 
     board[0][0]= new Rook("white");
-/*
+
     board[0][1]= new Knight("white");
     board[0][2]= new Bishop("white");
-    */
+
     board[0][3]= new Queen("white");
 
 
     board[0][4]= new King("white");
-/*
+
     board[0][5]= new Bishop("white");
     board[0][6]= new Knight("white");
-*/
+
     board[0][7]= new Rook("white");
-/*
+
     for(int y=0; y<=7; y++){
       board[1][y] = new Pawn("white");
     }
-    */
+
+
 
 
     board[7][0]= new Rook("black");
-/*
+
     board[7][1]= new Knight("black");
     board[7][2]= new Bishop("black");
-    */
+
     board[7][3]= new Queen("black");
 
     board[7][4]= new King("black");
 
-/*
     board[7][5]= new Bishop("black");
     board[7][6]= new Knight("black");
-    */
 
     board[7][7]= new Rook("black");
-/*
+
     for(int y=0; y<=7; y++){
       board[6][y] = new Pawn("black");
     }
-    */
 
   }
+}
 
   public boolean isChecked(String color){
     int[] kingPos = getKingPosition(color);
@@ -109,7 +109,7 @@ public class ChessBoard {
     for(int i = 0; i<board.length; i++){
       for(int j = 0; j<board[0].length; j++){
         if(board[i][j] != null){
-          if(board[i][j].getClass().isInstance(new King("white")) && board[i][j].getColor().equals(color)){
+          if(board[i][j].getClass().isInstance(new King(color)) && board[i][j].getColor().equals(color)){
             row = i;
             col = j;
           }
@@ -128,71 +128,43 @@ public class ChessBoard {
     int[] arrOfMoves = parseScanner(move);
 
     if(board[arrOfMoves[0]][arrOfMoves[1]] == null){
-      throw new IllegalArgumentException("Input needs to be valid. letter + number. Space. letter + number");
+      throw new IllegalArgumentException("Input needs to be valid. Make sure starting square has a piece on it");
     }
 
     if(!board[arrOfMoves[0]][arrOfMoves[1]].getColor().equals(color)){
-      throw new IllegalArgumentException("Colors should match");
+      throw new IllegalArgumentException("Color for initial square should match player color");
     }
 
     if(board[arrOfMoves[2]][arrOfMoves[3]] != null){
       if(board[arrOfMoves[2]][arrOfMoves[3]].getColor().equals(color)){
-        throw new IllegalArgumentException("Colors should not match if square is occupied");
+        throw new IllegalArgumentException("Square is occupied");
       }
     }
 
-    if(board[arrOfMoves[0]][arrOfMoves[1]].canMove(board, arrOfMoves[0], arrOfMoves[1], arrOfMoves[2], arrOfMoves[3])){
-
-      if(isChecked(color)){
-        throw new IllegalArgumentException("Player is in check");
-      }
-
-      if(moveCompleted){
-        //Switch
-        board[arrOfMoves[2]][arrOfMoves[3]] = board[arrOfMoves[0]][arrOfMoves[1]];
-        board[arrOfMoves[0]][arrOfMoves[1]] = null;
-      }
-
-      if(board[arrOfMoves[2]][arrOfMoves[3]] != null){
-        if(board[arrOfMoves[2]][arrOfMoves[3]].getClass().isInstance(new King("white"))){
-          if(moveCompleted){
-            ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasMoved = true;
-          }
-
-          if(((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled){
-            if(arrOfMoves[3] - arrOfMoves[1] == 2){
-              board[arrOfMoves[2]][arrOfMoves[3] - 1] = board[arrOfMoves[2]][arrOfMoves[3] + 1];
-              board[arrOfMoves[2]][arrOfMoves[3] + 1] = null;
-            }else{
-              board[arrOfMoves[2]][arrOfMoves[3] + 1] = board[arrOfMoves[2]][arrOfMoves[3] - 1];
-              board[arrOfMoves[2]][arrOfMoves[3] - 1] = null;
-            }
-            ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled = false;
-          }
-        }
-      }
-
-    }else{
-      throw new IllegalArgumentException("Input needs to be valid. letter + number. Space. letter + number");
-    }
-
-    //for pawns
     if(moveCompleted){
-      Piece piece = board[arrOfMoves[2]][arrOfMoves[3]];
-      if(piece != null){
-        if(piece.getClass().isInstance(new Pawn("white"))){
+      Piece temp2 = board[arrOfMoves[2]][arrOfMoves[3]];
+      if(temp2 != null){
+        if(temp2.getClass().isInstance(new Pawn(color))){
+          Pawn piece=(Pawn) temp2;
           piece.hasMoved = true;
+
+          if (piece.emPassanAble){
+            int[] prevMove= parseScanner(scoreSheet.get(scoreSheet.size()-2));
+            board[prevMove[2]][prevMove[3]]=null;
+            piece.emPassanAble=false;
+          }
 
           //promote
           Piece replacement;
           if(move.split(" ").length < 3){
             move += " s";
           }
-          if(piece.getColor().equals("white")){
+          if(piece.getColor().equals(color)){
             if(arrOfMoves[2] == 7){
               switch(move.split(" ")[2].charAt(0)){
                 case 'B': replacement = new Bishop("white"); break;
                 case 'N': replacement = new Knight("white"); break;
+                case 'R': replacement = new Rook("white"); break;
                 default: replacement = new Queen("white"); break;
               }
               board[arrOfMoves[2]][arrOfMoves[3]] = replacement;
@@ -202,6 +174,7 @@ public class ChessBoard {
               switch(move.split(" ")[2].charAt(0)){
                 case 'B': replacement = new Bishop("black"); break;
                 case 'N': replacement = new Knight("black"); break;
+                case 'R': replacement = new Rook("black"); break;
                 default: replacement = new Queen("black"); break;
               }
               board[arrOfMoves[2]][arrOfMoves[3]] = replacement;
@@ -209,6 +182,44 @@ public class ChessBoard {
           }
         }
       }
+    }
+
+    if(board[arrOfMoves[0]][arrOfMoves[1]].canMove(this, arrOfMoves[0], arrOfMoves[1], arrOfMoves[2], arrOfMoves[3])){
+
+      if(isChecked(color)){
+        //need to code this
+        throw new IllegalArgumentException("Player is in check");
+      }
+
+      if(moveCompleted){
+        //fails enpassant and castle
+        //Switch
+        board[arrOfMoves[2]][arrOfMoves[3]] = board[arrOfMoves[0]][arrOfMoves[1]];
+        board[arrOfMoves[0]][arrOfMoves[1]] = null;
+        scoreSheet.add(move);
+      }
+
+      if(board[arrOfMoves[2]][arrOfMoves[3]] != null){ //if there is a rook there
+        if(board[arrOfMoves[2]][arrOfMoves[3]].getClass().isInstance(new King(color))){ //new King
+          if(moveCompleted){ //king moves
+            ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasMoved = true;
+          }
+          //set hasCastled to true
+          if(((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled){
+            if((arrOfMoves[3] - arrOfMoves[1] == 2)) { //if the difference in row number is 2
+              board[arrOfMoves[2]][arrOfMoves[3] - 1] = board[arrOfMoves[2]][arrOfMoves[3] + 1]; //
+              board[arrOfMoves[2]][arrOfMoves[3] + 1] = null;
+            }
+            else{
+              board[arrOfMoves[2]][arrOfMoves[3] + 1] = board[arrOfMoves[2]][arrOfMoves[3] - 1];
+              board[arrOfMoves[2]][arrOfMoves[3] - 1] = null;
+            }
+            ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled = false;
+          }
+        }
+      }
+    }else{
+      throw new IllegalArgumentException();
     }
   }
 
@@ -283,9 +294,27 @@ public class ChessBoard {
     return false;
   }
 
-  public boolean staleMate(String color){
+  /*public boolean staleMate(String color){
+    if (board.canAnyMove(color)==false){
+      return true;
+    }
     return false;
   }
+
+  public boolean checkMate(String color){
+    if (board.canAnyMove(color)==false){
+      for (int i=0;i<board.length;i++){
+        for (int k=0;k<board[i].length;k++){
+          if (canMove(board, board.getKingPosition(color)[0], board.getKingPosition(color)[1], k, i)){
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+    return false;
+  }
+*/
 
   //Displays board given side to display from
   /*

@@ -8,8 +8,7 @@ public abstract class Piece{
     return this.color;
   }
 
-  public abstract boolean canMove(Piece[][] board, int initialX, int initialY, int destX, int destY);
-
+  public abstract boolean canMove(ChessBoard cb, int initialX, int initialY, int destX, int destY);
   public abstract String toString();
 
 }
