@@ -336,7 +336,6 @@ public class ChessBoard {
     }
     return false;
   }
-
   public boolean checkMate(String color){
     if (board.canAnyMove(color)==false){
       for (int i=0;i<board.length;i++){
