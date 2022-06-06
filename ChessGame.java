@@ -8,6 +8,12 @@ public static void main(String[] args) {
   ChessBoard newBoard = new ChessBoard();
   boolean possibleStalemate = false;
   String color = "white";
+  int chessMode = Integer.parseInt(args[0]);
+  String tutorialMode = args[1];
+  System.out.println("Enter which mode you want to play. 1 is 3-Check, 2 is Kings of the Hill, 3 is Atomic Chess, 4 is Chess 960. \n Just run the file if you want to play normal chess.");
+  System.out.println("If you want to solve chess tactics, enter in puzzle1 and so on...");
+
+
   while(true){
     System.out.println (newBoard.scoreSheet.toString());
     System.out.println(newBoard);
