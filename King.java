@@ -1,5 +1,4 @@
 public class King extends Piece{
-
   public String color;
   public boolean hasCastled;
   public boolean hasMoved;
@@ -35,7 +34,6 @@ public class King extends Piece{
 public boolean canMove(ChessBoard cb, int initialX, int initialY, int destX, int destY){
   Piece[][] board=cb.board;
   if(Math.abs(destX - initialX) > 1 || Math.abs(destY - initialY) > 1){
-
     if(hasMoved){
       return false;
     }

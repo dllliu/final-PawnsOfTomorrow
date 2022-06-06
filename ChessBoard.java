@@ -1,4 +1,3 @@
-// valid moves will be checked in Piece class
 import java.util.*;
 
 public class ChessBoard {
@@ -12,31 +11,20 @@ public class ChessBoard {
     for(int i=2; i< 6; i++){
       for(int j=0; j<8; j++){
         board[i][j] = null;
-
+      }
     }
 
-
-
-
     board[0][0]= new Rook("white");
-
     board[0][1]= new Knight("white");
     board[0][2]= new Bishop("white");
     board[0][3]= new Queen("white");
-
     board[0][4]= new King("white");
-
-
     board[0][5]= new Bishop("white");
     board[0][6]= new Knight("white");
-
     board[0][7]= new Rook("white");
-
-
     for(int y=0; y<=7; y++){
       board[1][y] = new Pawn("white");
     }
-
 
     board[7][0]= new Rook("black");
     board[7][1]= new Knight("black");
@@ -46,12 +34,9 @@ public class ChessBoard {
     board[7][5]= new Bishop("black");
     board[7][6]= new Knight("black");
     board[7][7]= new Rook("black");
-
     for(int y=0; y<=7; y++){
       board[6][y] = new Pawn("black");
     }
-
-  }
 }
 
   public boolean isChecked(String color){
@@ -95,7 +80,6 @@ public class ChessBoard {
     returnArray[3] = charToInt(Character.toLowerCase(split[1].charAt(0)));
     returnArray[2] = Integer.parseInt(split[1].charAt(1) + "") - 1;
     return returnArray;
-
   }
 
   private int[] getKingPosition(String color){
@@ -120,6 +104,7 @@ public class ChessBoard {
 
   }
 
+//moveCompleted makes sure it's completely a valid square
   public void makeMove(String move, String color, boolean moveCompleted) throws IllegalArgumentException{
     int[] arrOfMoves = parseScanner(move);
 
@@ -133,12 +118,9 @@ public class ChessBoard {
 
     if(board[arrOfMoves[2]][arrOfMoves[3]] != null){
       if(board[arrOfMoves[2]][arrOfMoves[3]].getColor().equals(color)){
-        throw new IllegalArgumentException("Square is occupied");
+        throw new IllegalArgumentException("Destination square is occupied by a piece of the same color");
       }
     }
-
-
-
 
     if(board[arrOfMoves[0]][arrOfMoves[1]].canMove(this, arrOfMoves[0], arrOfMoves[1], arrOfMoves[2], arrOfMoves[3])){
       Piece[][] oldBoard=new Piece[board.length][board.length];
@@ -150,28 +132,29 @@ public class ChessBoard {
       board[arrOfMoves[2]][arrOfMoves[3]] = board[arrOfMoves[0]][arrOfMoves[1]];
       board[arrOfMoves[0]][arrOfMoves[1]] = null;
       if(moveCompleted){
-        //fails enpassant and castle
-        //Switch
         scoreSheet.add(move);
        }
 
+      //empassant
       Piece temp2 = board[arrOfMoves[2]][arrOfMoves[3]];
-
       if(temp2 != null){
         if(temp2.getClass().isInstance(new Pawn(color))){
           Pawn piece=(Pawn) temp2;
           if (piece.emPassanAble){
             int[] prevMove;
             if (moveCompleted){
-
-          prevMove= parseScanner(scoreSheet.get(scoreSheet.size()-2));}
-            else {prevMove= parseScanner(scoreSheet.get(scoreSheet.size()-1));}
+              prevMove= parseScanner(scoreSheet.get(scoreSheet.size()-2));
+            }
+            else {
+              prevMove= parseScanner(scoreSheet.get(scoreSheet.size()-1));
+            }
             board[prevMove[2]][prevMove[3]]=null;
-            if(moveCompleted)
-      {piece.emPassanAble=false;}
+            if(moveCompleted){
+              piece.emPassanAble=false;
+            }
           }
 
-          //promote
+          //?
           Piece replacement;
           if(move.split(" ").length < 3){
             move += " s";
@@ -206,7 +189,9 @@ public class ChessBoard {
             board[i][k]=oldBoard[i][k];
           }
         }
-        if (moveCompleted){scoreSheet.remove(scoreSheet.size()-1);}
+        if (moveCompleted){
+          scoreSheet.remove(scoreSheet.size()-1);
+        }
         throw new IllegalArgumentException("Player is in check");
       }
 
@@ -237,7 +222,6 @@ public class ChessBoard {
   }
 
   private String convertCoord(int initialX, int initialY, int destX, int destY){
-
     String outputStr = "";
 
     switch(initialY){
@@ -300,21 +284,20 @@ public class ChessBoard {
                       }
                     }
                     return true;
-
+                  }
                 }
-              }
               for (int m=0;m<board.length;m++){
                 for (int n=0;n<board.length;n++){
                   board[m][n]=oldBoard[m][n];
                 }
               }
-                        } catch(Exception e){
-                          for (int m=0;m<board.length;m++){
-                            for (int n=0;n<board.length;n++){
-                              board[m][n]=oldBoard[m][n];
-                            }
-                          }
-                                    }
+            } catch(Exception e){
+                for (int m=0;m<board.length;m++){
+                  for (int n=0;n<board.length;n++){
+                    board[m][n]=oldBoard[m][n];
+                  }
+                }
+              }
           }
         }
       }
@@ -326,56 +309,6 @@ public class ChessBoard {
       }
     }    return false;
   }
-
-  /*public boolean staleMate(String color){
-    if (board.canAnyMove(color)==false){
-      return true;
-    }
-    return false;
-  }
-
-  public boolean checkMate(String color){
-    if (board.canAnyMove(color)==false){
-      for (int i=0;i<board.length;i++){
-        for (int k=0;k<board[i].length;k++){
-          if (canMove(board, board.getKingPosition(color)[0], board.getKingPosition(color)[1], k, i)){
-            return false;
-          }
-        }
-      }
-      return true;
-    }
-    return false;
-  }
-*/
-
-  //Displays board given side to display from
-  /*
-  public String toString(){
-  int k=8;
-  for (int i=0;i<8;i++){
-  System.out.print(k);
-  k--;
-  for (int j=0;j<board[i].length;j++){
-  System.out.print(" "+ board[i][j]);
-}
-System.out.println();
-}
-System.out.print("  a b c d e f g h");
-System.out.println();
-}
-else{
-for (int i=0;i<board.length;i++){
-System.out.print(i+1);
-for (int j=board[i].length-1;j>=0;j--){
-System.out.print(" "+ board[i][j]);
-}
-System.out.println();
-}
-System.out.print("  h g f e d c b a");
-System.out.println();
-}
-*/
 
 public String toString(){
   String str = "";
