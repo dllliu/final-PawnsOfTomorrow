@@ -5,38 +5,58 @@ public class ChessBoard {
   public Piece[][] board;
   public ArrayList<String> scoreSheet=new ArrayList<String>();
 
-  public ChessBoard(){
+  public ChessBoard(ArrayList<String> locationList, ArrayList<String> piecesList, ArrayList<String> colorList){
     board=new Piece[8][8];
-
-    for(int i=2; i< 6; i++){
-      for(int j=0; j<8; j++){
-        board[i][j] = null;
+    for (int i=0;i<locationList.size();i++){
+      if (piecesList.get(i).equals("rook")){
+        board[Integer.parseInt(locationList.get(i).substring(1,2))][Integer.parseInt(locationList.get(i).substring(0,1))]=new Rook(colorList.get(i));
+      }
+      if (piecesList.get(i).equals("pawn")){
+        board[Integer.parseInt(locationList.get(i).substring(1,2))][Integer.parseInt(locationList.get(i).substring(0,1))]=new Pawn(colorList.get(i));
+      }
+      if (piecesList.get(i).equals("bishop")){
+        board[Integer.parseInt(locationList.get(i).substring(1,2))][Integer.parseInt(locationList.get(i).substring(0,1))]=new Bishop(colorList.get(i));
+      }
+      if (piecesList.get(i).equals("knight")){
+        board[Integer.parseInt(locationList.get(i).substring(1,2))][Integer.parseInt(locationList.get(i).substring(0,1))]=new Knight(colorList.get(i));
+      }
+      if (piecesList.get(i).equals("king")){
+        board[Integer.parseInt(locationList.get(i).substring(1,2))][Integer.parseInt(locationList.get(i).substring(0,1))]=new King(colorList.get(i));
+      }
+      if (piecesList.get(i).equals("queen")){
+        board[Integer.parseInt(locationList.get(i).substring(1,2))][Integer.parseInt(locationList.get(i).substring(0,1))]=new Queen(colorList.get(i));
       }
     }
 
-    board[0][0]= new Rook("white");
-    board[0][1]= new Knight("white");
-    board[0][2]= new Bishop("white");
-    board[0][3]= new Queen("white");
-    board[0][4]= new King("white");
-    board[0][5]= new Bishop("white");
-    board[0][6]= new Knight("white");
-    board[0][7]= new Rook("white");
-    for(int y=0; y<=7; y++){
-      board[1][y] = new Pawn("white");
-    }
-
-    board[7][0]= new Rook("black");
-    board[7][1]= new Knight("black");
-    board[7][2]= new Bishop("black");
-    board[7][3]= new Queen("black");
-    board[7][4]= new King("black");
-    board[7][5]= new Bishop("black");
-    board[7][6]= new Knight("black");
-    board[7][7]= new Rook("black");
-    for(int y=0; y<=7; y++){
-      board[6][y] = new Pawn("black");
-    }
+    // for(int i=2; i< 6; i++){
+    //   for(int j=0; j<8; j++){
+    //     board[i][j] = null;
+    //   }
+    // }
+    //
+    // board[0][0]= new Rook("white");
+    // board[0][1]= new Knight("white");
+    // board[0][2]= new Bishop("white");
+    // board[0][3]= new Queen("white");
+    // board[0][4]= new King("white");
+    // board[0][5]= new Bishop("white");
+    // board[0][6]= new Knight("white");
+    // board[0][7]= new Rook("white");
+    // for(int y=0; y<=7; y++){
+    //   board[1][y] = new Pawn("white");
+    // }
+    //
+    // board[7][0]= new Rook("black");
+    // board[7][1]= new Knight("black");
+    // board[7][2]= new Bishop("black");
+    // board[7][3]= new Queen("black");
+    // board[7][4]= new King("black");
+    // board[7][5]= new Bishop("black");
+    // board[7][6]= new Knight("black");
+    // board[7][7]= new Rook("black");
+    // for(int y=0; y<=7; y++){
+    //   board[6][y] = new Pawn("black");
+    // }
 }
 
   public boolean isChecked(String color){
