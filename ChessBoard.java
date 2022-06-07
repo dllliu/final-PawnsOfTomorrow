@@ -28,9 +28,6 @@ public class ChessBoard {
       board[1][y] = new Pawn("white");
     }
 
-
-
-
     board[7][0]= new Rook("black");
 
     board[7][1]= new Knight("black");
@@ -57,7 +54,7 @@ public class ChessBoard {
     for(int i = 0; i<board.length; i++){
       for(int j = 0; j<board[0].length; j++){
         if(board[i][j] != null){
-          if(board[i][j].canMove(board, i, j, row, col) && !board[i][j].getColor().equals(color)){
+          if(board[i][j].canMove(this, i, j, row, col) && !board[i][j].getColor().equals(color)){
             return true;
           }
         }
@@ -320,6 +317,7 @@ public class ChessBoard {
     }    return false;
   }
 
+/*
 public String toString(){
   String str = "";
   int count1 = 0;
@@ -343,4 +341,47 @@ public String toString(){
   reverse += "  a b c d e f g h \n";
   return reverse;
 }
+*/
+
+public String toString(){
+  String str = "";
+  int countRow = 0;
+  for(Piece[] pieces: board){
+    int countCol = 0;
+    for(Piece piece: pieces){
+      if(piece==null){
+        if (countRow%2 == 0 && (countRow != 0) && (countRow != 1) && (countRow != 6) && (countRow != 7)) {
+          if(countCol%2 == 0){
+            str += "#";
+          }else{
+            str += " ";
+          }
+        }else{
+          if(countCol%2 == 0){
+            str += " ";
+          }else{
+            if((countRow != 0) && (countRow != 1) && (countRow != 6) && (countRow != 7)){
+            str += "#";
+          }
+          }
+        }
+      }else{
+        str += piece;
+      }
+      str += " ";
+      countCol++;
+    }
+    countRow++;
+    str += "\n";
+  }
+
+  String reverse = "";
+  String[] split = str.split("\n");
+  for(int x = split.length-1; x >= 0; x--){
+    reverse += x+1 + " " + split[x] + "\n";
+  }
+  reverse += "  a b c d e f g h \n";
+  return reverse;
+}
+
 }
