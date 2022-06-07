@@ -3,8 +3,10 @@ import java.util.*;
 public class ChessBoard {
   public Piece[][] board;
   public ArrayList<String> scoreSheet=new ArrayList<String>();
+  public int count50;
 
   public ChessBoard(ArrayList<String> locationList, ArrayList<String> piecesList, ArrayList<String> colorList){
+    count50=0;
     board=new Piece[8][8];
     for (int i=0;i<locationList.size();i++){
       if (piecesList.get(i).equals("rook")){
@@ -95,8 +97,12 @@ public class ChessBoard {
 
 //moveCompleted makes sure it's completely a valid square
   public void makeMove(String move, String color, boolean moveCompleted) throws IllegalArgumentException{
+    boolean reset=false;
     int[] arrOfMoves = parseScanner(move);
 
+    if (arrOfMoves[0]<0||arrOfMoves[0]>7||arrOfMoves[1]<0||arrOfMoves[1]>7||arrOfMoves[2]<0||arrOfMoves[2]>7||arrOfMoves[3]<0||arrOfMoves[3]>7){
+      throw new IllegalArgumentException("Input needs to be valid. Make sure the move is not out of bounds");
+    }
     if(board[arrOfMoves[0]][arrOfMoves[1]] == null){
       throw new IllegalArgumentException("Input needs to be valid. Make sure starting square has a piece on it");
     }
@@ -108,6 +114,9 @@ public class ChessBoard {
     if(board[arrOfMoves[2]][arrOfMoves[3]] != null){
       if(board[arrOfMoves[2]][arrOfMoves[3]].getColor().equals(color)){
         throw new IllegalArgumentException("Destination square is occupied by a piece of the same color");
+      }
+      else{
+        reset=true;
       }
     }
 
@@ -128,6 +137,7 @@ public class ChessBoard {
       Piece temp2 = board[arrOfMoves[2]][arrOfMoves[3]];
       if(temp2 != null){
         if(temp2.getClass().isInstance(new Pawn(color))){
+          reset=true;
           Pawn piece=(Pawn) temp2;
           if (piece.emPassanAble){
             int[] prevMove;
@@ -207,7 +217,12 @@ public class ChessBoard {
       throw new IllegalArgumentException();
     }
     if (moveCompleted){
-    board[arrOfMoves[2]][arrOfMoves[3]].hasMoved=true;}
+      board[arrOfMoves[2]][arrOfMoves[3]].hasMoved=true;
+      if (reset){
+        count50=1;
+      }
+      else{count50++;}
+    }
   }
 
   private String convertCoord(int initialX, int initialY, int destX, int destY){
@@ -264,7 +279,6 @@ public class ChessBoard {
         for(int k = 0; k<board.length; k++){
           for(int l= 0; l<board[0].length; l++){
             try{
-              //?
               if(board[i][j] != null){
                 if(board[i][j].getColor().equals(color)){
                   makeMove(convertCoord(i, j, k, l), board[i][j].getColor(), false);
@@ -276,12 +290,6 @@ public class ChessBoard {
                     return true;
                   }
                 }
-                //?
-              for (int m=0;m<board.length;m++){
-                for (int n=0;n<board.length;n++){
-                  board[m][n]=oldBoard[m][n];
-                }
-              }
             } catch(Exception e){
                 for (int m=0;m<board.length;m++){
                   for (int n=0;n<board.length;n++){
@@ -293,12 +301,7 @@ public class ChessBoard {
         }
       }
     }
-
-    for (int m=0;m<board.length;m++){
-      for (int n=0;n<board.length;n++){
-        board[m][n]=oldBoard[m][n];
-      }
-    }    return false;
+   return false;
   }
 
 public String toString(){
@@ -317,7 +320,6 @@ public String toString(){
     str += "\n";
   }
 
-  //?
   String reverse = "";
   String[] split = str.split("\n");
   for(int x = split.length-1; x >= 0; x--){
