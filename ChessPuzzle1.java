@@ -28,7 +28,8 @@ public class ChessPuzzle1 extends ChessPuzzle{
     solution.add("g1 d4");
     solution.add("h8 g8");
     solution.add("d4 a1");
+
     ChessPuzzle board=new ChessPuzzle();
-    board.solve( locationList, piecesList,colorList,solution);
+    board.solve( locationList, piecesList,colorList,solution,"white");
   }
 }

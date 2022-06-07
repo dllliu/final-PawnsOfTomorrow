@@ -122,12 +122,10 @@ public static void main(String[] args) {
       System.out.println(otherColor(color) + " wins");
       return;
     }if(possibleStalemate){
-      //Draw?
       if(move.toLowerCase().contains("draw") || move.toLowerCase().contains("stalemate")){
         System.out.println("The game has ended in a draw");
         return;
       }else{
-//what is possibleStalemate
         possibleStalemate = false;
       }
     } try{
@@ -138,12 +136,13 @@ public static void main(String[] args) {
       continue;
     }
 
+//?
     Piece[][] oldBoard = newBoard.board.clone();
-  if(!newBoard.canAnyMove(otherColor(color))){
-    //difference?
+    if(!newBoard.canAnyMove(otherColor(color))){
       if(!newBoard.canAnyMove(otherColor(color))){
-      System.out.println(color + " checkmated " + otherColor(color));
-    }else{
+        System.out.println(color + " checkmated " + otherColor(color));
+    }
+    else{
       System.out.println("Game has ended in a stalemate");
     }
     return;

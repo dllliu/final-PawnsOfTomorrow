@@ -4,11 +4,10 @@ import java.io.IOException;
 
 public class ChessPuzzle{
 
-  public  void solve(ArrayList<String> locationList,ArrayList<String> piecesList,ArrayList<String> colorList, ArrayList<String> solution) {
+  public  void solve(ArrayList<String> locationList,ArrayList<String> piecesList,ArrayList<String> colorList, ArrayList<String> solution, String color) {
     //xy
     ChessBoard newBoard = new ChessBoard(locationList,piecesList,colorList);
 
-    String color = "white";
     while(true){
       System.out.println (newBoard.scoreSheet.toString());
       System.out.println(newBoard);
@@ -22,9 +21,10 @@ public class ChessPuzzle{
           return;
         }
         else if (solution.size()>1){
-          newBoard.makeMove(solution.get(0), (color), true);
+          newBoard.makeMove(solution.get(0),color, true);
           solution.remove(0);
           newBoard.makeMove(solution.get(0), ChessGame.otherColor(color), true);
+          solution.remove(0);
           continue;
         }
       }
