@@ -89,7 +89,7 @@ public class ChessBoard {
     return returnArray;
   }
 
-  private int[] getKingPosition(String color){
+  public int[] getKingPosition(String color){
     int row = 0;
     int col = 0;
 
@@ -215,8 +215,9 @@ public class ChessBoard {
               board[arrOfMoves[2]][arrOfMoves[3] + 1] = board[arrOfMoves[2]][arrOfMoves[3] - 2];
               board[arrOfMoves[2]][arrOfMoves[3] - 2] = null;
             }
-            if(moveCompleted)
-{((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled = false;}
+            if(moveCompleted){
+              ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled = false;
+            }
           }
         }
       }
@@ -228,7 +229,7 @@ public class ChessBoard {
     board[arrOfMoves[2]][arrOfMoves[3]].hasMoved=true;}
   }
 
-  private String convertCoord(int initialX, int initialY, int destX, int destY){
+  public String convertCoord(int initialX, int initialY, int destX, int destY){
     String outputStr = "";
 
     switch(initialY){
@@ -317,7 +318,7 @@ public class ChessBoard {
     }    return false;
   }
 
-/*
+
 public String toString(){
   String str = "";
   int count1 = 0;
@@ -341,8 +342,9 @@ public String toString(){
   reverse += "  a b c d e f g h \n";
   return reverse;
 }
-*/
 
+
+/*
 public String toString(){
   String str = "";
   int countRow = 0;
@@ -383,5 +385,6 @@ public String toString(){
   reverse += "  a b c d e f g h \n";
   return reverse;
 }
+*/
 
 }
