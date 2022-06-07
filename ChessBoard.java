@@ -318,12 +318,10 @@ public class ChessBoard {
     }    return false;
   }
 
-
+/*
 public String toString(){
   String str = "";
-  int count1 = 0;
   for(Piece[] pieces: board){
-    int count2 = 0;
     for(Piece piece: pieces){
       if(piece==null){
         str += " ";
@@ -342,9 +340,9 @@ public String toString(){
   reverse += "  a b c d e f g h \n";
   return reverse;
 }
+*/
 
 
-/*
 public String toString(){
   String str = "";
   int countRow = 0;
@@ -354,16 +352,16 @@ public String toString(){
       if(piece==null){
         if (countRow%2 == 0 && (countRow != 0) && (countRow != 1) && (countRow != 6) && (countRow != 7)) {
           if(countCol%2 == 0){
-            str += "#";
+            str += "■";
           }else{
-            str += " ";
+            str += "□";
           }
         }else{
-          if(countCol%2 == 0){
-            str += " ";
+          if(countCol % 2 == 0 && (countRow != 0) && (countRow != 1) && (countRow != 6) && (countRow != 7)) {
+            str += "□";
           }else{
             if((countRow != 0) && (countRow != 1) && (countRow != 6) && (countRow != 7)){
-            str += "#";
+            str += "■";
           }
           }
         }
@@ -385,6 +383,6 @@ public String toString(){
   reverse += "  a b c d e f g h \n";
   return reverse;
 }
-*/
+
 
 }
