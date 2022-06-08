@@ -5,58 +5,159 @@ import java.io.IOException;
 public class ChessGame{
 
 public static void main(String[] args) {
-  ChessBoard newBoard = new ChessBoard();
+  ArrayList<String> locationList = new ArrayList<String>();
+  ArrayList<String> piecesList = new ArrayList<String>();
+  ArrayList<String> colorList = new ArrayList<String>();
+  locationList.add("00");
+  locationList.add("10");
+  locationList.add("20");
+  locationList.add("30");
+  locationList.add("40");
+  locationList.add("50");
+  locationList.add("60");
+  locationList.add("70");
+  locationList.add("01");
+  locationList.add("11");
+  locationList.add("21");
+  locationList.add("31");
+  locationList.add("41");
+  locationList.add("51");
+  locationList.add("61");
+  locationList.add("71");
+  locationList.add("07");
+  locationList.add("17");
+  locationList.add("27");
+  locationList.add("37");
+  locationList.add("47");
+  locationList.add("57");
+  locationList.add("67");
+  locationList.add("77");
+  locationList.add("06");
+  locationList.add("16");
+  locationList.add("26");
+  locationList.add("36");
+  locationList.add("46");
+  locationList.add("56");
+  locationList.add("66");
+  locationList.add("76");
+
+  piecesList.add("rook");
+  piecesList.add("knight");
+  piecesList.add("bishop");
+  piecesList.add("queen");
+  piecesList.add("king");
+  piecesList.add("bishop");
+  piecesList.add("knight");
+  piecesList.add("rook");
+  piecesList.add("pawn");
+  piecesList.add("pawn");
+  piecesList.add("pawn");
+  piecesList.add("pawn");
+  piecesList.add("pawn");
+  piecesList.add("pawn");
+  piecesList.add("pawn");
+  piecesList.add("pawn");
+  piecesList.add("rook");
+  piecesList.add("knight");
+  piecesList.add("bishop");
+  piecesList.add("queen");
+  piecesList.add("king");
+  piecesList.add("bishop");
+  piecesList.add("knight");
+  piecesList.add("rook");
+  piecesList.add("pawn");
+  piecesList.add("pawn");
+  piecesList.add("pawn");
+  piecesList.add("pawn");
+  piecesList.add("pawn");
+  piecesList.add("pawn");
+  piecesList.add("pawn");
+  piecesList.add("pawn");
+
+  colorList.add("white");
+  colorList.add("white");
+  colorList.add("white");
+  colorList.add("white");
+  colorList.add("white");
+  colorList.add("white");
+  colorList.add("white");
+  colorList.add("white");
+  colorList.add("white");
+  colorList.add("white");
+  colorList.add("white");
+  colorList.add("white");
+  colorList.add("white");
+  colorList.add("white");
+  colorList.add("white");
+  colorList.add("white");
+
+  colorList.add("black");
+  colorList.add("black");
+  colorList.add("black");
+  colorList.add("black");
+  colorList.add("black");
+  colorList.add("black");
+  colorList.add("black");
+  colorList.add("black");
+  colorList.add("black");
+  colorList.add("black");
+  colorList.add("black");
+  colorList.add("black");
+  colorList.add("black");
+  colorList.add("black");
+  colorList.add("black");
+  colorList.add("black");
+
+  ChessBoard newBoard = new ChessBoard(locationList,piecesList,colorList);
   boolean possibleStalemate = false;
   String color = "white";
   System.out.println("Enter which mode you want to play. 1 is 3-Check, 2 is Kings of the Hill, 3 is Atomic Chess, 4 is Chess 960. \n Just run the file if you want to play normal chess.");
-  //System.out.println("If you want to solve chess tactics, enter in puzzle1 and so on...");
-  //String tutorialMode = args[1];
-  if(args.length == 0){
+ //System.out.println("If you want to solve chess tactics, enter in puzzle1 and so on...");
+ //String tutorialMode = args[1];
+ if(args.length == 0){
+  System.out.print("\033[H\033[2J");
+  System.out.flush();
+  System.out.println(newBoard);
+  int count=0;
+
   while(true){
     System.out.println (newBoard.scoreSheet.toString());
-    System.out.println(newBoard);
     System.out.println(color + " enter your move");
     Scanner in = new Scanner(System.in);
     String move = in.nextLine();
     if (move.contains("resign")){
-      System.out.println(color + " reigns");
+      System.out.println(color + " resigns");
       System.out.println(otherColor(color) + " wins");
       return;
-    }if(possibleStalemate){
-      //Draw?
-      if(move.toLowerCase().contains("draw") || move.toLowerCase().contains("stalemate")){
-        System.out.println("The game has ended in a draw");
-        return;
-      }else{
-//what is possibleStalemate
-        possibleStalemate = false;
-      }
-    } try{
+    }
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
+    try{
       newBoard.makeMove(move, color, true);
+      System.out.println(newBoard);
     }catch(IllegalArgumentException e){
       e.printStackTrace();
       System.out.println("Invalid move: Enter Moves in following format: Character + number + space + Character + number");
+      System.out.println(newBoard);
       continue;
     }
-
-    Piece[][] oldBoard = newBoard.board.clone();
-  if(!newBoard.canAnyMove(otherColor(color))){
-    //difference?
-      if(!newBoard.canAnyMove(otherColor(color))){
-      System.out.println(color + " checkmated " + otherColor(color));
-    }else{
+    if(!newBoard.canAnyMove(otherColor(color))){
+      if(newBoard.isChecked(otherColor(color))){
+        System.out.println(color + " checkmated " + otherColor(color));
+      }
+    else{
       System.out.println("Game has ended in a stalemate");
     }
     return;
-}
-    newBoard.board = oldBoard;
-    //point?
+  }
    if(newBoard.isChecked(otherColor(color))) {
       System.out.println(otherColor(color) + " is in check.");
-    } if(move.contains("draw")){
-        possibleStalemate = true;
     }
-      color = otherColor(color);
+    color = otherColor(color);
+    if (newBoard.count50==100){
+      System.out.println("Game has ended in a draw due to the 50 move rule");
+      return;
+    }
   }
 } else if (args.length == 1){
   int chessMode = Integer.parseInt(args[0]);
@@ -122,7 +223,7 @@ public static void main(String[] args) {
       color = otherColor(color);
   }
 }
-} else if (chessMode == 2){
+} else if ((args.length == 1) && (Integer.parseInt(args[0]) == 2)) {
   while(true){
     System.out.println (newBoard.scoreSheet.toString());
     System.out.println(newBoard);
@@ -139,7 +240,6 @@ public static void main(String[] args) {
         System.out.println("The game has ended in a draw");
         return;
       }else{
-//what is possibleStalemate
         possibleStalemate = false;
       }
     } try{

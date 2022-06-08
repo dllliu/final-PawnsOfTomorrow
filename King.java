@@ -46,7 +46,8 @@ public boolean canMove(ChessBoard cb, int initialX, int initialY, int destX, int
       }
       for(int i = 0; i<board.length; i++){
         for(int j = 0; j<board[0].length; j++){
-          if(board[i][j] != null&&!board[i][j].getColor().equals(color)&&!(board[i][j].getClass().isInstance(new King((color))))){
+          //?
+          if(board[i][j] != null&&!board[i][j].getColor().equals(color)){
             if(board[i][j].canMove(cb, i, j, initialX, initialY) || board[i][j].canMove(cb, i, j, initialX, initialY+1)||board[i][j].canMove(cb, i, j, initialX, initialY+2)){
               return false;
             }
@@ -61,7 +62,7 @@ public boolean canMove(ChessBoard cb, int initialX, int initialY, int destX, int
       }
       for(int i = 0; i<board.length; i++){
         for(int j = 0; j<board[0].length; j++){
-          if(board[i][j] != null&&!board[i][j].getColor().equals(color)&&!(board[i][j].getClass().isInstance(new King((color))))){
+          if(board[i][j] != null&&!board[i][j].getColor().equals(color)){
             if((board[i][j].canMove(cb, i, j, initialX, initialY) || board[i][j].canMove(cb, i, j, initialX, initialY-1)||board[i][j].canMove(cb, i, j, initialX, initialY-2))){
               return false;
             }
