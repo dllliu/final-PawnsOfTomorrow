@@ -163,35 +163,38 @@ public class HardPuzzles extends ChessPuzzle{
     piecesList.clear();
     locationList.clear();
 
-    locationList.add("13");
+    locationList.add("11");
     colorList.add("white");
+    piecesList.add("knight");
+    locationList.add("14");
+    colorList.add("black");
     piecesList.add("pawn");
-    locationList.add("60");
-    colorList.add("white");
+    locationList.add("26");
+    colorList.add("black");
     piecesList.add("king");
-    locationList.add("23");
-    colorList.add("white");
-    piecesList.add("pawn");
-    locationList.add("76");
-    colorList.add("white");
-    piecesList.add("rook");
-    locationList.add("15");
-    colorList.add("black");
-    piecesList.add("pawn");
-    locationList.add("24");
-    colorList.add("black");
-    piecesList.add("pawn");
-    locationList.add("25");
-    colorList.add("black");
-    piecesList.add("pawn");
     locationList.add("35");
     colorList.add("black");
+    piecesList.add("rook");
+    locationList.add("47");
+    colorList.add("white");
+    piecesList.add("rook");
+    locationList.add("55");
+    colorList.add("white");
+    piecesList.add("knight");
+    locationList.add("53");
+    colorList.add("white");
     piecesList.add("pawn");
-    locationList.add("25");
-    colorList.add("black");
+    locationList.add("64");
+    colorList.add("white");
     piecesList.add("king");
+    locationList.add("65");
+    colorList.add("black");
+    piecesList.add("pawn");
 
-    solution.add("b4 b5");
+    solution.add("e8 e2");
+    solution.add("b2 c4");
+    solution.add("e6 d8");
+
     board.solve( locationList, piecesList,colorList,solution,"white");
 
   }
