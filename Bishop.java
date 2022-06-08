@@ -12,7 +12,7 @@ public class Bishop extends Piece{
   @Override
   public boolean canMove(ChessBoard cb, int initialX, int initialY, int destX, int destY){
     Piece[][] board=cb.board;
-        if ((initialY == destY || initialX == destX)) {
+      if ((initialY == destY || initialX == destX)) {
       return false;
     }else if (Math.abs(initialY - destY) != (Math.abs(initialX - destX))) {
       return false;

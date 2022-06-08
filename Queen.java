@@ -1,5 +1,7 @@
 
 public class Queen extends Piece{
+  public String color;
+
   public Queen(String color){
     this.color = color;
     this.hasMoved=false;

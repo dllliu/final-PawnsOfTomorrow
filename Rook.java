@@ -32,6 +32,7 @@ public class Rook extends Piece{
       }
     }
     }
+
     if (destY != initialY) {
       if(destY > initialY){
         inc = 1;

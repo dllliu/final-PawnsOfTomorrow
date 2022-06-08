@@ -1,41 +1,32 @@
 import java.util.*;
 
 public class ChessBoard {
-
   public Piece[][] board;
   public ArrayList<String> scoreSheet=new ArrayList<String>();
+  public int count50;
 
-  public ChessBoard(){
+  public ChessBoard(ArrayList<String> locationList, ArrayList<String> piecesList, ArrayList<String> colorList){
+    count50=0;
     board=new Piece[8][8];
-
-    for(int i=2; i< 6; i++){
-      for(int j=0; j<8; j++){
-        board[i][j] = null;
+    for (int i=0;i<locationList.size();i++){
+      if (piecesList.get(i).equals("rook")){
+        board[Integer.parseInt(locationList.get(i).substring(1,2))][Integer.parseInt(locationList.get(i).substring(0,1))]=new Rook(colorList.get(i));
       }
-    }
-
-    board[0][0]= new Rook("white");
-    board[0][1]= new Knight("white");
-    board[0][2]= new Bishop("white");
-    board[0][3]= new Queen("white");
-    board[0][4]= new King("white");
-    board[0][5]= new Bishop("white");
-    board[0][6]= new Knight("white");
-    board[0][7]= new Rook("white");
-    for(int y=0; y<=7; y++){
-      board[1][y] = new Pawn("white");
-    }
-
-    board[7][0]= new Rook("black");
-    board[7][1]= new Knight("black");
-    board[7][2]= new Bishop("black");
-    board[7][3]= new Queen("black");
-    board[7][4]= new King("black");
-    board[7][5]= new Bishop("black");
-    board[7][6]= new Knight("black");
-    board[7][7]= new Rook("black");
-    for(int y=0; y<=7; y++){
-      board[6][y] = new Pawn("black");
+      if (piecesList.get(i).equals("pawn")){
+        board[Integer.parseInt(locationList.get(i).substring(1,2))][Integer.parseInt(locationList.get(i).substring(0,1))]=new Pawn(colorList.get(i));
+      }
+      if (piecesList.get(i).equals("bishop")){
+        board[Integer.parseInt(locationList.get(i).substring(1,2))][Integer.parseInt(locationList.get(i).substring(0,1))]=new Bishop(colorList.get(i));
+      }
+      if (piecesList.get(i).equals("knight")){
+        board[Integer.parseInt(locationList.get(i).substring(1,2))][Integer.parseInt(locationList.get(i).substring(0,1))]=new Knight(colorList.get(i));
+      }
+      if (piecesList.get(i).equals("king")){
+        board[Integer.parseInt(locationList.get(i).substring(1,2))][Integer.parseInt(locationList.get(i).substring(0,1))]=new King(colorList.get(i));
+      }
+      if (piecesList.get(i).equals("queen")){
+        board[Integer.parseInt(locationList.get(i).substring(1,2))][Integer.parseInt(locationList.get(i).substring(0,1))]=new Queen(colorList.get(i));
+      }
     }
 }
 
@@ -82,7 +73,7 @@ public class ChessBoard {
     return returnArray;
   }
 
-  private int[] getKingPosition(String color){
+  public int[] getKingPosition(String color){
     int row = 0;
     int col = 0;
 
@@ -106,8 +97,12 @@ public class ChessBoard {
 
 //moveCompleted makes sure it's completely a valid square
   public void makeMove(String move, String color, boolean moveCompleted) throws IllegalArgumentException{
+    boolean reset=false;
     int[] arrOfMoves = parseScanner(move);
 
+    if (arrOfMoves[0]<0||arrOfMoves[0]>7||arrOfMoves[1]<0||arrOfMoves[1]>7||arrOfMoves[2]<0||arrOfMoves[2]>7||arrOfMoves[3]<0||arrOfMoves[3]>7){
+      throw new IllegalArgumentException("Input needs to be valid. Make sure the move is not out of bounds");
+    }
     if(board[arrOfMoves[0]][arrOfMoves[1]] == null){
       throw new IllegalArgumentException("Input needs to be valid. Make sure starting square has a piece on it");
     }
@@ -119,6 +114,9 @@ public class ChessBoard {
     if(board[arrOfMoves[2]][arrOfMoves[3]] != null){
       if(board[arrOfMoves[2]][arrOfMoves[3]].getColor().equals(color)){
         throw new IllegalArgumentException("Destination square is occupied by a piece of the same color");
+      }
+      else{
+        reset=true;
       }
     }
 
@@ -139,6 +137,7 @@ public class ChessBoard {
       Piece temp2 = board[arrOfMoves[2]][arrOfMoves[3]];
       if(temp2 != null){
         if(temp2.getClass().isInstance(new Pawn(color))){
+          reset=true;
           Pawn piece=(Pawn) temp2;
           if (piece.emPassanAble){
             int[] prevMove;
@@ -208,8 +207,9 @@ public class ChessBoard {
               board[arrOfMoves[2]][arrOfMoves[3] + 1] = board[arrOfMoves[2]][arrOfMoves[3] - 2];
               board[arrOfMoves[2]][arrOfMoves[3] - 2] = null;
             }
-            if(moveCompleted)
-{((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled = false;}
+            if(moveCompleted){
+              ((King) board[arrOfMoves[2]][arrOfMoves[3]]).hasCastled = false;
+            }
           }
         }
       }
@@ -218,10 +218,15 @@ public class ChessBoard {
       throw new IllegalArgumentException();
     }
     if (moveCompleted){
-    board[arrOfMoves[2]][arrOfMoves[3]].hasMoved=true;}
+      board[arrOfMoves[2]][arrOfMoves[3]].hasMoved=true;
+      if (reset){
+        count50=1;
+      }
+      else{count50++;}
+    }
   }
 
-  private String convertCoord(int initialX, int initialY, int destX, int destY){
+  public String convertCoord(int initialX, int initialY, int destX, int destY){
     String outputStr = "";
 
     switch(initialY){
@@ -286,11 +291,6 @@ public class ChessBoard {
                     return true;
                   }
                 }
-              for (int m=0;m<board.length;m++){
-                for (int n=0;n<board.length;n++){
-                  board[m][n]=oldBoard[m][n];
-                }
-              }
             } catch(Exception e){
                 for (int m=0;m<board.length;m++){
                   for (int n=0;n<board.length;n++){
@@ -302,19 +302,13 @@ public class ChessBoard {
         }
       }
     }
-
-    for (int m=0;m<board.length;m++){
-      for (int n=0;n<board.length;n++){
-        board[m][n]=oldBoard[m][n];
-      }
-    }    return false;
+   return false;
   }
+
 
 public String toString(){
   String str = "";
-  int count1 = 0;
   for(Piece[] pieces: board){
-    int count2 = 0;
     for(Piece piece: pieces){
       if(piece==null){
         str += " ";
@@ -325,6 +319,7 @@ public String toString(){
     }
     str += "\n";
   }
+
   String reverse = "";
   String[] split = str.split("\n");
   for(int x = split.length-1; x >= 0; x--){
@@ -333,4 +328,50 @@ public String toString(){
   reverse += "  a b c d e f g h \n";
   return reverse;
 }
+
+
+/*
+public String toString(){
+  String str = "";
+  int countRow = 0;
+  for(Piece[] pieces: board){
+    int countCol = 0;
+    for(Piece piece: pieces){
+      if(piece==null){
+        if (countRow%2 == 0 && (countRow != 0) && (countRow != 1) && (countRow != 6) && (countRow != 7)) {
+          if(countCol%2 == 0){
+            str += "■";
+          }else{
+            str += "□";
+          }
+        }else{
+          if(countCol % 2 == 0 && (countRow != 0) && (countRow != 1) && (countRow != 6) && (countRow != 7)) {
+            str += "□";
+          }else{
+            if((countRow != 0) && (countRow != 1) && (countRow != 6) && (countRow != 7)){
+            str += "■";
+          }
+          }
+        }
+      }else{
+        str += piece;
+      }
+      str += " ";
+      countCol++;
+    }
+    countRow++;
+    str += "\n";
+  }
+
+  String reverse = "";
+  String[] split = str.split("\n");
+  for(int x = split.length-1; x >= 0; x--){
+    reverse += x+1 + " " + split[x] + "\n";
+  }
+  reverse += "  a b c d e f g h \n";
+  return reverse;
+}
+*/
+
+
 }
