@@ -349,8 +349,8 @@ public String toString(){
             str += "□";
           }else{
             if((countRow != 0) && (countRow != 1) && (countRow != 6) && (countRow != 7)){
-            str += "■";
-          }
+              str += "■";
+            }
           }
         }
       }else{
@@ -362,7 +362,6 @@ public String toString(){
     countRow++;
     str += "\n";
   }
-
   String reverse = "";
   String[] split = str.split("\n");
   for(int x = split.length-1; x >= 0; x--){

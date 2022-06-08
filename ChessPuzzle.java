@@ -12,7 +12,7 @@ public class ChessPuzzle{
     while(true){
       System.out.println(newBoard);
       System.out.println (newBoard.scoreSheet.toString());
-      System.out.println(color + " enter your move");
+      System.out.println(color + " enter your move. HINT: Use the Bishop");
       Scanner in = new Scanner(System.in);
       String move = in.nextLine();
       if (move.contains("help")){
