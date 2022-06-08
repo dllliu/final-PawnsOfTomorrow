@@ -269,6 +269,7 @@ public static void main(String[] args) {
   colorList.add("black");
 
   ChessBoard newBoard = new ChessBoard(locationList,piecesList,colorList);
+<<<<<<< HEAD
   if(chessMode == 1){
     int whiteCheckCount = 0;
     int blackCheckCount = 0;
@@ -373,16 +374,24 @@ else if (args.length == 2){
 }
 /*
  else if ((args.length == 1) && (Integer.parseInt(args[0]) == 2)) {
+=======
+  boolean possibleStalemate = false;
+  String color = "white";
+  System.out.print("\033[H\033[2J");
+  System.out.flush();
+  System.out.println(newBoard);
+  int count=0;
+>>>>>>> Eugene
   while(true){
     System.out.println (newBoard.scoreSheet.toString());
-    System.out.println(newBoard);
     System.out.println(color + " enter your move");
     Scanner in = new Scanner(System.in);
     String move = in.nextLine();
     if (move.contains("resign")){
-      System.out.println(color + " reigns");
+      System.out.println(color + " resigns");
       System.out.println(otherColor(color) + " wins");
       return;
+<<<<<<< HEAD
     }if(possibleStalemate){
       //Draw?
       if(move.toLowerCase().contains("draw") || move.toLowerCase().contains("stalemate")){
@@ -392,12 +401,21 @@ else if (args.length == 2){
         possibleStalemate = false;
       }
     } try{
+=======
+    }
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
+    try{
+>>>>>>> Eugene
       newBoard.makeMove(move, color, true);
+      System.out.println(newBoard);
     }catch(IllegalArgumentException e){
       e.printStackTrace();
       System.out.println("Invalid move: Enter Moves in following format: Character + number + space + Character + number");
+      System.out.println(newBoard);
       continue;
     }
+<<<<<<< HEAD
 
     Piece[][] oldBoard = newBoard.board.clone();
   if(!newBoard.canAnyMove(otherColor(color))){
@@ -405,22 +423,33 @@ else if (args.length == 2){
       if(!newBoard.canAnyMove(otherColor(color))){
       System.out.println(color + " checkmated " + otherColor(color));
     }else{
+=======
+    if(!newBoard.canAnyMove(otherColor(color))){
+      if(newBoard.isChecked(otherColor(color))){
+        System.out.println(color + " checkmated " + otherColor(color));
+      }
+    else{
+>>>>>>> Eugene
       System.out.println("Game has ended in a stalemate");
     }
     return;
-}
-    newBoard.board = oldBoard;
-    //point?
+  }
    if(newBoard.isChecked(otherColor(color))) {
       System.out.println(otherColor(color) + " is in check.");
-    } if(move.contains("draw")){
-        possibleStalemate = true;
     }
+<<<<<<< HEAD
       color = otherColor(color);
       if (newBoard.count50==100){
         System.out.println("Game has ended in a draw due to the 50 move rule");
         return;
       }
+=======
+    color = otherColor(color);
+    if (newBoard.count50==100){
+      System.out.println("Game has ended in a draw due to the 50 move rule");
+      return;
+    }
+>>>>>>> Eugene
   }
 }
 */
