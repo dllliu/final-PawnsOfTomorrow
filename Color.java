@@ -18,6 +18,16 @@ public class Color{
   public static final int UNDERLINE = 4;
   public static final int INVERTED = 7;
 
+  public static final String TEXT_RESET = "\u001B[0m";
+  public static final String TEXT_BLACK = "\u001B[30m";
+  public static final String TEXT_RED = "\u001B[31m";
+  public static final String TEXT_GREEN = "\u001B[32m";
+  public static final String TEXT_YELLOW = "\u001B[33m";
+  public static final String TEXT_BLUE = "\u001B[34m";
+  public static final String TEXT_PURPLE = "\u001B[35m";
+  public static final String TEXT_CYAN = "\u001B[36m";
+  public static final String TEXT_WHITE = "\u001B[37m";
+
   /*Reset colors*/
   public static void reset(){
     System.out.print("\u001b[0m");
@@ -45,13 +55,13 @@ public class Color{
   /*Overloaded Colorize methods.
     c1,c2 and c3 are any color modifiers such as bold/color/background color etc.
   */
-  public static String colorize(Piece text,int c1){
+  public static String colorize(String text,int c1){
     return ("\u001b[" + c1 + "m"+text+"\u001b[0m");
   }
-  public static String colorize(Piece text,int c1,int c2){
+  public static String colorize(String text,int c1,int c2){
     return ("\u001b[" + c1 + ";" + c2 + "m"+text+"\u001b[0m");
   }
-  public static String colorize(Piece text,int c1,int c2,int c3){
+  public static String colorize(String text,int c1,int c2,int c3){
     return ("\u001b[" + c1 + ";" + c2 + ";" + c3 + "m"+text+"\u001b[0m");
   }
 }

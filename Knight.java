@@ -7,8 +7,8 @@ public class Knight extends Piece{
 
 @Override
    public String toString(){
-       if (getColor().equals("white")) return "♘";
-       return "♞";
+       if (getColor().equals("white")) return Color.colorize("♞",Color.WHITE);
+       return Color.colorize("♞",Color.BLACK);
    }
 
   @Override
