@@ -306,6 +306,7 @@ public class ChessBoard {
   }
 
 
+/*
 public String toString(){
   String str = "";
   for(Piece[] pieces: board){
@@ -328,9 +329,8 @@ public String toString(){
   reverse += "  a b c d e f g h \n";
   return reverse;
 }
+*/
 
-
-/*
 public String toString(){
   String str = "";
   int countRow = 0;
@@ -338,26 +338,19 @@ public String toString(){
     int countCol = 0;
     for(Piece piece: pieces){
       if(piece==null){
-        if (countRow%2 == 0 && (countRow != 0) && (countRow != 1) && (countRow != 6) && (countRow != 7)) {
-          if(countCol%2 == 0){
-            str += "■";
-          }else{
-            str += "□";
-          }
-        }else{
-          if(countCol % 2 == 0 && (countRow != 0) && (countRow != 1) && (countRow != 6) && (countRow != 7)) {
-            str += "□";
-          }else{
-            if((countRow != 0) && (countRow != 1) && (countRow != 6) && (countRow != 7)){
-              str += "■";
-            }
-          }
-        }
-      }else{
-        str += piece;
+        str += " ";
       }
+      else{
+      str += piece;
+      /*
+      if(countRow == 0 || countRow == 1){
+        System.out.print(Color.colorize(piece, Color.WHITE));
+      } else if (countRow == 6 || countRow == 7){
+        System.out.print(Color.colorize(piece, Color.GREEN));
+      }
+      */
+    }
       str += " ";
-      countCol++;
     }
     countRow++;
     str += "\n";
@@ -367,10 +360,8 @@ public String toString(){
   for(int x = split.length-1; x >= 0; x--){
     reverse += x+1 + " " + split[x] + "\n";
   }
-  reverse += "  a b c d e f g h \n";
+    reverse += "  a b c d e f g h \n";
   return reverse;
 }
-*/
-
 
 }
