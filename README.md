@@ -63,3 +63,5 @@ Updated ChessBoard implementation and I also used clearBoard. Also made ChessBoa
 
 Eugene Yoo (6/7)
 I worked on expanding the Chess Puzzles. Created three more tactics, and I am planning to have two modes to choose from (hard, and easy). I also created draw50, which is a conditional in ChessGame that ends the game of chess once 50 black and white consecutive moves (100 total) have occurred without a capture or pawn push.
+
+Daniel Liu (6/7): Added support for draw50 across all modes that are appropriate, added support for parsing to go to the relevant chess tutorial(so far only chessPuzzle1). Worked on colorize.
