@@ -155,6 +155,8 @@ public class HardPuzzles extends ChessPuzzle{
     solution.add("f1 f6");
     solution.add("g7 f6");
     solution.add("c5 d7");
+    solution.add("f8 g8");
+    solution.add("d7 b8");
 
     board.solve( locationList, piecesList,colorList,solution,"white");
 
@@ -164,7 +166,7 @@ public class HardPuzzles extends ChessPuzzle{
     locationList.clear();
 
     locationList.add("11");
-    colorList.add("white");
+    colorList.add("black");
     piecesList.add("knight");
     locationList.add("14");
     colorList.add("black");
@@ -193,7 +195,10 @@ public class HardPuzzles extends ChessPuzzle{
 
     solution.add("e8 e2");
     solution.add("b2 c4");
-    solution.add("e6 d8");
+    solution.add("f6 e8");
+    solution.add("c7 d7");
+    solution.add("e8 d6");
+
 
     board.solve( locationList, piecesList,colorList,solution,"white");
 
