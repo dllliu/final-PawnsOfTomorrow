@@ -154,7 +154,7 @@ public class HardPuzzles extends ChessPuzzle{
 
     solution.add("f1 f6");
     solution.add("g7 f6");
-    solution.add("f1 f6");
+    solution.add("c5 d7");
 
     board.solve( locationList, piecesList,colorList,solution,"white");
 
