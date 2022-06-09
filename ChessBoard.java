@@ -331,6 +331,7 @@ public String toString(){
 }
 */
 
+/*
 public String toString(){
   String str = "";
   int countRow = 0;
@@ -342,13 +343,6 @@ public String toString(){
       }
       else{
       str += piece;
-      /*
-      if(countRow == 0 || countRow == 1){
-        System.out.print(Color.colorize(piece, Color.WHITE));
-      } else if (countRow == 6 || countRow == 7){
-        System.out.print(Color.colorize(piece, Color.GREEN));
-      }
-      */
     }
       str += " ";
     }
@@ -361,7 +355,69 @@ public String toString(){
     reverse += x+1 + " " + split[x] + "\n";
   }
     reverse += "  a b c d e f g h \n";
-  return reverse;
-}
+    return reverse;
+    }
+    */
 
+
+
+    public String toString(){
+      String str = "";
+      int countRow = 0;
+      for(Piece[] pieces: board){
+        int countCol = 0;
+        for(Piece piece: pieces){
+          if(piece==null){
+            if(countRow%2 == 0){
+              if(countCol%2 == 0){
+                str += Color.colorize(" ", Color.GREEN + Color.BACKGROUND);
+              }else{
+                str += Color.colorize(" ", Color.WHITE+Color.BRIGHT + Color.BACKGROUND);;
+              }
+            }else{
+              if(countCol%2 == 0){
+                str += Color.colorize(" ",Color.WHITE+Color.BRIGHT + Color.BACKGROUND);;
+              }else{
+                str += Color.colorize(" ", Color.GREEN + Color.BACKGROUND);
+              }
+            }
+          }else if(piece != null){
+            if(countRow%2 == 0){
+              if(countCol%2 == 0){
+                str += Color.colorize(piece.toString(), Color.GREEN + Color.BACKGROUND);
+              }else{
+                str += Color.colorize(piece.toString(), Color.WHITE+Color.BRIGHT + Color.BACKGROUND);;
+              }
+            }else{
+              if(countCol%2 == 0){
+                str += Color.colorize(piece.toString(),Color.WHITE+Color.BRIGHT + Color.BACKGROUND);;
+              }else{
+                str += Color.colorize(piece.toString(), Color.GREEN + Color.BACKGROUND);
+              }
+            }
+            /*
+            if(countRow%2 == 0){
+            str += Color.colorize(piece.toString(), Color.GREEN + Color.BACKGROUND);
+          }
+          else{
+          str += Color.colorize(piece.toString(), Color.WHITE+Color.BRIGHT + Color.BACKGROUND);
+        }
+        */
+
+        }
+          str += " ";
+          countCol++;
+      }
+        countRow++;
+        str += "\n";
+      }
+      String reverseString = "";
+
+      reverseString += "  a b c d e f g h \n";
+      String[] stringSplit = str.split("\n");
+      for(int x = stringSplit.length-1; x >= 0; x--){
+        reverseString += x+1 + " " + stringSplit[x] + "\n";
+      }
+    return reverseString;
+  }
 }

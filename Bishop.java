@@ -5,8 +5,8 @@ public class Bishop extends Piece{
 
   @Override
      public String toString(){
-         if (getColor().equals("white")) return Color.colorize("♗",Color.WHITE,Color.BOLD);
-          return Color.colorize("♗",Color.BLACK);
+         if (getColor().equals("white")) return Color.colorize("♝",Color.WHITE,Color.BOLD);
+          return Color.colorize("♝",Color.BLACK);
      }
 
   @Override

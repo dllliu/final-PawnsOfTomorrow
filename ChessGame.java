@@ -9,6 +9,7 @@ public static void main(String[] args) {
   String color = "white";
   System.out.println("Enter which mode you want to play. 1 is 3-Check, 2 is King of the Hill, 3 is Atomic Chess, 4 is Chess 960. Just run the file with java ChessGame if you want to play normal chess. \n");
   System.out.println("Set Terminal Color to A Good Color Where You Can See Black and White. If you want to solve chess tactics, enter in EasyPuzzles for easy chess tactics or HardPuzzles for hard chess tactics \n If the input is invalid, you will see the instructions again!");
+  
 
  if(args.length == 0){
 
