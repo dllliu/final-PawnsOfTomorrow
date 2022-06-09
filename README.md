@@ -33,7 +33,6 @@ Daniel Liu (5/30): Tested makeMove and deleted instance variables that were not 
 
 Daniel Liu (5/31): Added prototype Doc in ReadMe. Worked on debugging using stackTrace, fixed toString so that it outputs a baord with the correct pieces and format. Deleted Move class, added tests for resign, stalemate, check, and checkmate. Merged into main.
 
-<<<<<<< HEAD
 Eugene Yoo (5/31):
 Made en passant function. The way en passant works is that if the opponent has just moved a pawn 2 squares forward, if my pawn is right next to that pawn, then I can capture it. This was a bit of a challenge because you cannot check just destX and destY or adjacency. You also need to make sure the last move was a jump of two squares. In order to accomplish this, I had to create an instance variable called scoreSheet which is of type ArrayList<String> that looks at the previous move and makes sure it bounced two. Also changed inputs of makeMove() to take in a ChessBoard rather than a 2D piece board because I need to call instance variables and other ChessBoard methods.
 
@@ -54,8 +53,7 @@ Daniel Liu (6/4): Debugged king and pawn moves, fixed pawn entirely. King castle
 Eugene Yoo (6/4):
 Made long castles and short castles work. The king can move two spaces to the right and left if both it and the rook have not yet moved. It is difficult to implement because the rook needs to be able to go to a new square and it isn’t related to destY or destX. However, you can check this with another instance variable called hasMoved which moves the rook if the king and rook have not moved yet.
 
-Eugene Yoo (6/5):
-Made isChecked() work. This is an important method because it can be used in makeMove() and can determine whether a move is valid. If after a move a king is still in check, then that move is invalid. I also increased consistency related to inheritance by implementing constructors and instance variables in the subclasses and helped check for possible errors with piece movement. Additionally, I made sure that you can’t castle away when the king is in check or castling through or over a square that is checked, which I had to do by implementing my own isChecked() inside the King subclass. Created oldBoard which resets board in canAnyMove after each move is tested, and got rid of unnecessary code.
+Eugene Yoo (6/5): Made isChecked() work. This is an important method because it can be used in makeMove() and can determine whether a move is valid. If after a move a king is still in check, then that move is invalid. I also increased consistency related to inheritance by implementing constructors and instance variables in the subclasses and helped check for possible errors with piece movement. Additionally, I made sure that you can’t castle away when the king is in check or castling through or over a square that is checked, which I had to do by implementing my own isChecked() inside the King subclass. Created oldBoard which resets board in canAnyMove after each move is tested, and got rid of unnecessary code.
 
 Daniel Liu (6/6): Verified promote, check, and checkmate. Full Game of Chess Works. Finished parsing args for new modes when running the file using integers. Made another version of toString in which diagonal paths are easier to see due to chess board pattern. Finished 3-Check.
 
@@ -66,14 +64,5 @@ Eugene Yoo (6/7)
 I worked on expanding the Chess Puzzles. Created three more tactics, and I am planning to have two modes to choose from (hard, and easy). I also created draw50, which is a conditional in ChessGame that ends the game of chess once 50 black and white consecutive moves (100 total) have occurred without a capture or pawn push.
 
 Daniel Liu (6/7): Added support for draw50 across all modes that are appropriate, added support for parsing to go to the relevant chess tutorial(so far only chessPuzzle1). Worked on colorize.
-=======
-Daniel Liu (6/1): Fixed bug where pawn hasMoved was not updated when it moved, allowing it to move 2 squares multiple times. Tried to fix castle for king and rook, but does not work queen side. Tested and made sure capture and resign work properly, verified movement of all other pieces.
-
-Daniel Liu (6/2): Reverted back to a previous version, features pushed to main broke essential chess features like moving. Worked further on debugging castle and king moves, plan to finish tomorrow and begin on different modes/animation.
-
-Daniel Liu (6/3): Fixed bug in rook where it only will move one square horizontally or vertically at a time. Added better error messages for players to understand why the move is invalid, like moving while in check.
-
-Daniel Liu (6/4): Debugged king and pawn moves, fixed pawn entirely. King castle queen side modifies king position correctly, but not rook. Fixed Bishop movement, improved readibility of code for en passant. 
-
-Daniel Liu (6/6): Verified promote, check, and checkmate. Full Game of Chess Works. Finished parsing args for new modes when running the file using integers. Made another version of toString in which diagonal paths are easier to see due to chess board pattern. Finished 3-Check.
->>>>>>> Eugene
+ 
+Daniel Liu(6/9): Made a new color scheme for board. Started King of The Hill. Parsing for all available chess tutorials, like the easy and hard chess tutorials, with printing of the mode currently selected. Updated instructions to be more clear, string arguements when running file instead of integer arguements.
