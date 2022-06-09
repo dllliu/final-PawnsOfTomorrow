@@ -5,7 +5,6 @@ import java.io.IOException;
 public class ChessPuzzle{
 
   public void solve(ArrayList<String> locationList,ArrayList<String> piecesList,ArrayList<String> colorList, ArrayList<String> solution, String color) {
-    //xy
     ChessBoard newBoard = new ChessBoard(locationList,piecesList,colorList);
     System.out.print("\033[H\033[2J");
     System.out.flush();
@@ -38,7 +37,7 @@ public class ChessPuzzle{
       if(!move.equals(solution.get(0))){
         System.out.print("\033[H\033[2J");
         System.out.flush();
-                System.out.println("Wrong move. Try again");
+        System.out.println("Wrong move. Try again");
         continue;
       }
       else{
