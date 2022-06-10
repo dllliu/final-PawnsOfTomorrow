@@ -9,6 +9,8 @@ public class Color{
   public static final int CYAN = 36;
   public static final int WHITE = 37;
 
+
+
   /*Text modifiers to be ADDED to a color*/
   public static final int BACKGROUND = 10;
   public static final int BRIGHT = 60;
@@ -17,16 +19,6 @@ public class Color{
   public static final int BOLD = 1;
   public static final int UNDERLINE = 4;
   public static final int INVERTED = 7;
-
-  public static final String TEXT_RESET = "\u001B[0m";
-  public static final String TEXT_BLACK = "\u001B[30m";
-  public static final String TEXT_RED = "\u001B[31m";
-  public static final String TEXT_GREEN = "\u001B[32m";
-  public static final String TEXT_YELLOW = "\u001B[33m";
-  public static final String TEXT_BLUE = "\u001B[34m";
-  public static final String TEXT_PURPLE = "\u001B[35m";
-  public static final String TEXT_CYAN = "\u001B[36m";
-  public static final String TEXT_WHITE = "\u001B[37m";
 
   /*Reset colors*/
   public static void reset(){
