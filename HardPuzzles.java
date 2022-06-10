@@ -21,6 +21,7 @@ public class HardPuzzles extends ChessPuzzle{
     solutionHard.add("e5 e8");
 
     ChessPuzzle boardHard=new ChessPuzzle();
+    System.out.println("The Chess Mode is Hard Puzzles, this is Puzzle Number 1");
     boardHard.solve("", locationListHard, piecesList,colorListHard,solutionHard,"white",false);
 
     solutionHard.clear();
@@ -65,6 +66,7 @@ public class HardPuzzles extends ChessPuzzle{
     solutionHard.add("d2 d8");
     solutionHard.add("b8 d8");
 
+    System.out.println("The Chess Mode is Hard Puzzles, this is Puzzle Number 2");
     boardHard.solve("", locationListHard, piecesList,colorListHard,solutionHard,"white",false);
 
     solutionHard.clear();
@@ -92,6 +94,7 @@ public class HardPuzzles extends ChessPuzzle{
     solutionHard.add("a8 b8");
     solutionHard.add("a6 c8");
 
+    System.out.println("The Chess Mode is Hard Puzzles, this is Puzzle Number 3");
     boardHard.solve("", locationListHard, piecesList,colorListHard,solutionHard,"white",false);
 
     solutionHard.clear();
@@ -158,6 +161,7 @@ public class HardPuzzles extends ChessPuzzle{
     solutionHard.add("f8 g8");
     solutionHard.add("d7 b8");
 
+    System.out.println("The Chess Mode is Hard Puzzles, this is Puzzle Number 4");
     boardHard.solve("", locationListHard, piecesList,colorListHard,solutionHard,"white",false);
 
     solutionHard.clear();
@@ -199,7 +203,7 @@ public class HardPuzzles extends ChessPuzzle{
     solutionHard.add("c7 d7");
     solutionHard.add("e8 d6");
 
-
+    System.out.println("The Chess Mode is Hard Puzzles, this is Puzzle Number 5");
     boardHard.solve("", locationListHard, piecesList,colorListHard,solutionHard,"white",false);
 
   }

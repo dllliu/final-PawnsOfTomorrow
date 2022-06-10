@@ -25,6 +25,7 @@ public class EasyPuzzles extends ChessPuzzle{
     solutionEasy.add("g1 d4");
 
     ChessPuzzle boardEasy=new ChessPuzzle();
+    System.out.println("The Chess Mode is Easy Puzzles, this is Puzzle Number 1");
     boardEasy.solve("", locationListEasy, piecesListEasy,colorListEasy,solutionEasy,"white",false);
 
     solutionEasy.clear();
@@ -100,6 +101,7 @@ public class EasyPuzzles extends ChessPuzzle{
     piecesListEasy.add("pawn");
 
     solutionEasy.add("d6 e5");
+    System.out.println("The Chess Mode is Easy Puzzles, this is Puzzle Number 2");
     boardEasy.solve("", locationListEasy, piecesListEasy,colorListEasy,solutionEasy,"white",false);
 
     solutionEasy.clear();
@@ -130,6 +132,7 @@ public class EasyPuzzles extends ChessPuzzle{
     piecesListEasy.add("rook");
 
     solutionEasy.add("d5 e7");
+    System.out.println("The Chess Mode is Easy Puzzles, this is Puzzle Number 3");
     boardEasy.solve("", locationListEasy, piecesListEasy,colorListEasy,solutionEasy,"white",false);
 
     solutionEasy.clear();
@@ -154,6 +157,7 @@ public class EasyPuzzles extends ChessPuzzle{
     piecesListEasy.add("pawn");
 
     solutionEasy.add("d1 d8");
+    System.out.println("The Chess Mode is Easy Puzzles, this is Puzzle Number 4");
     boardEasy.solve("", locationListEasy, piecesListEasy,colorListEasy,solutionEasy,"white",false);
 
     solutionEasy.clear();
@@ -190,6 +194,7 @@ public class EasyPuzzles extends ChessPuzzle{
     piecesListEasy.add("king");
 
     solutionEasy.add("b4 b5");
+    System.out.println("The Chess Mode is Easy Puzzles, this is Puzzle Number 5");
     boardEasy.solve("", locationListEasy, piecesListEasy,colorListEasy,solutionEasy,"white",false);
 
   }
