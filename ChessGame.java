@@ -368,7 +368,7 @@ else if (args.length == 2){
 
     ChessPuzzle puzzleboard = new ChessPuzzle();
     System.out.println("\n Tutoral Mode is Chess Puzzle 1");
-    puzzleboard.solve(locationList1, piecesList1,colorList1,solution,"white");
+    puzzleboard.solve("",locationList1, piecesList1,colorList1,solution,"white",false);
   }
 }
 /*

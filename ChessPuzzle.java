@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class ChessPuzzle{
 
-  public void solve(ArrayList<String> locationList,ArrayList<String> piecesList,ArrayList<String> colorList, ArrayList<String> solution, String color) {
+  public static void solve(String checkType,ArrayList<String> locationList,ArrayList<String> piecesList,ArrayList<String> colorList, ArrayList<String> solution, String color, boolean yes) {
     //xy
     ChessBoard newBoard = new ChessBoard(locationList,piecesList,colorList);
     System.out.print("\033[H\033[2J");
@@ -13,32 +13,37 @@ public class ChessPuzzle{
       System.out.println(newBoard);
       System.out.println (newBoard.scoreSheet.toString());
       System.out.println(color + " enter your move");
+      if (yes){
+        System.out.println("This checks "+checkType);
+        System.out.println("Hint: make the move "+solution.get(0));
+      }
       Scanner in = new Scanner(System.in);
       String move = in.nextLine();
-      if (move.contains("help")){
-        if (solution.size()==1){
-          newBoard.makeMove(solution.get(0), (color), true);
-          solution.remove(0);
-          System.out.print("\033[H\033[2J");
-          System.out.flush();
-          System.out.println("solved");
-          System.out.println(newBoard);
-                    return;
+      if (move.contains("resign")){
+        System.out.println(color + " resigns");
+        System.out.println(otherColor(color) + " wins");
+        return;
+      }
+      if(!newBoard.canAnyMove(otherColor(color))){
+        if(newBoard.isChecked(otherColor(color))){
+          System.out.println(color + " checkmated " + otherColor(color));
         }
-        else if (solution.size()>1){
-          newBoard.makeMove(solution.get(0),color, true);
-          solution.remove(0);
-          newBoard.makeMove(solution.get(0), ChessGame.otherColor(color), true);
-          solution.remove(0);
-          System.out.print("\033[H\033[2J");
-          System.out.flush();
-                    continue;
-        }
+      else{
+        System.out.println("Game has ended in a stalemate");
+      }
+      return;
+    }
+     if(newBoard.isChecked(otherColor(color))) {
+        System.out.println(otherColor(color) + " is in check.");
+      }
+      if (newBoard.count50==100){
+        System.out.println("Game has ended in a draw due to the 50 move rule");
+        return;
       }
       if(!move.equals(solution.get(0))){
         System.out.print("\033[H\033[2J");
         System.out.flush();
-                System.out.println("Wrong move. Try again");
+         System.out.println("Wrong move. Try again");
         continue;
       }
       else{
@@ -58,5 +63,12 @@ public class ChessPuzzle{
         solution.remove(0);
       }
     }
+  }
+
+  public static String otherColor(String color){
+    if (color.equals("white")){
+      return "black";
+    }
+    return "white";
   }
 }

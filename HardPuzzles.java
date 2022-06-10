@@ -21,7 +21,7 @@ public class HardPuzzles extends ChessPuzzle{
     solution.add("e5 e8");
 
     ChessPuzzle board=new ChessPuzzle();
-    board.solve( locationList, piecesList,colorList,solution,"white");
+    board.solve("", locationList, piecesList,colorList,solution,"white",false);
 
     solution.clear();
     colorList.clear();
@@ -65,7 +65,7 @@ public class HardPuzzles extends ChessPuzzle{
     solution.add("d2 d8");
     solution.add("b8 d8");
 
-    board.solve( locationList, piecesList,colorList,solution,"white");
+    board.solve("", locationList, piecesList,colorList,solution,"white",false);
 
     solution.clear();
     colorList.clear();
@@ -92,7 +92,7 @@ public class HardPuzzles extends ChessPuzzle{
     solution.add("a8 b8");
     solution.add("a6 c8");
 
-    board.solve( locationList, piecesList,colorList,solution,"white");
+    board.solve("", locationList, piecesList,colorList,solution,"white",false);
 
     solution.clear();
     colorList.clear();
@@ -158,7 +158,7 @@ public class HardPuzzles extends ChessPuzzle{
     solution.add("f8 g8");
     solution.add("d7 b8");
 
-    board.solve( locationList, piecesList,colorList,solution,"white");
+    board.solve("", locationList, piecesList,colorList,solution,"white",false);
 
     solution.clear();
     colorList.clear();
@@ -200,7 +200,7 @@ public class HardPuzzles extends ChessPuzzle{
     solution.add("e8 d6");
 
 
-    board.solve( locationList, piecesList,colorList,solution,"white");
+    board.solve("", locationList, piecesList,colorList,solution,"white",false);
 
   }
 }

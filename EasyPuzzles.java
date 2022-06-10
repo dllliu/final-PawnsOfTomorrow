@@ -25,7 +25,7 @@ public class EasyPuzzles extends ChessPuzzle{
     solution.add("g1 d4");
 
     ChessPuzzle board=new ChessPuzzle();
-    board.solve( locationList, piecesList,colorList,solution,"white");
+    board.solve("", locationList, piecesList,colorList,solution,"white",false);
 
     solution.clear();
     colorList.clear();
@@ -100,7 +100,7 @@ public class EasyPuzzles extends ChessPuzzle{
     piecesList.add("pawn");
 
     solution.add("d6 e5");
-    board.solve( locationList, piecesList,colorList,solution,"white");
+    board.solve("", locationList, piecesList,colorList,solution,"white",false);
 
     solution.clear();
     colorList.clear();
@@ -130,7 +130,7 @@ public class EasyPuzzles extends ChessPuzzle{
     piecesList.add("rook");
 
     solution.add("d5 e7");
-    board.solve( locationList, piecesList,colorList,solution,"white");
+    board.solve("", locationList, piecesList,colorList,solution,"white",false);
 
     solution.clear();
     colorList.clear();
@@ -154,7 +154,7 @@ public class EasyPuzzles extends ChessPuzzle{
     piecesList.add("pawn");
 
     solution.add("d1 d8");
-    board.solve( locationList, piecesList,colorList,solution,"white");
+    board.solve("", locationList, piecesList,colorList,solution,"white",false);
 
     solution.clear();
     colorList.clear();
@@ -190,7 +190,7 @@ public class EasyPuzzles extends ChessPuzzle{
     piecesList.add("king");
 
     solution.add("b4 b5");
-    board.solve( locationList, piecesList,colorList,solution,"white");
+    board.solve("", locationList, piecesList,colorList,solution,"white",false);
 
   }
 }
