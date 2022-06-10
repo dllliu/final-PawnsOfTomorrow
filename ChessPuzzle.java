@@ -49,6 +49,9 @@ public class ChessPuzzle{
         if(solution.size()==0){
           System.out.println(newBoard);
           System.out.println("Success!");
+          System.out.println("Press enter to continue");
+          try{System.in.read();}
+          catch(Exception e){}
           return;
         }
         newBoard.makeMove(solution.get(0), ChessGame.otherColor(color), true);
