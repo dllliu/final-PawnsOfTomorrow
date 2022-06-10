@@ -7,9 +7,10 @@ public class ChessGame{
 public static void main(String[] args) {
   boolean possibleStalemate = false;
   String color = "white";
-  System.out.println("Enter which mode you want to play. 1 is 3-Check, 2 is King of the Hill, 3 is Atomic Chess, 4 is Chess 960. \n Just run the file if you want to play normal chess.");
-  System.out.println("If you want to solve chess tactics, enter in puzzle1 and so on...");
- //String tutorialMode = args[1];
+  System.out.println("Enter which mode you want to play. 1 is 3-Check, 2 is King of the Hill, 3 is Atomic Chess, 4 is Chess 960. Just run the file with java ChessGame if you want to play normal chess. \n");
+  System.out.println("Set Terminal Color to A Good Color Where You Can See Black and White. If you want to solve chess tactics, enter in EasyPuzzles for easy chess tactics or HardPuzzles for hard chess tactics \n If the input is invalid, you will see the instructions again!");
+
+
  if(args.length == 0){
 
    ArrayList<String> locationList = new ArrayList<String>();
@@ -120,6 +121,7 @@ public static void main(String[] args) {
 
   System.out.print("\033[H\033[2J");
   System.out.flush();
+  System.out.println("\n The Chess Mode is Regular Chess \n");
   System.out.println(newBoard);
   int count=0;
 
@@ -162,8 +164,12 @@ public static void main(String[] args) {
       return;
     }
   }
-} else if (args.length == 1){
-  int chessMode = Integer.parseInt(args[0]);
+}
+
+/////////////////////////////////////////////////////
+
+else if (args.length == 1){
+  String chessMode = args[0].toLowerCase();
   ArrayList<String> locationList = new ArrayList<String>();
   ArrayList<String> piecesList = new ArrayList<String>();
   ArrayList<String> colorList = new ArrayList<String>();
@@ -268,12 +274,12 @@ public static void main(String[] args) {
   colorList.add("black");
   colorList.add("black");
 
-  ChessBoard newBoard = new ChessBoard(locationList,piecesList,colorList);
-  if(chessMode == 1){
+    if(chessMode.equals("threecheck")){
+    ChessBoard newBoard = new ChessBoard(locationList,piecesList,colorList);
     int whiteCheckCount = 0;
     int blackCheckCount = 0;
     while(true){
-    System.out.println("Chess Mode is: " + chessMode);
+    System.out.println("\nChess Mode is: Three-Check");
     System.out.println("White Check Counter is: " + whiteCheckCount);
     System.out.println("Black Check Counter is: " + blackCheckCount);
     System.out.println (newBoard.scoreSheet.toString());
@@ -329,16 +335,69 @@ public static void main(String[] args) {
         possibleStalemate = true;
     }
       color = otherColor(color);
-      if (newBoard.count50==100){
+      if (newBoard.count50 == 100){
         System.out.println("Game has ended in a draw due to the 50 move rule");
         return;
       }
   }
+} else if (chessMode.equals("kingofthehill")) {
+  ChessBoard newBoard = new ChessBoard(locationList,piecesList,colorList);
+  while(true){
+  System.out.println("\n Chess Mode is: King Of The Hill");
+  System.out.println (newBoard.scoreSheet.toString());
+  System.out.println(newBoard);
+  System.out.println(color + " enter your move");
+  Scanner in = new Scanner(System.in);
+  String move = in.nextLine();
+  if (move.contains("resign")){
+    System.out.println(color + " reigns");
+    System.out.println(otherColor(color) + " wins");
+    return;
+  }if(possibleStalemate){
+    if(move.toLowerCase().contains("draw") || move.toLowerCase().contains("stalemate")){
+      System.out.println("The game has ended in a draw");
+      return;
+    }else{
+      possibleStalemate = false;
+    }
+  } try{
+    newBoard.makeMove(move, color, true);
+  }catch(IllegalArgumentException e){
+    //e.printStackTrace();
+    System.out.println("Invalid move: Enter Moves in following format: Character + number + space + Character + number");
+    continue;
+  }
+
+  Piece[][] oldBoard = newBoard.board.clone();
+if(!newBoard.canAnyMove(otherColor(color))){
+    if(!newBoard.canAnyMove(otherColor(color))){
+    System.out.println(color + " checkmated " + otherColor(color));
+  }else{
+    System.out.println("Game has ended in a stalemate");
+  }
+  return;
+}
+  newBoard.board = oldBoard;
+ if(newBoard.isChecked(otherColor(color))) {
+    System.out.println(otherColor(color) + " is in check.");
+  }
+   if(move.contains("draw")){
+      possibleStalemate = true;
+  }
+    color = otherColor(color);
+    if (newBoard.count50 == 100){
+      System.out.println("Game has ended in a draw due to the 50 move rule");
+      return;
+    }
+}
 } //if chess Mode == 2 inside if args.length == 1
+//end of 3 check
+
+
 }
 else if (args.length == 2){
-  int tutorialMode = Integer.parseInt(args[1]);
-  if(tutorialMode == 1){
+  String tutorialMode = args[1].toLowerCase();
+  if(tutorialMode.equals("test")){
     ArrayList<String> locationList1 = new ArrayList<String>();
     ArrayList<String> piecesList1 = new ArrayList<String>();
     ArrayList<String> colorList1 = new ArrayList<String>();
@@ -366,6 +425,7 @@ else if (args.length == 2){
     solution.add("h8 g8");
     solution.add("d4 a1");
 
+    System.out.println("\n Tutorial Mode is Chess Puzzle 1 \n");
     ChessPuzzle puzzleboard = new ChessPuzzle();
     System.out.println("\n Tutoral Mode is Chess Puzzle 1");
     puzzleboard.solve("",locationList1, piecesList1,colorList1,solution,"white",false);
@@ -380,7 +440,6 @@ else if (args.length == 2){
   System.out.flush();
   System.out.println(newBoard);
   int count=0;
->>>>>>> Eugene
   while(true){
     System.out.println (newBoard.scoreSheet.toString());
     System.out.println(color + " enter your move");
@@ -390,7 +449,6 @@ else if (args.length == 2){
       System.out.println(color + " resigns");
       System.out.println(otherColor(color) + " wins");
       return;
-<<<<<<< HEAD
     }if(possibleStalemate){
       //Draw?
       if(move.toLowerCase().contains("draw") || move.toLowerCase().contains("stalemate")){
@@ -405,7 +463,6 @@ else if (args.length == 2){
     System.out.print("\033[H\033[2J");
     System.out.flush();
     try{
->>>>>>> Eugene
       newBoard.makeMove(move, color, true);
       System.out.println(newBoard);
     }catch(IllegalArgumentException e){
@@ -414,21 +471,17 @@ else if (args.length == 2){
       System.out.println(newBoard);
       continue;
     }
-<<<<<<< HEAD
 
     Piece[][] oldBoard = newBoard.board.clone();
   if(!newBoard.canAnyMove(otherColor(color))){
-    //difference?
       if(!newBoard.canAnyMove(otherColor(color))){
       System.out.println(color + " checkmated " + otherColor(color));
     }else{
-=======
     if(!newBoard.canAnyMove(otherColor(color))){
       if(newBoard.isChecked(otherColor(color))){
         System.out.println(color + " checkmated " + otherColor(color));
       }
     else{
->>>>>>> Eugene
       System.out.println("Game has ended in a stalemate");
     }
     return;
@@ -436,19 +489,16 @@ else if (args.length == 2){
    if(newBoard.isChecked(otherColor(color))) {
       System.out.println(otherColor(color) + " is in check.");
     }
-<<<<<<< HEAD
       color = otherColor(color);
       if (newBoard.count50==100){
         System.out.println("Game has ended in a draw due to the 50 move rule");
         return;
       }
-=======
     color = otherColor(color);
     if (newBoard.count50==100){
       System.out.println("Game has ended in a draw due to the 50 move rule");
       return;
     }
->>>>>>> Eugene
   }
 }
 */
