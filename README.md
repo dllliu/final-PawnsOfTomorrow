@@ -60,9 +60,15 @@ Daniel Liu (6/6): Verified promote, check, and checkmate. Full Game of Chess Wor
 Eugene Yoo (6/6):
 Updated ChessBoard implementation and I also used clearBoard. Also made ChessBoard take in 4 arraylists as inputs. These are very useful because I want to create different variants of chess that don’t all contain the traditional initial setup of black and white pieces. Furthermore, for tactics, I can now set up initial coordinates and final coordinates. Removed draw instance variable because it was overly complicated as it would mean that the opponent would have to accept or decline. Also made sure that all locations were in bounds (not over 7 or less than 0).
 
-Eugene Yoo (6/7)
+Eugene Yoo (6/7):
 I worked on expanding the Chess Puzzles. Created three more tactics, and I am planning to have two modes to choose from (hard, and easy). I also created draw50, which is a conditional in ChessGame that ends the game of chess once 50 black and white consecutive moves (100 total) have occurred without a capture or pawn push.
 
 Daniel Liu (6/7): Added support for draw50 across all modes that are appropriate, added support for parsing to go to the relevant chess tutorial(so far only chessPuzzle1). Worked on colorize.
  
+Eugene Yoo (6/8):
+I created two full classes of HardPuzzles and EasyPuzzles. Both classes contain 5 tactics each, and they extend ChessPuzzle. The goal is to include these classes in ChessGame as an additional mode to call. To create HardPuzzles and EazyPuzzles, I needed to create a solve method, which essentially is similar to makeMove but with additional features such as the fact that the input move has to be equal to the solution and the game will automatically play the opponent's move based on the solution arraylist.
+ 
 Daniel Liu(6/9): Made a new color scheme for board. Started King of The Hill. Parsing for all available chess tutorials, like the easy and hard chess tutorials, with printing of the mode currently selected. Updated instructions to be more clear, string arguements when running file instead of integer arguements.
+
+ Eugene Yoo (6/10):
+ Built a new solve method in ChessPuzzle that is applicable to HardPuzzles and EasyPuzzles but also to Demo, a new class I made. The difference between Demo and HardPuzzles is that Demo will explicitly give you the solution for you to type in, whereas for HardPuzzles or EasyPuzzles you have to type in the word help or find the correct move by yourself. This functionality will help Mr. K run our program, and it also allows for concise code.
