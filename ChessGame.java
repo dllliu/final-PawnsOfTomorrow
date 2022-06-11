@@ -1,8 +1,10 @@
 import java.util.Scanner;
 import java.util.*;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class ChessGame{
+
 
 public static void main(String[] args) {
   boolean possibleStalemate = false;
@@ -377,6 +379,20 @@ if(!newBoard.canAnyMove(otherColor(color))){
   }
   return;
 }
+int[] arr1 =  {3,3};
+int[] arr2 = {3,4};
+int [] arr3 = {4,3};
+int[] arr4 = {4,4};
+int[][] goodSquares = {arr1,arr2,arr3,arr4};
+
+int[] kingArr = newBoard.getKingPosition(color);
+
+for(int[] arr: goodSquares) {
+  if(Arrays.equals(kingArr,arr)){
+    System.out.println(color + " has won the game because their king has moved to the center four squares");
+    return;
+  }
+  }
   newBoard.board = oldBoard;
  if(newBoard.isChecked(otherColor(color))) {
     System.out.println(otherColor(color) + " is in check.");
@@ -392,8 +408,7 @@ if(!newBoard.canAnyMove(otherColor(color))){
 }
 }else if (chessMode.equals("demo")){
   Demo.initDemo();
-} //if chess Mode == 2 inside if args.length == 1
-//end of 3 check
+}
 }
 else if (args.length == 2){
   String tutorialMode = args[1].toLowerCase();

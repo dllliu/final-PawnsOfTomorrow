@@ -370,34 +370,34 @@ public String toString(){
           if(piece==null){
             if(countRow%2 == 0){
               if(countCol%2 == 0){
-                str += Color.colorize(" ", Color.GREEN + Color.BACKGROUND);
+                str += Color.colorize(" ", Color.BLUE + Color.BACKGROUND);
               }else{
-                str += Color.colorize(" ", Color.WHITE+Color.BRIGHT + Color.BACKGROUND);;
+                str += Color.colorize(" ", Color.RED+ Color.BACKGROUND);;
               }
             }else{
               if(countCol%2 == 0){
-                str += Color.colorize(" ",Color.WHITE+Color.BRIGHT + Color.BACKGROUND);;
+                str += Color.colorize(" ",Color.RED+ Color.BACKGROUND);;
               }else{
-                str += Color.colorize(" ", Color.GREEN + Color.BACKGROUND);
+                str += Color.colorize(" ", Color.BLUE + Color.BACKGROUND);
               }
             }
           }else if(piece != null){
             if(countRow%2 == 0){
               if(countCol%2 == 0){
-                str += Color.colorize(piece.toString(), Color.GREEN + Color.BACKGROUND);
+                str += Color.colorize(piece.toString(), Color.BLUE + Color.BACKGROUND);
               }else{
-                str += Color.colorize(piece.toString(), Color.WHITE+Color.BRIGHT + Color.BACKGROUND);;
+                str += Color.colorize(piece.toString(), Color.RED + Color.BACKGROUND);;
               }
             }else{
               if(countCol%2 == 0){
-                str += Color.colorize(piece.toString(),Color.WHITE+Color.BRIGHT + Color.BACKGROUND);;
+                str += Color.colorize(piece.toString(),Color.RED + Color.BACKGROUND);;
               }else{
-                str += Color.colorize(piece.toString(), Color.GREEN + Color.BACKGROUND);
+                str += Color.colorize(piece.toString(), Color.BLUE + Color.BACKGROUND);
               }
             }
             /*
             if(countRow%2 == 0){
-            str += Color.colorize(piece.toString(), Color.GREEN + Color.BACKGROUND);
+            str += Color.colorize(piece.toString(), Color.BLUE + Color.BACKGROUND);
           }
           else{
           str += Color.colorize(piece.toString(), Color.WHITE+Color.BRIGHT + Color.BACKGROUND);
