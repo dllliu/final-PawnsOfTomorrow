@@ -390,10 +390,10 @@ if(!newBoard.canAnyMove(otherColor(color))){
       return;
     }
 }
+}else if (chessMode.equals("demo")){
+  Demo.initDemo();
 } //if chess Mode == 2 inside if args.length == 1
 //end of 3 check
-
-
 }
 else if (args.length == 2){
   String tutorialMode = args[1].toLowerCase();
@@ -425,10 +425,14 @@ else if (args.length == 2){
     solution.add("h8 g8");
     solution.add("d4 a1");
 
-    System.out.println("\n Tutorial Mode is Chess Puzzle 1 \n");
+    System.out.println("\n Tutorial Mode is Test \n");
     ChessPuzzle puzzleboard = new ChessPuzzle();
-    System.out.println("\n Tutoral Mode is Chess Puzzle 1");
+    System.out.println("\n Tutoral Mode is Test");
     puzzleboard.solve("",locationList1, piecesList1,colorList1,solution,"white",false);
+  } else if (tutorialMode.equals("easypuzzles")){
+    EasyPuzzles.initEasyPuzzles();
+  } else if (tutorialMode.equals("hardpuzzles")){
+    HardPuzzles.initHardPuzzles();
   }
 }
 /*

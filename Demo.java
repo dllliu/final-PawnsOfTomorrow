@@ -1,10 +1,10 @@
 import java.util.*;
 public class Demo {
-  public static void main(String[] args){
-      ArrayList<String> locationList = new ArrayList<String>();
-      ArrayList<String> piecesList = new ArrayList<String>();
-      ArrayList<String> colorList = new ArrayList<String>();
-      ArrayList<String> solution= new ArrayList<String>();
+  public static void initDemo(){
+      ArrayList<String> locationListDemo = new ArrayList<String>();
+      ArrayList<String> piecesListDemo = new ArrayList<String>();
+      ArrayList<String> colorListDemo = new ArrayList<String>();
+      ArrayList<String> solutionDemo= new ArrayList<String>();
 
       solution.add("h2 h4");
       solution.add("a8 b8");
@@ -94,59 +94,59 @@ public class Demo {
       piecesList.clear();
       locationList.clear();
 
-      solution.add("f5 f7");
-      locationList.add("54");
-      colorList.add("white");
-      piecesList.add("queen");
-      locationList.add("77");
-      colorList.add("black");
-      piecesList.add("king");
-      locationList.add("00");
-      colorList.add("white");
-      piecesList.add("king");
-      ChessPuzzle.solve("stalemate",locationList,piecesList,colorList,solution,"white",true);
-      solution.clear();
-      colorList.clear();
-      piecesList.clear();
-      locationList.clear();
+      solutionDemo.add("f5 f7");
+      locationListDemo.add("54");
+      colorListDemo.add("white");
+      piecesListDemo.add("queen");
+      locationListDemo.add("77");
+      colorListDemo.add("black");
+      piecesListDemo.add("king");
+      locationListDemo.add("00");
+      colorListDemo.add("white");
+      piecesListDemo.add("king");
+      ChessPuzzle.solve("stalemate",locationListDemo,piecesListDemo,colorListDemo,solutionDemo,"white",true);
+      solutionDemo.clear();
+      colorListDemo.clear();
+      piecesListDemo.clear();
+      locationListDemo.clear();
 
-      solution.add("h7 h8");
-      locationList.add("76");
-      colorList.add("white");
-      piecesList.add("pawn");
-      locationList.add("54");
-      colorList.add("black");
-      piecesList.add("king");
-      locationList.add("00");
-      colorList.add("white");
-      piecesList.add("king");
-      ChessPuzzle.solve("default promote",locationList,piecesList,colorList,solution,"white",true);
-      solution.clear();
-      colorList.clear();
-      piecesList.clear();
-      locationList.clear();
+      solutionDemo.add("h7 h8");
+      locationListDemo.add("76");
+      colorListDemo.add("white");
+      piecesListDemo.add("pawn");
+      locationListDemo.add("54");
+      colorListDemo.add("black");
+      piecesListDemo.add("king");
+      locationListDemo.add("00");
+      colorListDemo.add("white");
+      piecesListDemo.add("king");
+      ChessPuzzle.solve("default promote",locationListDemo,piecesListDemo,colorListDemo,solutionDemo,"white",true);
+      solutionDemo.clear();
+      colorListDemo.clear();
+      piecesListDemo.clear();
+      locationListDemo.clear();
 
-      solution.add("e1 g1");
-      locationList.add("40");
-      colorList.add("white");
-      piecesList.add("king");
-      locationList.add("13");
-      colorList.add("black");
-      piecesList.add("bishop");
-      locationList.add("01");
-      colorList.add("white");
-      piecesList.add("pawn");
-      locationList.add("70");
-      colorList.add("white");
-      piecesList.add("rook");
-      locationList.add("16");
-      colorList.add("black");
-      piecesList.add("king");
+      solutionDemo.add("e1 g1");
+      locationListDemo.add("40");
+      colorListDemo.add("white");
+      piecesListDemo.add("king");
+      locationListDemo.add("13");
+      colorListDemo.add("black");
+      piecesListDemo.add("bishop");
+      locationListDemo.add("01");
+      colorListDemo.add("white");
+      piecesListDemo.add("pawn");
+      locationListDemo.add("70");
+      colorListDemo.add("white");
+      piecesListDemo.add("rook");
+      locationListDemo.add("16");
+      colorListDemo.add("black");
+      piecesListDemo.add("king");
 
-      ChessPuzzle.solve("castle through check, which is not legal",locationList,piecesList,colorList,solution,"white",true);
-      solution.clear();
-      colorList.clear();
-      piecesList.clear();
-      locationList.clear();
+      ChessPuzzle.solve("castle through check, which is not legal",locationListDemo,piecesListDemo,colorListDemo,solutionDemo,"white",true);
+      solutionDemo.clear();
+      colorListDemo.clear();
+      piecesListDemo.clear();
+      locationListDemo.clear();
  }
 }
