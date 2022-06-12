@@ -10,7 +10,7 @@ public class ChessPuzzle{
     System.out.print("\033[H\033[2J");
     System.out.flush();
     while(true){
-      System.out.println(newBoard.toString(color));
+      System.out.println(newBoard.toString(ChessGame.otherColor(color)));
       System.out.println (newBoard.scoreSheet.toString());
       System.out.println(color + " enter your move");
       if (yes){
@@ -69,7 +69,7 @@ public class ChessPuzzle{
           System.out.println("Game has ended in a draw due to the 50 move rule");
         }
         if(solution.size()==0){
-          System.out.println(newBoard.toString(color));
+          System.out.println(newBoard.toString(ChessGame.otherColor(color)));
           System.out.println("Success!");
           System.out.println("Press enter to continue");
           try{System.in.read();}
