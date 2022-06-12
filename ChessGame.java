@@ -17,7 +17,7 @@ System.out.println();
   Scanner scan = new Scanner(System.in);
   String chessMode = scan.nextLine().toLowerCase();
 
-while(!chessMode.equals("double") && !chessMode.equals("solo") && !chessMode.equals("demo") && !chessMode.equals("three-check") && !chessMode.equals("king-hill") && !chessMode.equals("horde") && !chessMode.equals("easypuzzles") && !chessMode.equals("hardpuzzles")){
+while(!chessMode.equals("double") && !chessMode.equals("solo") && !chessMode.equals("demo") && !chessMode.equals("three-check") && !chessMode.equals("king-hill") && !chessMode.equals("horde") && !chessMode.equals("easypuzzles") && !chessMode.equals("hardpuzzles") && !chessMode.equals("chess-960")){
    scan = new Scanner(System.in);
    System.out.println("Invalid mode: type again");
    chessMode = scan.nextLine();
@@ -405,12 +405,55 @@ if(!hordeBoard.canAnyMove(otherColor(color))){
       return;
     }
 }
-} else if (chessMode.equals("fischerchess")){
-  ChessBoard newBoard = new ChessBoard(locationList, piecesList, colorList);
-}else if (chessMode.equals("atomicchess")){
-  ChessBoard newBoard = new ChessBoard(locationList, piecesList, colorList);
-}else if (chessMode.equals("giveawaychess")){
-  ChessBoard newBoard = new ChessBoard(locationList, piecesList, colorList);
+} else if (chessMode.equals("chess-960")){
+  ChessBoard.makeChess960();
+}else if (chessMode.equals("atomic")){
+  ChessBoard atomicBoard = new ChessBoard(locationList, piecesList, colorList);
+  while(true){
+  System.out.println("\nChess Mode is: Atomic Chess");
+  System.out.println (atomicBoard.scoreSheet.toString());
+  System.out.println(atomicBoard.toString(color));
+  System.out.println(color + " enter your move");
+  Scanner in = new Scanner(System.in);
+  String move = in.nextLine();
+  if (move.contains("resign")){
+    System.out.println(color + " resigns");
+    System.out.println(otherColor(color) + " wins");
+    return;
+  }
+  System.out.print("\033[H\033[2J");
+  System.out.flush();
+  try{
+    atomicBoard.makeMove(move, color, true);
+  }catch(IllegalArgumentException e){
+    //e.printStackTrace();
+    System.out.println("Invalid move: Enter Moves in following format: Character + number + space + Character + number");
+    continue;
+  }
+
+  Piece[][] oldBoard = atomicBoard.board.clone();
+if(!atomicBoard.canAnyMove(otherColor(color))){
+    if(!atomicBoard.canAnyMove(otherColor(color))){
+    System.out.println(color + " checkmated " + otherColor(color));
+  }else{
+    System.out.println("Game has ended in a stalemate");
+  }
+  return;
+}
+  atomicBoard.board = oldBoard;
+ if(atomicBoard.isChecked(otherColor(color))) {
+    System.out.println(otherColor(color) + " is in check.");
+  }
+    color = otherColor(color);
+    if (atomicBoard.count50 == 100){
+      System.out.println("Game has ended in a draw due to the 50 move rule");
+      return;
+    }
+    if(atomicBoard.getPawns("white") == false){
+      System.out.println("black has has won the game by capturing all white pawns");
+      return;
+    }
+}
 }
   if(chessMode.equals("easypuzzles")){
     ChessPuzzle puzzleboard = new ChessPuzzle();

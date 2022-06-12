@@ -1,5 +1,6 @@
 import java.util.*;
 import java.util.Arrays;
+import java.util.Random;
 
 public class ChessBoard {
   public Piece[][] board;
@@ -108,6 +109,168 @@ public class ChessBoard {
     }
   return false;
   }
+
+
+public static void makeChess960(){
+
+  ArrayList<String> locationList960 = new ArrayList<String>();
+  ArrayList<String> piecesList960 = new ArrayList<String>();
+  ArrayList<String> colorList960 = new ArrayList<String>();
+
+  for(int i=0; i<=7; i++){
+    locationList960.add("" + i + "" + 0);
+  }
+
+  for(int i=0; i<=7; i++){
+    locationList960.add("" + i + "" + 1);
+  }
+
+  for(int i=0; i<=7; i++){
+      locationList960.add("" + i + "" + 6);
+  }
+
+  for(int i=0; i<=7; i++){
+    locationList960.add("" + i + "" + 7);
+  }
+
+  String[] notPawns = {"rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"};
+  List<String> list =Arrays.asList(notPawns);
+  Collections.shuffle(list);
+  list.toArray(notPawns);
+  String str = "";
+  int firstBIndex = -1;
+  boolean val = true;
+  loop: for(int i=0; i<notPawns.length; i++){
+    switch(notPawns[i]) {
+      case "bishop":
+      if (firstBIndex == -1) {
+        firstBIndex = i;
+      } else {
+        if (firstBIndex % 2 == i % 2) {
+          val = false;
+          break loop;
+        }
+      }
+      break;
+    }
+  }
+
+if(val){
+  for(int i=0; i<notPawns.length; i++){
+  piecesList960.add(notPawns[i]);
+}
+}
+
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+
+String[] notPawns1 = {"rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"};
+List<String> list1 =Arrays.asList(notPawns);
+Collections.shuffle(list);
+list.toArray(notPawns);
+String str1 = "";
+int firstBIndex1 = -1;
+boolean val1 = true;
+loop: for(int i=0; i<notPawns1.length; i++){
+  switch(notPawns1[i]) {
+    case "bishop":
+    if (firstBIndex1 == -1) {
+      firstBIndex1 = i;
+    } else {
+      if (firstBIndex1 % 2 == i % 2) {
+        val1 = false;
+        break loop;
+      }
+    }
+    break;
+  }
+}
+
+if(val){
+for(int i=0; i<notPawns.length; i++){
+piecesList960.add(notPawns[i]);
+}
+}
+
+  for(int i=0; i<16; i++){
+    colorList960.add("white");
+  }
+
+  for(int i=0; i<16; i++){
+  colorList960.add("black");
+}
+  ChessBoard fischerBoard = new ChessBoard(locationList960, piecesList960, colorList960);
+  String color = "white";
+
+  while(true){
+  System.out.println("\nChess Mode is: Fischer Chess or Chess 960");
+  System.out.println (fischerBoard.scoreSheet.toString());
+  System.out.println(fischerBoard.toString(color));
+  System.out.println(color + " enter your move");
+  Scanner in = new Scanner(System.in);
+  String move = in.nextLine();
+  if (move.contains("resign")){
+    System.out.println(color + " resigns");
+    System.out.println(otherColor(color) + " wins");
+    return;
+  }
+  System.out.print("\033[H\033[2J");
+  System.out.flush();
+  try{
+    fischerBoard.makeMove(move, color, true);
+  }catch(IllegalArgumentException e){
+    //e.printStackTrace();
+    System.out.println("Invalid move: Enter Moves in following format: Character + number + space + Character + number");
+    continue;
+  }
+
+  Piece[][] oldBoard = fischerBoard.board.clone();
+if(!fischerBoard.canAnyMove(otherColor(color))){
+    if(!fischerBoard.canAnyMove(otherColor(color))){
+    System.out.println(color + " checkmated " + otherColor(color));
+  }else{
+    System.out.println("Game has ended in a stalemate");
+  }
+  return;
+}
+  fischerBoard.board = oldBoard;
+ if(fischerBoard.isChecked(otherColor(color))) {
+    System.out.println(otherColor(color) + " is in check.");
+  }
+    color = otherColor(color);
+    if (fischerBoard.count50 == 100){
+      System.out.println("Game has ended in a draw due to the 50 move rule");
+      return;
+    }
+    if(fischerBoard.getPawns("white") == false){
+      System.out.println("black has has won the game by capturing all white pawns");
+      return;
+    }
+}
+}
+
+public static String otherColor(String color){
+  if (color.equals("white")){
+    return "black";
+  }
+  return "white";
+}
+
 
 //moveCompleted makes sure it's completely a valid square
   public void makeMove(String move, String color, boolean moveCompleted) throws IllegalArgumentException{
