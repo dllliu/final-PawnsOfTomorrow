@@ -100,7 +100,7 @@ public class ChessBoard {
     for(int i = 0; i<board.length; i++){
       for(int j = 0; j<board[0].length; j++){
         if(board[i][j] != null){
-          if(board[i][j].getClass().isInstance(new Pawn(color)) && board[i][j].getColor().equals(color)){
+          if(board[i][j].getColor().equals(color)){
               return true;
           }
         }
@@ -393,7 +393,7 @@ public String toString(){
       String str = "";
       int countRow = 0;
       String reverseString;
-      if (color=="black"){
+      if (color.equals("white")){
       for(Piece[] pieces: board){
         int countCol = 0;
         for(Piece piece: pieces){
@@ -447,7 +447,8 @@ public String toString(){
       String[] stringSplit = str.split("\n");
       for(int x = stringSplit.length-1; x >= 0; x--){
         reverseString += x+1 + " " + stringSplit[x] + "\n";
-      }}
+      }
+    }
 
       else{
       for(int i=board.length-1;i>=0;i--){
@@ -481,15 +482,6 @@ public String toString(){
                 str += Color.colorize(board[i][j].toString(), Color.BLUE + Color.BACKGROUND);
               }
             }
-            /*
-            if(countRow%2 == 0){
-            str += Color.colorize(piece.toString(), Color.BLUE + Color.BACKGROUND);
-          }
-          else{
-          str += Color.colorize(piece.toString(), Color.WHITE+Color.BRIGHT + Color.BACKGROUND);
-        }
-        */
-
         }
           str += " ";
           countCol++;

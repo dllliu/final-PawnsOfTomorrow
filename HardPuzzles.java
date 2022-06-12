@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class HardPuzzles{
+public class HardPuzzles extends ChessPuzzle{
   public static void initHardPuzzles(){
     ArrayList<String> locationListHard = new ArrayList<String>();
     ArrayList<String> piecesList = new ArrayList<String>();

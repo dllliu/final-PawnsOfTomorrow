@@ -11,125 +11,125 @@ public static void main(String[] args) {
   System.out.flush();
   boolean possibleStalemate = false;
   String color = "white";
-  System.out.println("Enter which mode you want to play. 1 is 3-Check, 2 is King of the Hill, 3 is Atomic Chess, 4 is Chess 960. Just run the file with java ChessGame if you want to play normal chess. \n");
-  System.out.println("Set Terminal Color to A Good Color Where You Can See Black and White. If you want to solve chess tactics, enter in EasyPuzzles for easy chess tactics or HardPuzzles for hard chess tactics \n If the input is invalid, you will see the instructions again!");
-  System.out.println("To see functionality type in demo, and to play single-player type in solo");
+  System.out.println("Enter which mode you want to play. 1 is 3-Check, 2 is King of the Hill, 3 is Atomic Chess, 4 is Chess 960.");
+  System.out.println("If you want to solve chess tactics, enter in EasyPuzzles for easy chess tactics or HardPuzzles for hard chess tactics \n If the input is invalid, you will see the instructions again!");
+  System.out.println("To see functionality type in demo, and to play single-player type in solo,to play double player type in double when prompted");
 
   Scanner scan = new Scanner(System.in);
-  String answer = scan.nextLine();
-while(!answer.equals("regular")){
+  String chessMode = scan.nextLine().toLowerCase();
+while(!chessMode.equals("double") && !chessMode.equals("solo") && !chessMode.equals("demo") && !chessMode.equals("threecheck") && !chessMode.equals("kingofthehill") && !chessMode.equals("test") && !chessMode.equals("horde") && !chessMode.equals("easypuzzles") && !chessMode.equals("hardpuzzles")){
    scan = new Scanner(System.in);
    System.out.println("Invalid mode: type again");
-   answer = scan.nextLine();
+   chessMode = scan.nextLine();
 }
 System.out.print("\033[H\033[2J");
 System.out.flush();
- if(answer.equals("regular")){
 
-   ArrayList<String> locationList = new ArrayList<String>();
-   ArrayList<String> piecesList = new ArrayList<String>();
-   ArrayList<String> colorList = new ArrayList<String>();
+ArrayList<String> locationList = new ArrayList<String>();
+ArrayList<String> piecesList = new ArrayList<String>();
+ArrayList<String> colorList = new ArrayList<String>();
 
-   locationList.add("00");
-   locationList.add("10");
-   locationList.add("20");
-   locationList.add("30");
-   locationList.add("40");
-   locationList.add("50");
-   locationList.add("60");
-   locationList.add("70");
-   locationList.add("01");
-   locationList.add("11");
-   locationList.add("21");
-   locationList.add("31");
-   locationList.add("41");
-   locationList.add("51");
-   locationList.add("61");
-   locationList.add("71");
-   locationList.add("07");
-   locationList.add("17");
-   locationList.add("27");
-   locationList.add("37");
-   locationList.add("47");
-   locationList.add("57");
-   locationList.add("67");
-   locationList.add("77");
-   locationList.add("06");
-   locationList.add("16");
-   locationList.add("26");
-   locationList.add("36");
-   locationList.add("46");
-   locationList.add("56");
-   locationList.add("66");
-   locationList.add("76");
+locationList.add("00");
+locationList.add("10");
+locationList.add("20");
+locationList.add("30");
+locationList.add("40");
+locationList.add("50");
+locationList.add("60");
+locationList.add("70");
+locationList.add("01");
+locationList.add("11");
+locationList.add("21");
+locationList.add("31");
+locationList.add("41");
+locationList.add("51");
+locationList.add("61");
+locationList.add("71");
+locationList.add("07");
+locationList.add("17");
+locationList.add("27");
+locationList.add("37");
+locationList.add("47");
+locationList.add("57");
+locationList.add("67");
+locationList.add("77");
+locationList.add("06");
+locationList.add("16");
+locationList.add("26");
+locationList.add("36");
+locationList.add("46");
+locationList.add("56");
+locationList.add("66");
+locationList.add("76");
 
-   piecesList.add("rook");
-   piecesList.add("knight");
-   piecesList.add("bishop");
-   piecesList.add("queen");
-   piecesList.add("king");
-   piecesList.add("bishop");
-   piecesList.add("knight");
-   piecesList.add("rook");
-   piecesList.add("pawn");
-   piecesList.add("pawn");
-   piecesList.add("pawn");
-   piecesList.add("pawn");
-   piecesList.add("pawn");
-   piecesList.add("pawn");
-   piecesList.add("pawn");
-   piecesList.add("pawn");
-   piecesList.add("rook");
-   piecesList.add("knight");
-   piecesList.add("bishop");
-   piecesList.add("queen");
-   piecesList.add("king");
-   piecesList.add("bishop");
-   piecesList.add("knight");
-   piecesList.add("rook");
-   piecesList.add("pawn");
-   piecesList.add("pawn");
-   piecesList.add("pawn");
-   piecesList.add("pawn");
-   piecesList.add("pawn");
-   piecesList.add("pawn");
-   piecesList.add("pawn");
-   piecesList.add("pawn");
+piecesList.add("rook");
+piecesList.add("knight");
+piecesList.add("bishop");
+piecesList.add("queen");
+piecesList.add("king");
+piecesList.add("bishop");
+piecesList.add("knight");
+piecesList.add("rook");
+piecesList.add("pawn");
+piecesList.add("pawn");
+piecesList.add("pawn");
+piecesList.add("pawn");
+piecesList.add("pawn");
+piecesList.add("pawn");
+piecesList.add("pawn");
+piecesList.add("pawn");
+piecesList.add("rook");
+piecesList.add("knight");
+piecesList.add("bishop");
+piecesList.add("queen");
+piecesList.add("king");
+piecesList.add("bishop");
+piecesList.add("knight");
+piecesList.add("rook");
+piecesList.add("pawn");
+piecesList.add("pawn");
+piecesList.add("pawn");
+piecesList.add("pawn");
+piecesList.add("pawn");
+piecesList.add("pawn");
+piecesList.add("pawn");
+piecesList.add("pawn");
 
-   colorList.add("white");
-   colorList.add("white");
-   colorList.add("white");
-   colorList.add("white");
-   colorList.add("white");
-   colorList.add("white");
-   colorList.add("white");
-   colorList.add("white");
-   colorList.add("white");
-   colorList.add("white");
-   colorList.add("white");
-   colorList.add("white");
-   colorList.add("white");
-   colorList.add("white");
-   colorList.add("white");
-   colorList.add("white");
+colorList.add("white");
+colorList.add("white");
+colorList.add("white");
+colorList.add("white");
+colorList.add("white");
+colorList.add("white");
+colorList.add("white");
+colorList.add("white");
+colorList.add("white");
+colorList.add("white");
+colorList.add("white");
+colorList.add("white");
+colorList.add("white");
+colorList.add("white");
+colorList.add("white");
+colorList.add("white");
 
-   colorList.add("black");
-   colorList.add("black");
-   colorList.add("black");
-   colorList.add("black");
-   colorList.add("black");
-   colorList.add("black");
-   colorList.add("black");
-   colorList.add("black");
-   colorList.add("black");
-   colorList.add("black");
-   colorList.add("black");
-   colorList.add("black");
-   colorList.add("black");
-   colorList.add("black");
-   colorList.add("black");
-   colorList.add("black");
+colorList.add("black");
+colorList.add("black");
+colorList.add("black");
+colorList.add("black");
+colorList.add("black");
+colorList.add("black");
+colorList.add("black");
+colorList.add("black");
+colorList.add("black");
+colorList.add("black");
+colorList.add("black");
+colorList.add("black");
+colorList.add("black");
+colorList.add("black");
+colorList.add("black");
+colorList.add("black");
 
+ if(chessMode.equals("double")){
    ChessBoard newBoard = new ChessBoard(locationList,piecesList,colorList);
 
 
@@ -176,117 +176,11 @@ System.out.flush();
       return;
     }
   }
-}
-
-/////////////////////////////////////////////////////
-
-else if (args.length == 1){
-  String chessMode = args[0].toLowerCase();
-  ArrayList<String> locationList = new ArrayList<String>();
-  ArrayList<String> piecesList = new ArrayList<String>();
-  ArrayList<String> colorList = new ArrayList<String>();
-
-  locationList.add("00");
-  locationList.add("10");
-  locationList.add("20");
-  locationList.add("30");
-  locationList.add("40");
-  locationList.add("50");
-  locationList.add("60");
-  locationList.add("70");
-  locationList.add("01");
-  locationList.add("11");
-  locationList.add("21");
-  locationList.add("31");
-  locationList.add("41");
-  locationList.add("51");
-  locationList.add("61");
-  locationList.add("71");
-  locationList.add("07");
-  locationList.add("17");
-  locationList.add("27");
-  locationList.add("37");
-  locationList.add("47");
-  locationList.add("57");
-  locationList.add("67");
-  locationList.add("77");
-  locationList.add("06");
-  locationList.add("16");
-  locationList.add("26");
-  locationList.add("36");
-  locationList.add("46");
-  locationList.add("56");
-  locationList.add("66");
-  locationList.add("76");
-
-  piecesList.add("rook");
-  piecesList.add("knight");
-  piecesList.add("bishop");
-  piecesList.add("queen");
-  piecesList.add("king");
-  piecesList.add("bishop");
-  piecesList.add("knight");
-  piecesList.add("rook");
-  piecesList.add("pawn");
-  piecesList.add("pawn");
-  piecesList.add("pawn");
-  piecesList.add("pawn");
-  piecesList.add("pawn");
-  piecesList.add("pawn");
-  piecesList.add("pawn");
-  piecesList.add("pawn");
-  piecesList.add("rook");
-  piecesList.add("knight");
-  piecesList.add("bishop");
-  piecesList.add("queen");
-  piecesList.add("king");
-  piecesList.add("bishop");
-  piecesList.add("knight");
-  piecesList.add("rook");
-  piecesList.add("pawn");
-  piecesList.add("pawn");
-  piecesList.add("pawn");
-  piecesList.add("pawn");
-  piecesList.add("pawn");
-  piecesList.add("pawn");
-  piecesList.add("pawn");
-  piecesList.add("pawn");
-
-  colorList.add("white");
-  colorList.add("white");
-  colorList.add("white");
-  colorList.add("white");
-  colorList.add("white");
-  colorList.add("white");
-  colorList.add("white");
-  colorList.add("white");
-  colorList.add("white");
-  colorList.add("white");
-  colorList.add("white");
-  colorList.add("white");
-  colorList.add("white");
-  colorList.add("white");
-  colorList.add("white");
-  colorList.add("white");
-
-  colorList.add("black");
-  colorList.add("black");
-  colorList.add("black");
-  colorList.add("black");
-  colorList.add("black");
-  colorList.add("black");
-  colorList.add("black");
-  colorList.add("black");
-  colorList.add("black");
-  colorList.add("black");
-  colorList.add("black");
-  colorList.add("black");
-  colorList.add("black");
-  colorList.add("black");
-  colorList.add("black");
-  colorList.add("black");
-
-    if(chessMode.equals("threecheck")){
+} else if (chessMode.equals("demo")){
+  Demo.initDemo();
+}else if (chessMode.equals("solo")) {
+  RandomPlayer.play();
+}else if (chessMode.equals("threecheck")){
     ChessBoard newBoard = new ChessBoard(locationList,piecesList,colorList);
     int whiteCheckCount = 0;
     int blackCheckCount = 0;
@@ -353,9 +247,6 @@ else if (args.length == 1){
       }
   }
 }
-else if (chessMode.equals("solo")) {
-  RandomPlayer.play();
-}
 else if (chessMode.equals("kingofthehill")) {
   ChessBoard newBoard = new ChessBoard(locationList,piecesList,colorList);
   while(true){
@@ -420,8 +311,6 @@ for(int[] arr: goodSquares) {
       return;
     }
 }
-}else if (chessMode.equals("demo")){
-  Demo.initDemo();
 } else if(chessMode.equals("horde")){
   ArrayList<String> locationListHorde = new ArrayList<String>();
   ArrayList<String> piecesListHorde = new ArrayList<String>();
@@ -480,7 +369,7 @@ for(int[] arr: goodSquares) {
   while(true){
   System.out.println("\nChess Mode is: Horde");
   System.out.println (hordeBoard.scoreSheet.toString());
-  System.out.println(hordeBoard);
+  System.out.println(hordeBoard.toString(color));
   System.out.println(color + " enter your move");
   Scanner in = new Scanner(System.in);
   String move = in.nextLine();
@@ -530,10 +419,8 @@ if(!hordeBoard.canAnyMove(otherColor(color))){
     }
 }
 }
-}
-else if (args.length == 2){
-  String tutorialMode = args[1].toLowerCase();
-  if(tutorialMode.equals("test")){
+
+else if (chessMode.equals("test")){
     ArrayList<String> locationList1 = new ArrayList<String>();
     ArrayList<String> piecesList1 = new ArrayList<String>();
     ArrayList<String> colorList1 = new ArrayList<String>();
@@ -565,12 +452,11 @@ else if (args.length == 2){
     ChessPuzzle puzzleboard = new ChessPuzzle();
     System.out.println("\n Tutoral Mode is Test");
     puzzleboard.solve("",locationList1, piecesList1,colorList1,solution,"white",false);
-  } else if (tutorialMode.equals("easypuzzles")){
+  } else if (chessMode.equals("easypuzzles")){
     EasyPuzzles.initEasyPuzzles();
-  } else if (tutorialMode.equals("hardpuzzles")){
+  } else if (chessMode.equals("hardpuzzles")){
     HardPuzzles.initHardPuzzles();
   }
-}
 }
 
   public static String otherColor(String color){

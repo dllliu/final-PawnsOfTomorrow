@@ -30,7 +30,7 @@ public class Demo {
       piecesListDemo.clear();
       locationListDemo.clear();
 
-      solutionDemo.add("h2 h4");
+      solutionDemo.add("h3 h4");
       locationListDemo.add("71");
       colorListDemo.add("white");
       piecesListDemo.add("pawn");
@@ -40,13 +40,13 @@ public class Demo {
       locationListDemo.add("00");
       colorListDemo.add("white");
       piecesListDemo.add("king");
-      ChessPuzzle.solve("invalid move due to invalid start square. Before making the right move, type in the invalid move h3 h4",locationListDemo,piecesListDemo,colorListDemo,solutionDemo,"white",true);
+      ChessPuzzle.solve("invalid move due to invalid start square",locationListDemo,piecesListDemo,colorListDemo,solutionDemo,"white",true);
       solutionDemo.clear();
       colorListDemo.clear();
       piecesListDemo.clear();
       locationListDemo.clear();
 
-      solutionDemo.add("h2 h4");
+      solutionDemo.add("h2 h5");
       locationListDemo.add("71");
       colorListDemo.add("white");
       piecesListDemo.add("pawn");
@@ -56,13 +56,13 @@ public class Demo {
       locationListDemo.add("00");
       colorListDemo.add("white");
       piecesListDemo.add("king");
-      ChessPuzzle.solve("invalid move due to invalid destination square. Before making the right move, type in the invalid move h2 h5",locationListDemo,piecesListDemo,colorListDemo,solutionDemo,"white",true);
+      ChessPuzzle.solve("invalid move due to invalid destination square",locationListDemo,piecesListDemo,colorListDemo,solutionDemo,"white",true);
       solutionDemo.clear();
       colorListDemo.clear();
       piecesListDemo.clear();
       locationListDemo.clear();
 
-      solutionDemo.add("h2 h4");
+      solutionDemo.add("h3 h4");
       locationListDemo.add("71");
       colorListDemo.add("white");
       piecesListDemo.add("pawn");
@@ -72,7 +72,7 @@ public class Demo {
       locationListDemo.add("00");
       colorListDemo.add("white");
       piecesListDemo.add("king");
-      ChessPuzzle.solve("invalid move due to invalid start and destination square. Before making the right move, type in the invalid move h3 h5",locationListDemo,piecesListDemo,colorListDemo,solutionDemo,"white",true);
+      ChessPuzzle.solve("invalid move due to invalid start and destination square",locationListDemo,piecesListDemo,colorListDemo,solutionDemo,"white",true);
       solutionDemo.clear();
       colorListDemo.clear();
       piecesListDemo.clear();
