@@ -64,18 +64,18 @@ Eugene Yoo (6/7):
 I worked on expanding the Chess Puzzles. Created three more tactics, and I am planning to have two modes to choose from (hard, and easy). I also created draw50, which is a conditional in ChessGame that ends the game of chess once 50 black and white consecutive moves (100 total) have occurred without a capture or pawn push.
 
 Daniel Liu (6/7): Added support for draw50 across all modes that are appropriate, added support for parsing to go to the relevant chess tutorial(so far only chessPuzzle1). Worked on colorize.
- 
+
 Eugene Yoo (6/8):
 I created two full classes of HardPuzzles and EasyPuzzles. Both classes contain 5 tactics each, and they extend ChessPuzzle. The goal is to include these classes in ChessGame as an additional mode to call. To create HardPuzzles and EazyPuzzles, I needed to create a solve method, which essentially is similar to makeMove but with additional features such as the fact that the input move has to be equal to the solution and the game will automatically play the opponent's move based on the solution arraylist.
- 
+
 Daniel Liu(6/9): Made a new color scheme for board. Started King of The Hill. Parsing for all available chess tutorials, like the easy and hard chess tutorials, with printing of the mode currently selected. Updated instructions to be more clear, string arguements when running file instead of integer arguements.
 
  Eugene Yoo (6/10):
  Built a new solve method in ChessPuzzle that is applicable to HardPuzzles and EasyPuzzles but also to Demo, a new class I made. The difference between Demo and HardPuzzles is that Demo will explicitly give you the solution for you to type in, whereas for HardPuzzles or EasyPuzzles you have to type in the word help or find the correct move by yourself. This functionality will help Mr. K run our program, and it also allows for concise code. Daniel and I also determined that to make our ChessGame main not too clogged up, we could call methods in other classes like a Demo method for example.
- 
+
 Daniel Liu(6/10): Cleaned up code, large sections of code in ChessGame main were moved to seperate classes like the demo and made into init functions. Added print statements for the board number you are currently on when doing the chess puzzles/tutorials.
- 
-Daniel Liu (6/11): Finished King of the Hill, verified mode works. Finished Horde Chess, verified it worked. Changed color scheme to red and blue. Plan to finish fischer chess(chess 960), giveaway chess, atomic chess, maybe add new piece that is a combo of a knight and bishop.
 
 Eugene Yoo (6/11):
  Made changes so that error messages are printed in demo mode. I also made invalid moves not stop the program, and it also can print out true statements, such as if it is a stalemate position, or if someone is in check
+
+ Daniel Liu(6/11): Made Chess 960 mode. Fixed bug in switching color for sides. Added a new piece that is a combo of a knight and a queen in a new mode. Worked with Eugene in fixing bugs in parsing, cleaned up some code and moved to functions. Worked on Demo.
