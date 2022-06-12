@@ -75,9 +75,9 @@ Daniel Liu(6/9): Made a new color scheme for board. Started King of The Hill. Pa
  
 Daniel Liu(6/10): Cleaned up code, large sections of code in ChessGame main were moved to seperate classes like the demo and made into init functions. Added print statements for the board number you are currently on when doing the chess puzzles/tutorials.
  
-Daniel Liu (6/11): Finished King of the Hill, verified mode works. Finished Horde Chess, verified it worked. Changed color scheme to red and blue. Plan to finish fischer chess(chess 960), maybe add new piece that is a combo of a knight and bishop.
+Daniel Liu (6/11): Finished King of the Hill, verified mode works. Finished Horde Chess, verified it worked. Changed color scheme to red and blue. Plan to finish fischer chess(chess 960), maybe add new piece that is a combo of a knight and queen.
 
 Eugene Yoo (6/11):
  Made changes so that error messages are printed in demo mode. I also made invalid moves not stop the program, and it also can print out true statements, such as if it is a stalemate position, or if someone is in check
  
- Daniel Liu(6/11): Made Chess 960 mode. Fixed bug in switching color for sides. Added a new piece that is a combo of a knight and a bishop in a new mode. Worked with Eugene in fixing bugs in parsing, cleaned up some code and moved to functions. Worked on Demo.
+ Daniel Liu(6/11): Made Chess 960 mode. Fixed bug in switching color for sides. Added a new piece that is a combo of a knight and a queen in a new mode. Worked with Eugene in fixing bugs in parsing, cleaned up some code and moved to functions. Worked on Demo.
