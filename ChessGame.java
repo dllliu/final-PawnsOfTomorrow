@@ -11,9 +11,12 @@ public static void main(String[] args) {
   System.out.flush();
   boolean possibleStalemate = false;
   String color = "white";
+  /*
   System.out.println("Enter which mode you want to play. 1 is 3-Check, 2 is King of the Hill, 3 is Atomic Chess, 4 is Chess 960.");
   System.out.println("If you want to solve chess tactics, enter in EasyPuzzles for easy chess tactics or HardPuzzles for hard chess tactics \n If the input is invalid, you will see the instructions again!");
   System.out.println("To see functionality type in demo, and to play single-player type in solo,to play double player type in double when prompted");
+  */
+  System.out.println("Enter Your Preferred Mode with No Spaces");
 
   Scanner scan = new Scanner(System.in);
   String chessMode = scan.nextLine().toLowerCase();
@@ -130,7 +133,7 @@ colorList.add("black");
 colorList.add("black");
 
  if(chessMode.equals("double")){
-   ChessBoard newBoard = new ChessBoard(locationList,piecesList,colorList);
+  ChessBoard newBoard = new ChessBoard(locationList, piecesList, colorList);
 
 
   System.out.println("\n The Chess Mode is Regular Chess \n");
@@ -418,6 +421,12 @@ if(!hordeBoard.canAnyMove(otherColor(color))){
       return;
     }
 }
+} else if (chessMode.equals("fischerchess")){
+  ChessBoard newBoard = new ChessBoard(locationList, piecesList, colorList);
+}else if (chessMode.equals("atomicchess")){
+  ChessBoard newBoard = new ChessBoard(locationList, piecesList, colorList);
+}else if (chessMode.equals("giveawaychess")){
+  ChessBoard newBoard = new ChessBoard(locationList, piecesList, colorList);
 }
 
 else if (chessMode.equals("test")){
