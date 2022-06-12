@@ -12,13 +12,13 @@ public static void main(String[] args) {
   System.out.println("Welcome to the wonderful game of Chess! Enter which mode you woud like to play.\n");
   System.out.println("Set Terminal Color to A Good Color Where You Can See Black and White. If the input is invalid, you will see the instructions again!");
   System.out.println();
-  System.out.println("Normal Chess is ‘normal,’ 3-Check Chess is ‘three-check,’ King of the Hill Chess is 'king-hill,' Atomic Chess is ‘atomic,’ Horde Chess is ‘horde.’ To solve tactics, if you’d like to solve easy puzzles, type ‘easy,’ and if you’d like to solve hard puzzles, type ‘hard.’ If you’d like to play single player, type ‘solo.’ If you’d like to see the functionality of our program, type ‘demo.’");
+  System.out.println("Normal Chess is ‘normal,’ 3-Check is ‘three-check,’ King of the Hill Chess is 'king-hill,' Atomic Chess is ‘atomic,’ Horde Chess is ‘horde.’ To solve tactics, if you’d like to solve easy puzzles, type ‘easy,’ and if you’d like to solve hard puzzles, type ‘hard.’ If you’d like to play single player, type ‘solo.’ If you’d like to see the functionality of our program, type ‘demo.’");
 
   Scanner scan = new Scanner(System.in);
   String answer = scan.nextLine();
 while(!answer.equals("normal")&&!answer.equals("three-check")&&!answer.equals("horde")&&!answer.equals("easy")&&!answer.equals("hard")&&!answer.equals("solo")&&!answer.equals("demo")&&!answer.equals("king-hill")){
    scan = new Scanner(System.in);
-   System.out.println("Invalid mode: type again");
+   System.out.println("Invalid mode: try again");
    answer = scan.nextLine();
 }
 System.out.print("\033[H\033[2J");
@@ -132,7 +132,7 @@ System.out.flush();
    ChessBoard newBoard = new ChessBoard(locationList,piecesList,colorList);
 
 
-  System.out.println("\n The Chess Mode is Regular Chess \n");
+  System.out.println("\n The Chess Mode is Normal Chess \n");
   System.out.println(newBoard.toString(otherColor(color)));
   int count=0;
 
@@ -290,7 +290,7 @@ else{
     int whiteCheckCount = 0;
     int blackCheckCount = 0;
     while(true){
-    System.out.println("\nChess Mode is: Three-Check");
+      System.out.println("\n The Chess Mode is Three-Check  \n");
     System.out.println("White Check Counter is: " + whiteCheckCount);
     System.out.println("Black Check Counter is: " + blackCheckCount);
     System.out.println (newBoard.scoreSheet.toString());
@@ -324,7 +324,7 @@ else{
 }
     newBoard.board = oldBoard;
    if(newBoard.isChecked(otherColor(color))) {
-     if(color == "white"){
+     if(color .equals( "white")){
        blackCheckCount ++;
     }else{
       whiteCheckCount ++;
@@ -346,12 +346,13 @@ else{
   }
 }
 else if (answer.equals("solo")) {
+  System.out.println("\n The Chess Mode is SinglePlayer \n");
   RandomPlayer.play();
 }
 else if (answer.equals("king-hill")) {
   ChessBoard newBoard = new ChessBoard(locationList,piecesList,colorList);
   while(true){
-  System.out.println("\n Chess Mode is: King Of The Hill");
+  System.out.println("\n The Chess Mode is King of the Hill \n");
   System.out.println (newBoard.scoreSheet.toString());
   System.out.println(newBoard.toString(otherColor(color)));
   System.out.println(color + " enter your move");
@@ -406,6 +407,7 @@ for(int[] arr: goodSquares) {
     }
 }
 }else if (answer.equals("demo")){
+  System.out.println("\n The Chess Mode is Demo \n");
   Demo.initDemo();
 } else if(answer.equals("horde")){
   ArrayList<String> locationListHorde = new ArrayList<String>();
@@ -463,7 +465,7 @@ for(int[] arr: goodSquares) {
 
   ChessBoard hordeBoard = new ChessBoard(locationListHorde,piecesListHorde,colorListHorde);
   while(true){
-  System.out.println("\nChess Mode is: Horde");
+    System.out.println("\n The Chess Mode is Horde \n");
   System.out.println (hordeBoard.scoreSheet.toString());
   System.out.println(hordeBoard.toString(otherColor(color)));
   System.out.println(color + " enter your move");
@@ -510,9 +512,12 @@ if(!hordeBoard.canAnyMove(otherColor(color))){
 }
 }
   if(answer.equals("easy")){
+    System.out.println("\n The Chess Mode is Easy Puzzles \n");
     ChessPuzzle puzzleboard = new ChessPuzzle();
     EasyPuzzles.initEasyPuzzles();
   }  if (answer.equals("hard")){
+    System.out.println("\n The Chess Mode is Hard Puzzles \n");
+
     HardPuzzles.initHardPuzzles();
   }
 }

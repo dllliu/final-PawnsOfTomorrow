@@ -514,9 +514,6 @@ public String toString(){
 
 
 
-
-
-
   public ArrayList<String> allPossibleMoves(String color){
     ArrayList<String> list = new ArrayList<String>();
     Piece[][] oldBoard=new Piece[board.length][board.length];

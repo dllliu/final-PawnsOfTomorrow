@@ -121,7 +121,7 @@ public class RandomPlayer{
    while(true){
      System.out.println("You are playing as " + yourColor);
      System.out.println (newBoard.scoreSheet.toString());
-     if (color==yourColor){
+     if (color.equals(yourColor)){
        System.out.println(color + " enter your move");
        Scanner in = new Scanner(System.in);
         move = in.nextLine();
