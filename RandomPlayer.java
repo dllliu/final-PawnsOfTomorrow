@@ -121,7 +121,7 @@ public class RandomPlayer{
    while(true){
      System.out.println("You are playing as " + yourColor);
      System.out.println (newBoard.scoreSheet.toString());
-     if (color==yourColor){
+     if (color.equals(yourColor)){
        System.out.println(color + " enter your move");
        Scanner in = new Scanner(System.in);
         move = in.nextLine();
@@ -140,7 +140,7 @@ public class RandomPlayer{
      System.out.flush();
      try{
        newBoard.makeMove(move, color, true);
-       System.out.println(newBoard.toString(color));
+       System.out.println(newBoard.toString(otherColor(color)));
      }catch(IllegalArgumentException e){
        e.printStackTrace();
        System.out.println("Invalid move: Enter Moves in following format: Character + number + space + Character + number");

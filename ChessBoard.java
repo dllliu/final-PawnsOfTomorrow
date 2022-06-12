@@ -425,15 +425,6 @@ public String toString(){
                 str += Color.colorize(piece.toString(), Color.BLUE + Color.BACKGROUND);
               }
             }
-            /*
-            if(countRow%2 == 0){
-            str += Color.colorize(piece.toString(), Color.BLUE + Color.BACKGROUND);
-          }
-          else{
-          str += Color.colorize(piece.toString(), Color.WHITE+Color.BRIGHT + Color.BACKGROUND);
-        }
-        */
-
         }
           str += " ";
           countCol++;
@@ -449,7 +440,6 @@ public String toString(){
         reverseString += x+1 + " " + stringSplit[x] + "\n";
       }
     }
-
       else{
       for(int i=board.length-1;i>=0;i--){
         int countCol = 0;
@@ -497,8 +487,6 @@ public String toString(){
       }
       reverseString += "h g f e d c b a \n";
     }
-
-
     return reverseString;
   }
 
