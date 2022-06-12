@@ -29,6 +29,12 @@ public class ChessBoard {
       if (piecesList.get(i).equals("queen")){
         board[Integer.parseInt(locationList.get(i).substring(1,2))][Integer.parseInt(locationList.get(i).substring(0,1))]=new Queen(colorList.get(i));
       }
+      if (piecesList.get(i).equals("queenknight")){
+        board[Integer.parseInt(locationList.get(i).substring(1,2))][Integer.parseInt(locationList.get(i).substring(0,1))]=new QueenKnight(colorList.get(i));
+      }
+      if (piecesList.get(i).equals("rookknight")){
+        board[Integer.parseInt(locationList.get(i).substring(1,2))][Integer.parseInt(locationList.get(i).substring(0,1))]=new RookKnight(colorList.get(i));
+      }
     }
 }
 
@@ -264,6 +270,116 @@ if(!fischerBoard.canAnyMove(otherColor(color))){
 }
 }
 
+public static void makeWierdBoard(){
+
+  ArrayList<String> locationListWierd = new ArrayList<String>();
+  ArrayList<String> piecesListWierd = new ArrayList<String>();
+  ArrayList<String> colorListWierd = new ArrayList<String>();
+
+  for(int i=0; i<=7; i++){
+    locationListWierd.add("" + i + "" + 0);
+  }
+
+  for(int i=0; i<=7; i++){
+    locationListWierd.add("" + i + "" + 1);
+  }
+
+  for(int i=0; i<=7; i++){
+      locationListWierd.add("" + i + "" + 6);
+  }
+
+  for(int i=0; i<=7; i++){
+    locationListWierd.add("" + i + "" + 7);
+  }
+
+  String[] notPawns = {"rookknight", "knight", "bishop", "queenknight", "king", "bishop", "knight", "rookknight"};
+
+  for(int i=0; i<notPawns.length; i++){
+  piecesListWierd.add(notPawns[i]);
+  }
+
+
+  piecesListWierd.add("pawn");
+  piecesListWierd.add("pawn");
+  piecesListWierd.add("pawn");
+  piecesListWierd.add("pawn");
+  piecesListWierd.add("pawn");
+  piecesListWierd.add("pawn");
+  piecesListWierd.add("pawn");
+  piecesListWierd.add("pawn");
+
+  piecesListWierd.add("pawn");
+  piecesListWierd.add("pawn");
+  piecesListWierd.add("pawn");
+  piecesListWierd.add("pawn");
+  piecesListWierd.add("pawn");
+  piecesListWierd.add("pawn");
+  piecesListWierd.add("pawn");
+  piecesListWierd.add("pawn");
+
+  String[] notPawns1 = {"rookknight", "knight", "bishop", "queenknight", "king", "bishop", "knight", "rookknight"};
+
+  for(int i=0; i<notPawns.length; i++){
+  piecesListWierd.add(notPawns[i]);
+  }
+
+
+  for(int i=0; i<16; i++){
+    colorListWierd.add("white");
+  }
+
+  for(int i=0; i<16; i++){
+  colorListWierd.add("black");
+  }
+  ChessBoard wierdBoard = new ChessBoard(locationListWierd, piecesListWierd, colorListWierd);
+  String color = "white";
+
+  while(true){
+  System.out.println (wierdBoard.scoreSheet.toString());
+  System.out.println(wierdBoard.toString(color));
+  System.out.println(color + " enter your move");
+  Scanner in = new Scanner(System.in);
+  String move = in.nextLine();
+  if (move.contains("resign")){
+    System.out.println(color + " resigns");
+    System.out.println(otherColor(color) + " wins");
+    return;
+  }
+  System.out.print("\033[H\033[2J");
+  System.out.flush();
+  try{
+    wierdBoard.makeMove(move, color, true);
+  }catch(IllegalArgumentException e){
+    //e.printStackTrace();
+    System.out.println("Invalid move: Enter Moves in following format: Character + number + space + Character + number");
+    continue;
+  }
+
+  Piece[][] oldBoard = wierdBoard.board.clone();
+  if(!wierdBoard.canAnyMove(otherColor(color))){
+    if(!wierdBoard.canAnyMove(otherColor(color))){
+    System.out.println(color + " checkmated " + otherColor(color));
+  }else{
+    System.out.println("Game has ended in a stalemate");
+  }
+  return;
+  }
+  wierdBoard.board = oldBoard;
+  if(wierdBoard.isChecked(otherColor(color))) {
+    System.out.println(otherColor(color) + " is in check.");
+  }
+    color = otherColor(color);
+    if (wierdBoard.count50 == 100){
+      System.out.println("Game has ended in a draw due to the 50 move rule");
+      return;
+    }
+    if(wierdBoard.getPawns("white") == false){
+      System.out.println("black has has won the game by capturing all white pawns");
+      return;
+    }
+  }
+}
+
 public static String otherColor(String color){
   if (color.equals("white")){
     return "black";
@@ -329,20 +445,6 @@ public static String otherColor(String color){
               piece.emPassanAble=false;
             }
           }
-/*
-          if(scoreSheet.size() >= 7){
-            int[] wMove1 = parseScanner(scoreSheet.get(scoreSheet.size()-6));
-            int[] bMove1 = parseScanner(scoreSheet.get(scoreSheet.size()-5));
-            int[] wMove2 = parseScanner(scoreSheet.get(scoreSheet.size()-4));
-            int[] bMove2 = parseScanner(scoreSheet.get(scoreSheet.size()-3));
-            int[] wMove3 = parseScanner(scoreSheet.get(scoreSheet.size()-2));
-            int[] bMove3 = parseScanner(scoreSheet.get(scoreSheet.size()-1));
-          if(Arrays.equals(wMove1,wMove2) && Arrays.equals(wMove2,wMove3) && Arrays.equals(bMove1,bMove2) && Arrays.equals(bMove2,bMove3)) {
-            System.out.println("The game has ended in a stalemate. You cannot have the same moves on each side three times in a row");
-            return;
-          }
-        }
-        */
 
           Piece replacement;
           if(move.split(" ").length < 3){

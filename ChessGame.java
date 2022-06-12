@@ -17,7 +17,7 @@ System.out.println();
   Scanner scan = new Scanner(System.in);
   String chessMode = scan.nextLine().toLowerCase();
 
-while(!chessMode.equals("double") && !chessMode.equals("solo") && !chessMode.equals("demo") && !chessMode.equals("three-check") && !chessMode.equals("king-hill") && !chessMode.equals("horde") && !chessMode.equals("easypuzzles") && !chessMode.equals("hardpuzzles") && !chessMode.equals("chess-960")){
+while(!chessMode.equals("double") && !chessMode.equals("solo") && !chessMode.equals("demo") && !chessMode.equals("three-check") && !chessMode.equals("king-hill") && !chessMode.equals("horde") && !chessMode.equals("easypuzzles") && !chessMode.equals("hardpuzzles") && !chessMode.equals("chess-960") && !chessMode.equals("knight-takeover")){
    scan = new Scanner(System.in);
    System.out.println("Invalid mode: type again");
    chessMode = scan.nextLine();
@@ -418,6 +418,9 @@ if(!hordeBoard.canAnyMove(otherColor(color))){
   }else if (chessMode.equals("hardpuzzles")){
     System.out.println("\n The Chess Mode is Hard Puzzles \n");
     HardPuzzles.initHardPuzzles();
+  }else if(chessMode.equals("knight-takeover")){
+    System.out.println("This Chess Mode has a Queen-Knight and a Rook-Knight! \n");
+    ChessBoard.makeWierdBoard();
   }
 }
 
