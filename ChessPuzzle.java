@@ -51,24 +51,23 @@ public class ChessPuzzle{
       }
       else{
         newBoard.makeMove(move, color, true);
-          if(!newBoard.canAnyMove(otherColor(color))){
-            if(newBoard.isChecked(otherColor(color))){
-              System.out.println(color + " checkmated " + otherColor(color));
-            }
-          else{
-            System.out.println("Game has ended in a stalemate");
-          }
-        }
-         if(newBoard.isChecked(otherColor(color))) {
-            System.out.println(otherColor(color) + " is in check.");
-          }
-          if (newBoard.count50==100){
-            System.out.println("Game has ended in a draw due to the 50 move rule");
-          }
-
         solution.remove(0);
         System.out.print("\033[H\033[2J");
         System.out.flush();
+        if(!newBoard.canAnyMove(otherColor(color))){
+          if(newBoard.isChecked(otherColor(color))){
+            System.out.println(color + " checkmated " + otherColor(color));
+          }
+        else{
+          System.out.println("Game has ended in a stalemate");
+        }
+      }
+       if(newBoard.isChecked(otherColor(color))) {
+          System.out.println(otherColor(color) + " is in check.");
+        }
+        if (newBoard.count50==100){
+          System.out.println("Game has ended in a draw due to the 50 move rule");
+        }
         if(solution.size()==0){
           System.out.println(newBoard);
           System.out.println("Success!");
