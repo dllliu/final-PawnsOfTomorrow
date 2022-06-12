@@ -1,5 +1,6 @@
 import java.util.*;
 import java.util.Arrays;
+import java.util.Random;
 
 public class ChessBoard {
   public Piece[][] board;
@@ -100,7 +101,7 @@ public class ChessBoard {
     for(int i = 0; i<board.length; i++){
       for(int j = 0; j<board[0].length; j++){
         if(board[i][j] != null){
-          if(board[i][j].getClass().isInstance(new Pawn(color)) && board[i][j].getColor().equals(color)){
+          if(board[i][j].getColor().equals(color)){
               return true;
           }
         }
@@ -108,6 +109,168 @@ public class ChessBoard {
     }
   return false;
   }
+
+
+public static void makeChess960(){
+
+  ArrayList<String> locationList960 = new ArrayList<String>();
+  ArrayList<String> piecesList960 = new ArrayList<String>();
+  ArrayList<String> colorList960 = new ArrayList<String>();
+
+  for(int i=0; i<=7; i++){
+    locationList960.add("" + i + "" + 0);
+  }
+
+  for(int i=0; i<=7; i++){
+    locationList960.add("" + i + "" + 1);
+  }
+
+  for(int i=0; i<=7; i++){
+      locationList960.add("" + i + "" + 6);
+  }
+
+  for(int i=0; i<=7; i++){
+    locationList960.add("" + i + "" + 7);
+  }
+
+  String[] notPawns = {"rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"};
+  List<String> list =Arrays.asList(notPawns);
+  Collections.shuffle(list);
+  list.toArray(notPawns);
+  String str = "";
+  int firstBIndex = -1;
+  boolean val = true;
+  loop: for(int i=0; i<notPawns.length; i++){
+    switch(notPawns[i]) {
+      case "bishop":
+      if (firstBIndex == -1) {
+        firstBIndex = i;
+      } else {
+        if (firstBIndex % 2 == i % 2) {
+          val = false;
+          break loop;
+        }
+      }
+      break;
+    }
+  }
+
+if(val){
+  for(int i=0; i<notPawns.length; i++){
+  piecesList960.add(notPawns[i]);
+}
+}
+
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+piecesList960.add("pawn");
+
+String[] notPawns1 = {"rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"};
+List<String> list1 =Arrays.asList(notPawns);
+Collections.shuffle(list);
+list.toArray(notPawns);
+String str1 = "";
+int firstBIndex1 = -1;
+boolean val1 = true;
+loop: for(int i=0; i<notPawns1.length; i++){
+  switch(notPawns1[i]) {
+    case "bishop":
+    if (firstBIndex1 == -1) {
+      firstBIndex1 = i;
+    } else {
+      if (firstBIndex1 % 2 == i % 2) {
+        val1 = false;
+        break loop;
+      }
+    }
+    break;
+  }
+}
+
+if(val){
+for(int i=0; i<notPawns.length; i++){
+piecesList960.add(notPawns[i]);
+}
+}
+
+  for(int i=0; i<16; i++){
+    colorList960.add("white");
+  }
+
+  for(int i=0; i<16; i++){
+  colorList960.add("black");
+}
+  ChessBoard fischerBoard = new ChessBoard(locationList960, piecesList960, colorList960);
+  String color = "white";
+
+  while(true){
+  System.out.println("\nChess Mode is: Fischer Chess or Chess 960");
+  System.out.println (fischerBoard.scoreSheet.toString());
+  System.out.println(fischerBoard.toString(color));
+  System.out.println(color + " enter your move");
+  Scanner in = new Scanner(System.in);
+  String move = in.nextLine();
+  if (move.contains("resign")){
+    System.out.println(color + " resigns");
+    System.out.println(otherColor(color) + " wins");
+    return;
+  }
+  System.out.print("\033[H\033[2J");
+  System.out.flush();
+  try{
+    fischerBoard.makeMove(move, color, true);
+  }catch(IllegalArgumentException e){
+    //e.printStackTrace();
+    System.out.println("Invalid move: Enter Moves in following format: Character + number + space + Character + number");
+    continue;
+  }
+
+  Piece[][] oldBoard = fischerBoard.board.clone();
+if(!fischerBoard.canAnyMove(otherColor(color))){
+    if(!fischerBoard.canAnyMove(otherColor(color))){
+    System.out.println(color + " checkmated " + otherColor(color));
+  }else{
+    System.out.println("Game has ended in a stalemate");
+  }
+  return;
+}
+  fischerBoard.board = oldBoard;
+ if(fischerBoard.isChecked(otherColor(color))) {
+    System.out.println(otherColor(color) + " is in check.");
+  }
+    color = otherColor(color);
+    if (fischerBoard.count50 == 100){
+      System.out.println("Game has ended in a draw due to the 50 move rule");
+      return;
+    }
+    if(fischerBoard.getPawns("white") == false){
+      System.out.println("black has has won the game by capturing all white pawns");
+      return;
+    }
+}
+}
+
+public static String otherColor(String color){
+  if (color.equals("white")){
+    return "black";
+  }
+  return "white";
+}
+
 
 //moveCompleted makes sure it's completely a valid square
   public void makeMove(String move, String color, boolean moveCompleted) throws IllegalArgumentException{
@@ -310,6 +473,7 @@ public class ChessBoard {
               if(board[i][j] != null){
                 if(board[i][j].getColor().equals(color)){
                   makeMove(convertCoord(i, j, k, l), board[i][j].getColor(), false);
+
                     for (int m=0;m<board.length;m++){
                       for (int n=0;n<board.length;n++){
                         board[m][n]=oldBoard[m][n];
@@ -388,9 +552,11 @@ public String toString(){
 
 
 
-    public String toString(){
+    public String toString(String color){
       String str = "";
       int countRow = 0;
+      String reverseString;
+      if (color.equals("white")){
       for(Piece[] pieces: board){
         int countCol = 0;
         for(Piece piece: pieces){
@@ -399,11 +565,11 @@ public String toString(){
               if(countCol%2 == 0){
                 str += Color.colorize(" ", Color.BLUE + Color.BACKGROUND);
               }else{
-                str += Color.colorize(" ", Color.RED+ Color.BACKGROUND);;
+                str += Color.colorize(" ", Color.RED+Color.BRIGHT + Color.BACKGROUND);;
               }
             }else{
               if(countCol%2 == 0){
-                str += Color.colorize(" ",Color.RED+ Color.BACKGROUND);;
+                str += Color.colorize(" ",Color.RED+Color.BRIGHT + Color.BACKGROUND);;
               }else{
                 str += Color.colorize(" ", Color.BLUE + Color.BACKGROUND);
               }
@@ -413,24 +579,15 @@ public String toString(){
               if(countCol%2 == 0){
                 str += Color.colorize(piece.toString(), Color.BLUE + Color.BACKGROUND);
               }else{
-                str += Color.colorize(piece.toString(), Color.RED + Color.BACKGROUND);;
+                str += Color.colorize(piece.toString(), Color.RED+Color.BRIGHT + Color.BACKGROUND);;
               }
             }else{
               if(countCol%2 == 0){
-                str += Color.colorize(piece.toString(),Color.RED + Color.BACKGROUND);;
+                str += Color.colorize(piece.toString(),Color.RED+Color.BRIGHT + Color.BACKGROUND);;
               }else{
                 str += Color.colorize(piece.toString(), Color.BLUE + Color.BACKGROUND);
               }
             }
-            /*
-            if(countRow%2 == 0){
-            str += Color.colorize(piece.toString(), Color.BLUE + Color.BACKGROUND);
-          }
-          else{
-          str += Color.colorize(piece.toString(), Color.WHITE+Color.BRIGHT + Color.BACKGROUND);
-        }
-        */
-
         }
           str += " ";
           countCol++;
@@ -438,13 +595,103 @@ public String toString(){
         countRow++;
         str += "\n";
       }
-      String reverseString = "";
+     reverseString = "";
 
       reverseString += "  a b c d e f g h \n";
       String[] stringSplit = str.split("\n");
       for(int x = stringSplit.length-1; x >= 0; x--){
         reverseString += x+1 + " " + stringSplit[x] + "\n";
       }
+    }
+      else{
+      for(int i=board.length-1;i>=0;i--){
+        int countCol = 0;
+        for(int j=board.length-1;j>=0;j--){
+          if(board[i][j]==null){
+            if(countRow%2 == 0){
+              if(countCol%2 == 0){
+                str += Color.colorize(" ", Color.BLUE + Color.BACKGROUND);
+              }else{
+                str += Color.colorize(" ", Color.RED+Color.BRIGHT + Color.BACKGROUND);;
+              }
+            }else{
+              if(countCol%2 == 0){
+                str += Color.colorize(" ",Color.RED+Color.BRIGHT + Color.BACKGROUND);;
+              }else{
+                str += Color.colorize(" ", Color.BLUE + Color.BACKGROUND);
+              }
+            }
+          }else if(board[i][j] != null){
+            if(countRow%2 == 0){
+              if(countCol%2 == 0){
+                str += Color.colorize(board[i][j].toString(), Color.BLUE + Color.BACKGROUND);
+              }else{
+                str += Color.colorize(board[i][j].toString(), Color.RED+Color.BRIGHT + Color.BACKGROUND);;
+              }
+            }else{
+              if(countCol%2 == 0){
+                str += Color.colorize(board[i][j].toString(),Color.RED+Color.BRIGHT + Color.BACKGROUND);;
+              }else{
+                str += Color.colorize(board[i][j].toString(), Color.BLUE + Color.BACKGROUND);
+              }
+            }
+        }
+          str += " ";
+          countCol++;
+      }
+        countRow++;
+        str += "\n";
+      }
+       reverseString = "";
+
+      String[] stringSplit = str.split("\n");
+      for(int x = stringSplit.length-1;x>=0; x--){
+        reverseString +=    stringSplit[x] +(8-x)+ "\n";
+      }
+      reverseString += "h g f e d c b a \n";
+    }
     return reverseString;
+  }
+
+
+  public ArrayList<String> allPossibleMoves(String color){
+    ArrayList<String> list = new ArrayList<String>();
+    Piece[][] oldBoard=new Piece[board.length][board.length];
+    for (int i=0;i<board.length;i++){
+      for (int k=0;k<board.length;k++){
+        oldBoard[i][k]=board[i][k];
+      }
+    }
+    for(int i = 0; i<board.length; i++){
+      for(int j = 0; j<board[0].length; j++){
+
+        //Check piece with each other piece
+
+        for(int k = 0; k<board.length; k++){
+          for(int l= 0; l<board[0].length; l++){
+            try{
+              if(board[i][j] != null){
+                if(board[i][j].getColor().equals(color)){
+                  makeMove(convertCoord(i, j, k, l), board[i][j].getColor(), false);
+                    list.add(convertCoord(i,j,k,l));
+                    for (int m=0;m<board.length;m++){
+                      for (int n=0;n<board.length;n++){
+                        board[m][n]=oldBoard[m][n];
+                      }
+                    }
+                  }
+                }
+            } catch(Exception e){
+                for (int m=0;m<board.length;m++){
+                  for (int n=0;n<board.length;n++){
+                    board[m][n]=oldBoard[m][n];
+                  }
+                }
+              }
+          }
+        }
+      }
+    }
+    return list;
   }
 }

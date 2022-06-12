@@ -72,3 +72,10 @@ Daniel Liu(6/9): Made a new color scheme for board. Started King of The Hill. Pa
 
  Eugene Yoo (6/10):
  Built a new solve method in ChessPuzzle that is applicable to HardPuzzles and EasyPuzzles but also to Demo, a new class I made. The difference between Demo and HardPuzzles is that Demo will explicitly give you the solution for you to type in, whereas for HardPuzzles or EasyPuzzles you have to type in the word help or find the correct move by yourself. This functionality will help Mr. K run our program, and it also allows for concise code. Daniel and I also determined that to make our ChessGame main not too clogged up, we could call methods in other classes like a Demo method for example.
+ 
+Daniel Liu(6/10): Cleaned up code, large sections of code in ChessGame main were moved to seperate classes like the demo and made into init functions. Added print statements for the board number you are currently on when doing the chess puzzles/tutorials.
+ 
+Daniel Liu (6/11): Finished King of the Hill, verified mode works. Finished Horde Chess, verified it worked. Changed color scheme to red and blue. Plan to finish fischer chess(chess 960), giveaway chess, atomic chess, maybe add new piece that is a combo of a knight and bishop.
+
+Eugene Yoo (6/11):
+ Made changes so that error messages are printed in demo mode. I also made invalid moves not stop the program, and it also can print out true statements, such as if it is a stalemate position, or if someone is in check
