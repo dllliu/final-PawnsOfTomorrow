@@ -243,7 +243,7 @@ colorList.add("black");
       }
   }
 }
-else if (answer.equals("solo")) {
+else if (chessMode.equals("solo")) {
   System.out.println("\n The Chess Mode is SinglePlayer \n");
   RandomPlayer.play();
 }
