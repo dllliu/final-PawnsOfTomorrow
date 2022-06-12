@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class EasyPuzzles extends ChessPuzzle{
+public class EasyPuzzles{
   public static void initEasyPuzzles(){
     ArrayList<String> locationListEasy = new ArrayList<String>();
     ArrayList<String> piecesListEasy = new ArrayList<String>();
