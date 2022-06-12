@@ -15,7 +15,16 @@ public static void main(String[] args) {
   System.out.println("Set Terminal Color to A Good Color Where You Can See Black and White. If you want to solve chess tactics, enter in EasyPuzzles for easy chess tactics or HardPuzzles for hard chess tactics \n If the input is invalid, you will see the instructions again!");
   System.out.println("To see functionality type in demo, and to play single-player type in solo");
 
- if(args.length == 0){
+  Scanner scan = new Scanner(System.in);
+  String answer = scan.nextLine();
+while(!answer.equals("regular")){
+   scan = new Scanner(System.in);
+   System.out.println("Invalid mode: type again");
+   answer = scan.nextLine();
+}
+System.out.print("\033[H\033[2J");
+System.out.flush();
+ if(answer.equals("regular")){
 
    ArrayList<String> locationList = new ArrayList<String>();
    ArrayList<String> piecesList = new ArrayList<String>();
@@ -125,7 +134,7 @@ public static void main(String[] args) {
 
 
   System.out.println("\n The Chess Mode is Regular Chess \n");
-  System.out.println(newBoard);
+  System.out.println(newBoard.toString(otherColor(color)));
   int count=0;
 
   while(true){
@@ -142,11 +151,11 @@ public static void main(String[] args) {
     System.out.flush();
     try{
       newBoard.makeMove(move, color, true);
-      System.out.println(newBoard);
+      System.out.println(newBoard.toString(color));
     }catch(IllegalArgumentException e){
       e.printStackTrace();
       System.out.println("Invalid move: Enter Moves in following format: Character + number + space + Character + number");
-      System.out.println(newBoard);
+      System.out.println(newBoard.toString(color));
       continue;
     }
     if(!newBoard.canAnyMove(otherColor(color))){
@@ -286,7 +295,7 @@ else if (args.length == 1){
     System.out.println("White Check Counter is: " + whiteCheckCount);
     System.out.println("Black Check Counter is: " + blackCheckCount);
     System.out.println (newBoard.scoreSheet.toString());
-    System.out.println(newBoard);
+    System.out.println(newBoard.toString(color));
     System.out.println(color + " enter your move");
     Scanner in = new Scanner(System.in);
     String move = in.nextLine();
@@ -352,7 +361,7 @@ else if (chessMode.equals("kingofthehill")) {
   while(true){
   System.out.println("\n Chess Mode is: King Of The Hill");
   System.out.println (newBoard.scoreSheet.toString());
-  System.out.println(newBoard);
+  System.out.println(newBoard.toString(color));
   System.out.println(color + " enter your move");
   Scanner in = new Scanner(System.in);
   String move = in.nextLine();

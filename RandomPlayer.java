@@ -115,7 +115,7 @@ public class RandomPlayer{
       yourColor="black";
     }
    String color = "white";
-   System.out.println(newBoard);
+   System.out.println(newBoard.toString(color));
    int count=0;
    String move;
    while(true){
@@ -140,11 +140,11 @@ public class RandomPlayer{
      System.out.flush();
      try{
        newBoard.makeMove(move, color, true);
-       System.out.println(newBoard);
+       System.out.println(newBoard.toString(color));
      }catch(IllegalArgumentException e){
        e.printStackTrace();
        System.out.println("Invalid move: Enter Moves in following format: Character + number + space + Character + number");
-       System.out.println(newBoard);
+       System.out.println(newBoard.toString(color));
        continue;
      }
      if(!newBoard.canAnyMove(otherColor(color))){
