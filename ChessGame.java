@@ -5,6 +5,8 @@ import java.io.IOException;
 public class ChessGame{
 
 public static void main(String[] args) {
+  System.out.print("\033[H\033[2J");
+  System.out.flush();
   boolean possibleStalemate = false;
   String color = "white";
   System.out.println("Enter which mode you want to play. 1 is 3-Check, 2 is King of the Hill, 3 is Atomic Chess, 4 is Chess 960. Just run the file with java ChessGame if you want to play normal chess. \n");
@@ -119,8 +121,7 @@ public static void main(String[] args) {
 
    ChessBoard newBoard = new ChessBoard(locationList,piecesList,colorList);
 
-  System.out.print("\033[H\033[2J");
-  System.out.flush();
+
   System.out.println("\n The Chess Mode is Regular Chess \n");
   System.out.println(newBoard);
   int count=0;
