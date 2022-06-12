@@ -79,3 +79,5 @@ Daniel Liu (6/11): Finished King of the Hill, verified mode works. Finished Hord
 
 Eugene Yoo (6/11):
  Made changes so that error messages are printed in demo mode. I also made invalid moves not stop the program, and it also can print out true statements, such as if it is a stalemate position, or if someone is in check
+ 
+ Daniel Liu(6/11): Made Chess 960 mode. Fixed bug in switching color for sides. Added a new piece that is a combo of a knight and a bishop in a new mode. Worked with Eugene in fixing bugs in parsing, cleaned up some code and moved to functions. Worked on Demo.
