@@ -310,6 +310,7 @@ public class ChessBoard {
               if(board[i][j] != null){
                 if(board[i][j].getColor().equals(color)){
                   makeMove(convertCoord(i, j, k, l), board[i][j].getColor(), false);
+
                     for (int m=0;m<board.length;m++){
                       for (int n=0;n<board.length;n++){
                         board[m][n]=oldBoard[m][n];
@@ -399,11 +400,11 @@ public String toString(){
               if(countCol%2 == 0){
                 str += Color.colorize(" ", Color.BLUE + Color.BACKGROUND);
               }else{
-                str += Color.colorize(" ", Color.YELLOW+Color.BRIGHT + Color.BACKGROUND);;
+                str += Color.colorize(" ", Color.RED+Color.BRIGHT + Color.BACKGROUND);;
               }
             }else{
               if(countCol%2 == 0){
-                str += Color.colorize(" ",Color.YELLOW+Color.BRIGHT + Color.BACKGROUND);;
+                str += Color.colorize(" ",Color.RED+Color.BRIGHT + Color.BACKGROUND);;
               }else{
                 str += Color.colorize(" ", Color.BLUE + Color.BACKGROUND);
               }
@@ -413,11 +414,11 @@ public String toString(){
               if(countCol%2 == 0){
                 str += Color.colorize(piece.toString(), Color.BLUE + Color.BACKGROUND);
               }else{
-                str += Color.colorize(piece.toString(), Color.YELLOW+Color.BRIGHT + Color.BACKGROUND);;
+                str += Color.colorize(piece.toString(), Color.RED+Color.BRIGHT + Color.BACKGROUND);;
               }
             }else{
               if(countCol%2 == 0){
-                str += Color.colorize(piece.toString(),Color.YELLOW+Color.BRIGHT + Color.BACKGROUND);;
+                str += Color.colorize(piece.toString(),Color.RED+Color.BRIGHT + Color.BACKGROUND);;
               }else{
                 str += Color.colorize(piece.toString(), Color.BLUE + Color.BACKGROUND);
               }
@@ -446,5 +447,53 @@ public String toString(){
         reverseString += x+1 + " " + stringSplit[x] + "\n";
       }
     return reverseString;
+  }
+
+
+
+
+
+
+
+
+  public ArrayList<String> allPossibleMoves(String color){
+    ArrayList<String> list = new ArrayList<String>();
+    Piece[][] oldBoard=new Piece[board.length][board.length];
+    for (int i=0;i<board.length;i++){
+      for (int k=0;k<board.length;k++){
+        oldBoard[i][k]=board[i][k];
+      }
+    }
+    for(int i = 0; i<board.length; i++){
+      for(int j = 0; j<board[0].length; j++){
+
+        //Check piece with each other piece
+
+        for(int k = 0; k<board.length; k++){
+          for(int l= 0; l<board[0].length; l++){
+            try{
+              if(board[i][j] != null){
+                if(board[i][j].getColor().equals(color)){
+                  makeMove(convertCoord(i, j, k, l), board[i][j].getColor(), false);
+                    list.add(convertCoord(i,j,k,l));
+                    for (int m=0;m<board.length;m++){
+                      for (int n=0;n<board.length;n++){
+                        board[m][n]=oldBoard[m][n];
+                      }
+                    }
+                  }
+                }
+            } catch(Exception e){
+                for (int m=0;m<board.length;m++){
+                  for (int n=0;n<board.length;n++){
+                    board[m][n]=oldBoard[m][n];
+                  }
+                }
+              }
+          }
+        }
+      }
+    }
+    return list;
   }
 }
