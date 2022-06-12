@@ -458,7 +458,7 @@ if(!atomicBoard.canAnyMove(otherColor(color))){
   if(chessMode.equals("easypuzzles")){
     ChessPuzzle puzzleboard = new ChessPuzzle();
     EasyPuzzles.initEasyPuzzles();
-  }  if (chessMode.equals("hardpuzzles")){
+  }else if (chessMode.equals("hardpuzzles")){
     HardPuzzles.initHardPuzzles();
   }
 }
