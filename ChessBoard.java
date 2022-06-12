@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.Arrays;
 
 public class ChessBoard {
   public Piece[][] board;
@@ -95,6 +96,19 @@ public class ChessBoard {
 
   }
 
+  public boolean getPawns(String color){
+    for(int i = 0; i<board.length; i++){
+      for(int j = 0; j<board[0].length; j++){
+        if(board[i][j] != null){
+          if(board[i][j].getClass().isInstance(new Pawn(color)) && board[i][j].getColor().equals(color)){
+              return true;
+          }
+        }
+      }
+    }
+  return false;
+  }
+
 //moveCompleted makes sure it's completely a valid square
   public void makeMove(String move, String color, boolean moveCompleted) throws IllegalArgumentException{
     boolean reset=false;
@@ -152,8 +166,21 @@ public class ChessBoard {
               piece.emPassanAble=false;
             }
           }
+/*
+          if(scoreSheet.size() >= 7){
+            int[] wMove1 = parseScanner(scoreSheet.get(scoreSheet.size()-6));
+            int[] bMove1 = parseScanner(scoreSheet.get(scoreSheet.size()-5));
+            int[] wMove2 = parseScanner(scoreSheet.get(scoreSheet.size()-4));
+            int[] bMove2 = parseScanner(scoreSheet.get(scoreSheet.size()-3));
+            int[] wMove3 = parseScanner(scoreSheet.get(scoreSheet.size()-2));
+            int[] bMove3 = parseScanner(scoreSheet.get(scoreSheet.size()-1));
+          if(Arrays.equals(wMove1,wMove2) && Arrays.equals(wMove2,wMove3) && Arrays.equals(bMove1,bMove2) && Arrays.equals(bMove2,bMove3)) {
+            System.out.println("The game has ended in a stalemate. You cannot have the same moves on each side three times in a row");
+            return;
+          }
+        }
+        */
 
-          //?
           Piece replacement;
           if(move.split(" ").length < 3){
             move += " s";
@@ -370,7 +397,7 @@ public String toString(){
           if(piece==null){
             if(countRow%2 == 0){
               if(countCol%2 == 0){
-                str += Color.colorize(" ", Color.GREEN + Color.BACKGROUND);
+                str += Color.colorize(" ", Color.BLUE + Color.BACKGROUND);
               }else{
                 str += Color.colorize(" ", Color.YELLOW+Color.BRIGHT + Color.BACKGROUND);;
               }
@@ -378,13 +405,13 @@ public String toString(){
               if(countCol%2 == 0){
                 str += Color.colorize(" ",Color.YELLOW+Color.BRIGHT + Color.BACKGROUND);;
               }else{
-                str += Color.colorize(" ", Color.GREEN + Color.BACKGROUND);
+                str += Color.colorize(" ", Color.BLUE + Color.BACKGROUND);
               }
             }
           }else if(piece != null){
             if(countRow%2 == 0){
               if(countCol%2 == 0){
-                str += Color.colorize(piece.toString(), Color.GREEN + Color.BACKGROUND);
+                str += Color.colorize(piece.toString(), Color.BLUE + Color.BACKGROUND);
               }else{
                 str += Color.colorize(piece.toString(), Color.YELLOW+Color.BRIGHT + Color.BACKGROUND);;
               }
@@ -392,12 +419,12 @@ public String toString(){
               if(countCol%2 == 0){
                 str += Color.colorize(piece.toString(),Color.YELLOW+Color.BRIGHT + Color.BACKGROUND);;
               }else{
-                str += Color.colorize(piece.toString(), Color.GREEN + Color.BACKGROUND);
+                str += Color.colorize(piece.toString(), Color.BLUE + Color.BACKGROUND);
               }
             }
             /*
             if(countRow%2 == 0){
-            str += Color.colorize(piece.toString(), Color.GREEN + Color.BACKGROUND);
+            str += Color.colorize(piece.toString(), Color.BLUE + Color.BACKGROUND);
           }
           else{
           str += Color.colorize(piece.toString(), Color.WHITE+Color.BRIGHT + Color.BACKGROUND);

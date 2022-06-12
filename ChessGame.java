@@ -1,8 +1,10 @@
 import java.util.Scanner;
 import java.util.*;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class ChessGame{
+
 
 public static void main(String[] args) {
   System.out.print("\033[H\033[2J");
@@ -378,6 +380,20 @@ if(!newBoard.canAnyMove(otherColor(color))){
   }
   return;
 }
+int[] arr1 =  {3,3};
+int[] arr2 = {3,4};
+int [] arr3 = {4,3};
+int[] arr4 = {4,4};
+int[][] goodSquares = {arr1,arr2,arr3,arr4};
+
+int[] kingArr = newBoard.getKingPosition(color);
+
+for(int[] arr: goodSquares) {
+  if(Arrays.equals(kingArr,arr)){
+    System.out.println(color + " has won the game because their king has moved to the center four squares");
+    return;
+  }
+  }
   newBoard.board = oldBoard;
  if(newBoard.isChecked(otherColor(color))) {
     System.out.println(otherColor(color) + " is in check.");
@@ -393,8 +409,114 @@ if(!newBoard.canAnyMove(otherColor(color))){
 }
 }else if (chessMode.equals("demo")){
   Demo.initDemo();
-} //if chess Mode == 2 inside if args.length == 1
-//end of 3 check
+} else if(chessMode.equals("horde")){
+  ArrayList<String> locationListHorde = new ArrayList<String>();
+  ArrayList<String> piecesListHorde = new ArrayList<String>();
+  ArrayList<String> colorListHorde = new ArrayList<String>();
+
+  //whjte setup
+  for(int i=0; i<=7; i++){
+    locationListHorde.add("" + i + "" + 0);
+    locationListHorde.add("" + i + "" + 1);
+    locationListHorde.add("" + i + "" + 2);
+    locationListHorde.add("" + i + "" + 3);
+  }
+
+  //extra pawns
+  locationListHorde.add("14");
+  locationListHorde.add("24");
+  locationListHorde.add("54");
+  locationListHorde.add("64");
+
+
+  for(int i=0; i<=35; i++){
+    piecesListHorde.add("pawn");
+    colorListHorde.add("white");
+  }
+
+  //start of black setup
+  for(int i=0; i<=7; i++){
+    locationListHorde.add("" + i + "" + 7);
+    colorListHorde.add("black");
+  }
+
+  piecesListHorde.add("rook");
+  piecesListHorde.add("knight");
+  piecesListHorde.add("bishop");
+  piecesListHorde.add("queen");
+  piecesListHorde.add("king");
+  piecesListHorde.add("bishop");
+  piecesListHorde.add("knight");
+  piecesListHorde.add("rook");
+
+  for(int i=0; i<=7; i++){
+    locationListHorde.add("" + i + "" + 6);
+    colorListHorde.add("black");
+  }
+
+  piecesListHorde.add("pawn");
+  piecesListHorde.add("pawn");
+  piecesListHorde.add("pawn");
+  piecesListHorde.add("pawn");
+  piecesListHorde.add("pawn");
+  piecesListHorde.add("pawn");
+  piecesListHorde.add("pawn");
+  piecesListHorde.add("pawn");
+
+  ChessBoard hordeBoard = new ChessBoard(locationListHorde,piecesListHorde,colorListHorde);
+  while(true){
+  System.out.println("\nChess Mode is: Horde");
+  System.out.println (hordeBoard.scoreSheet.toString());
+  System.out.println(hordeBoard);
+  System.out.println(color + " enter your move");
+  Scanner in = new Scanner(System.in);
+  String move = in.nextLine();
+  if (move.contains("resign")){
+    System.out.println(color + " reigns");
+    System.out.println(otherColor(color) + " wins");
+    return;
+  }if(possibleStalemate){
+    if(move.toLowerCase().contains("draw") || move.toLowerCase().contains("stalemate")){
+      System.out.println("The game has ended in a draw");
+      return;
+    }else{
+      possibleStalemate = false;
+    }
+  } try{
+    hordeBoard.makeMove(move, color, true);
+  }catch(IllegalArgumentException e){
+    //e.printStackTrace();
+    System.out.println("Invalid move: Enter Moves in following format: Character + number + space + Character + number");
+    continue;
+  }
+
+  Piece[][] oldBoard = hordeBoard.board.clone();
+if(!hordeBoard.canAnyMove(otherColor(color))){
+    if(!hordeBoard.canAnyMove(otherColor(color))){
+    System.out.println(color + " checkmated " + otherColor(color));
+  }else{
+    System.out.println("Game has ended in a stalemate");
+  }
+  return;
+}
+  hordeBoard.board = oldBoard;
+ if(hordeBoard.isChecked(otherColor(color))) {
+    System.out.println(otherColor(color) + " is in check.");
+  }
+   if(move.contains("draw")){
+      possibleStalemate = true;
+  }
+    color = otherColor(color);
+    if (hordeBoard.count50 == 100){
+      System.out.println("Game has ended in a draw due to the 50 move rule");
+      return;
+    }
+    if(hordeBoard.getPawns(color) == false){
+      System.out.println("black has has won the game by capturing all white pawns");
+      return;
+    }
+}
+}
 }
 else if (args.length == 2){
   String tutorialMode = args[1].toLowerCase();
@@ -436,77 +558,6 @@ else if (args.length == 2){
     HardPuzzles.initHardPuzzles();
   }
 }
-/*
- else if ((args.length == 1) && (Integer.parseInt(args[0]) == 2)) {
-=======
-  boolean possibleStalemate = false;
-  String color = "white";
-  System.out.print("\033[H\033[2J");
-  System.out.flush();
-  System.out.println(newBoard);
-  int count=0;
-  while(true){
-    System.out.println (newBoard.scoreSheet.toString());
-    System.out.println(color + " enter your move");
-    Scanner in = new Scanner(System.in);
-    String move = in.nextLine();
-    if (move.contains("resign")){
-      System.out.println(color + " resigns");
-      System.out.println(otherColor(color) + " wins");
-      return;
-    }if(possibleStalemate){
-      //Draw?
-      if(move.toLowerCase().contains("draw") || move.toLowerCase().contains("stalemate")){
-        System.out.println("The game has ended in a draw");
-        return;
-      }else{
-        possibleStalemate = false;
-      }
-    } try{
-=======
-    }
-    System.out.print("\033[H\033[2J");
-    System.out.flush();
-    try{
-      newBoard.makeMove(move, color, true);
-      System.out.println(newBoard);
-    }catch(IllegalArgumentException e){
-      e.printStackTrace();
-      System.out.println("Invalid move: Enter Moves in following format: Character + number + space + Character + number");
-      System.out.println(newBoard);
-      continue;
-    }
-
-    Piece[][] oldBoard = newBoard.board.clone();
-  if(!newBoard.canAnyMove(otherColor(color))){
-      if(!newBoard.canAnyMove(otherColor(color))){
-      System.out.println(color + " checkmated " + otherColor(color));
-    }else{
-    if(!newBoard.canAnyMove(otherColor(color))){
-      if(newBoard.isChecked(otherColor(color))){
-        System.out.println(color + " checkmated " + otherColor(color));
-      }
-    else{
-      System.out.println("Game has ended in a stalemate");
-    }
-    return;
-  }
-   if(newBoard.isChecked(otherColor(color))) {
-      System.out.println(otherColor(color) + " is in check.");
-    }
-      color = otherColor(color);
-      if (newBoard.count50==100){
-        System.out.println("Game has ended in a draw due to the 50 move rule");
-        return;
-      }
-    color = otherColor(color);
-    if (newBoard.count50==100){
-      System.out.println("Game has ended in a draw due to the 50 move rule");
-      return;
-    }
-  }
-}
-*/
 }
 
   public static String otherColor(String color){

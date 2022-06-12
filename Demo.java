@@ -4,7 +4,7 @@ public class Demo {
       ArrayList<String> locationListDemo = new ArrayList<String>();
       ArrayList<String> piecesListDemo = new ArrayList<String>();
       ArrayList<String> colorListDemo = new ArrayList<String>();
-      ArrayList<String> solutionDemo= new ArrayList<String>();
+      ArrayList<String> solutionDemo = new ArrayList<String>();
 
       solutionDemo.add("h2 h4");
       solutionDemo.add("a8 b8");
