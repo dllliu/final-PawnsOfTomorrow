@@ -200,6 +200,48 @@ public class Demo {
       piecesListDemo.clear();
       locationListDemo.clear();
 
+      solutionDemo.add("a8 b6");
+      solutionDemo.add("a1 b3");
+      solutionDemo.add("b6 d5");
+      locationListDemo.add("00");
+      colorListDemo.add("white");
+      piecesListDemo.add("knight");
+      locationListDemo.add("07");
+      colorListDemo.add("black");
+      piecesListDemo.add("knight");
+      locationListDemo.add("70");
+      colorListDemo.add("white");
+      piecesListDemo.add("king");
+      locationListDemo.add("77");
+      colorListDemo.add("black");
+      piecesListDemo.add("king");
+      ChessPuzzle.fiftyMove("shows 50 move rule, which is a draw when both sides haven't pushed a pawn or made a capture in the past 50 moves. The move count is set to 48 moves as black's turn to speed up the process",locationListDemo,piecesListDemo,colorListDemo,solutionDemo,"black",true);
+      solutionDemo.clear();
+      colorListDemo.clear();
+      piecesListDemo.clear();
+      locationListDemo.clear();
+
+      solutionDemo.add("h1 g1");
+      solutionDemo.add("a8 b6");
+      solutionDemo.add("a2 a4");
+      locationListDemo.add("01");
+      colorListDemo.add("white");
+      piecesListDemo.add("pawn");
+      locationListDemo.add("07");
+      colorListDemo.add("black");
+      piecesListDemo.add("knight");
+      locationListDemo.add("70");
+      colorListDemo.add("white");
+      piecesListDemo.add("king");
+      locationListDemo.add("77");
+      colorListDemo.add("black");
+      piecesListDemo.add("king");
+      ChessPuzzle.fiftyMove("shows how 50 move rule resets after a pawn move or capture. The move count is set to 48 moves as black's turn to speed up the process",locationListDemo,piecesListDemo,colorListDemo,solutionDemo,"white",true);
+      solutionDemo.clear();
+      colorListDemo.clear();
+      piecesListDemo.clear();
+      locationListDemo.clear();
+
       solutionDemo.add("e2 e4");
       solutionDemo.add("e7 e5");
       solutionDemo.add("f1 c4");
