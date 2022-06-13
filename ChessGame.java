@@ -14,14 +14,14 @@ System.out.println("If the input is invalid, you will see the instructions again
 System.out.println();
 System.out.println("If you’d like to play single player, type ‘solo’, and if you'd like to play double player, type ‘double’.");
 System.out.println();
- System.out.println("There are also other modes to select from. 3-Check Chess is ‘three-check’, King of the Hill Chess is 'king-hill,' Chess 960 is 'chess-960', Knight Chess is 'knight-takeover,' Horde Chess is ‘horde’.");
+ System.out.println("There are also other modes to select from. 3-Check Chess is ‘three-check’, King of the Hill Chess is 'king-hill,', Knight Chess is 'knight-takeover,' Horde Chess is ‘horde’.");
  System.out.println();
 System.out.println("To solve tactics, if you’d like to solve easy puzzles, type ‘easypuzzles,’ and if you’d like to solve hard puzzles, type ‘hardpuzzles.’ If you’d like to see the functionality of our program, type ‘demo.’");
 System.out.println();
   Scanner scan = new Scanner(System.in);
   String chessMode = scan.nextLine().toLowerCase();
 
-while(!chessMode.equals("double") && !chessMode.equals("solo") && !chessMode.equals("demo") && !chessMode.equals("three-check") && !chessMode.equals("king-hill") && !chessMode.equals("horde") && !chessMode.equals("easypuzzles") && !chessMode.equals("hardpuzzles") && !chessMode.equals("chess-960") && !chessMode.equals("knight-takeover")){
+while(!chessMode.equals("double") && !chessMode.equals("solo") && !chessMode.equals("demo") && !chessMode.equals("three-check") && !chessMode.equals("king-hill") && !chessMode.equals("horde") && !chessMode.equals("easypuzzles") && !chessMode.equals("hardpuzzles") && !chessMode.equals("knight-takeover")){
    scan = new Scanner(System.in);
    System.out.println("Invalid mode: type again");
    System.out.println();
@@ -413,16 +413,6 @@ if(!hordeBoard.canAnyMove(otherColor(color))){
       return;
     }
 }
-} else if (chessMode.equals("chess-960")){
-  System.out.println("The Chess Mode is Chess-960. Re-run if you get an error!");
-  /*
-  try{
-  ChessBoard.makeChess960();
-}catch(IndexOutOfBoundsException e){
-  System.out.println("Please Re-Run");
-}
-*/
-ChessBoard.makeChess960();
 }
   if(chessMode.equals("easypuzzles")){
     System.out.println("\n The Chess Mode is Easy Puzzles \n");
