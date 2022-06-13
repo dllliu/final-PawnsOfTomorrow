@@ -70,6 +70,9 @@ public class ChessBoard {
   }
 
   public static int[] parseScanner(String move){
+    if (move.length()<5){
+      throw new IllegalArgumentException("Invalid move: Enter Moves in following format: Character + number + space + Character + number");
+    }
     int[] returnArray = new int[4];
 
     String[] split = move.split(" ");
