@@ -2,6 +2,7 @@ import java.util.*;
 public class Demo {
   public static void initDemo(){
 
+
       ArrayList<String> locationListDemo = new ArrayList<String>();
       ArrayList<String> piecesListDemo = new ArrayList<String>();
       ArrayList<String> colorListDemo = new ArrayList<String>();
