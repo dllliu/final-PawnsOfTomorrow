@@ -402,14 +402,21 @@ if(!hordeBoard.canAnyMove(otherColor(color))){
       System.out.println("Game has ended in a draw due to the 50 move rule");
       return;
     }
-    if(hordeBoard.getPawns("white") == false){
-      System.out.println("black has has won the game by capturing all white pawns");
+    if(hordeBoard.helpFind(color) == false){
+      System.out.println(otherColor(color) + " has has won the game by capturing all " + color + " pawns");
       return;
     }
 }
 } else if (chessMode.equals("chess-960")){
   System.out.println("The Chess Mode is Chess-960. Re-run if you get an error! \n");
+  /*
+  try{
   ChessBoard.makeChess960();
+}catch(IndexOutOfBoundsException e){
+  System.out.println("Please Re-Run");
+}
+*/
+ChessBoard.makeChess960();
 }
   if(chessMode.equals("easypuzzles")){
     System.out.println("\n The Chess Mode is Easy Puzzles \n");
@@ -419,7 +426,7 @@ if(!hordeBoard.canAnyMove(otherColor(color))){
     System.out.println("\n The Chess Mode is Hard Puzzles \n");
     HardPuzzles.initHardPuzzles();
   }else if(chessMode.equals("knight-takeover")){
-    System.out.println("This Chess Mode has a Queen-Knight and a Rook-Knight! \n");
+    System.out.println("This Chess Mode has a side with all knights! \n");
     ChessBoard.makeWierdBoard();
   }
 }
