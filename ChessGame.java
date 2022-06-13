@@ -134,7 +134,7 @@ colorList.add("black");
 
 
   System.out.println("\n The Chess Mode is Two Player Chess \n");
-  System.out.println(newBoard.toString(color));
+  System.out.println(newBoard.toString(otherColor(color)));
   int count=0;
 
   while(true){
@@ -152,7 +152,7 @@ colorList.add("black");
     System.out.flush();
     try{
       newBoard.makeMove(move, color, true);
-      System.out.println(newBoard.toString(otherColor(color)));
+      System.out.println(newBoard.toString(color));
     }catch(IllegalArgumentException e){
       e.printStackTrace();
       System.out.println("Invalid move: Enter Moves in following format: Character + number + space + Character + number");
@@ -192,12 +192,12 @@ colorList.add("black");
     System.out.println("White Check Counter is: " + whiteCheckCount);
     System.out.println("Black Check Counter is: " + blackCheckCount);
     System.out.println (newBoard.scoreSheet.toString());
-    System.out.println(newBoard.toString(color));
+    System.out.println(newBoard.toString(otherColor(color)));
     System.out.println(color + " enter your move");
     Scanner in = new Scanner(System.in);
     String move = in.nextLine();
     if (move.contains("resign")){
-      System.out.println(color + " reigns");
+      System.out.println(color + " resigns");
       System.out.println(otherColor(color) + " wins");
       return;
     }
@@ -252,7 +252,7 @@ else if (chessMode.equals("king-hill")) {
   while(true){
   System.out.println("\n The Chess Mode is King of the Hill \n");
   System.out.println (newBoard.scoreSheet.toString());
-  System.out.println(newBoard.toString(color));
+  System.out.println(newBoard.toString(otherColor(color)));
   System.out.println(color + " enter your move");
   Scanner in = new Scanner(System.in);
   String move = in.nextLine();
@@ -365,7 +365,7 @@ for(int[] arr: goodSquares) {
   while(true){
     System.out.println("\n The Chess Mode is Horde \n");
   System.out.println (hordeBoard.scoreSheet.toString());
-  System.out.println(hordeBoard.toString(color));
+  System.out.println(hordeBoard.toString(otherColor(color)));
   System.out.println(color + " enter your move");
   Scanner in = new Scanner(System.in);
   String move = in.nextLine();

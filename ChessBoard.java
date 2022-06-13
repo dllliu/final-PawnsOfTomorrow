@@ -229,7 +229,7 @@ piecesList960.add(notPawns[i]);
   while(true){
   System.out.println("\nChess Mode is: Fischer Chess or Chess 960");
   System.out.println (fischerBoard.scoreSheet.toString());
-  System.out.println(fischerBoard.toString(color));
+  System.out.println(fischerBoard.toString(otherColor(color)));
   System.out.println(color + " enter your move");
   Scanner in = new Scanner(System.in);
   String move = in.nextLine();
@@ -339,7 +339,7 @@ public static void makeWierdBoard(){
 
   while(true){
   System.out.println (wierdBoard.scoreSheet.toString());
-  System.out.println(wierdBoard.toString(color));
+  System.out.println(wierdBoard.toString(otherColor(color)));
   System.out.println(color + " enter your move");
   Scanner in = new Scanner(System.in);
   String move = in.nextLine();
@@ -661,7 +661,7 @@ public String toString(){
       String str = "";
       int countRow = 0;
       String reverseString;
-      if (color.equals("white")){
+      if (color.equals("black")){
       for(Piece[] pieces: board){
         int countCol = 0;
         for(Piece piece: pieces){
