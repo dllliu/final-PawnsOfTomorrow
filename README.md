@@ -92,3 +92,5 @@ Eugene Yoo (6/11):
  
  Daniel Liu(6/12): Changed color scheme to green/grey. Fixed chess 960(king is between rooks). WARNING: Chess 960 may need to be ran multiple times before it runs correctly! Added Knight-Takeover mode. Debugged.
  
+ Eugene Yoo (6/12):
+ Created a chess program simulator, which basically is a singleplayer option to choose. It used a method similar to canAnyMove but it was slightly different because it added all valid moves for the computer side and then randomly chose one move. I also worked on assigning modes to different inputs, on finishing the demo class that checks multiples cases, a toString method to make sure it is displayed on the right side, and debugging.ing
