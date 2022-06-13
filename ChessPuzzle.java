@@ -15,7 +15,7 @@ public class ChessPuzzle{
       System.out.println(color + " enter your move");
       if (yes){
         System.out.println("This checks "+checkType);
-        System.out.println("Hint: make the move "+solution.get(0));
+        System.out.println("To move on: make the move "+solution.get(0));
       }
       Scanner in = new Scanner(System.in);
       String move = in.nextLine();
