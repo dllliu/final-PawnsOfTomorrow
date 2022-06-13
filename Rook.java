@@ -8,7 +8,7 @@ public class Rook extends Piece{
 
 @Override
    public String toString(){
-       if (getColor().equals("white")) return Color.colorize("♜",Color.WHITE);
+       if (getColor().equals("white")) return Color.colorize("♜",Color.WHITE+Color.BRIGHT);
         return Color.colorize("♜",Color.BLACK);
    }
 
