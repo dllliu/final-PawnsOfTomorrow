@@ -29,12 +29,6 @@ public class ChessBoard {
       if (piecesList.get(i).equals("queen")){
         board[Integer.parseInt(locationList.get(i).substring(1,2))][Integer.parseInt(locationList.get(i).substring(0,1))]=new Queen(colorList.get(i));
       }
-      if (piecesList.get(i).equals("queenknight")){
-        board[Integer.parseInt(locationList.get(i).substring(1,2))][Integer.parseInt(locationList.get(i).substring(0,1))]=new QueenKnight(colorList.get(i));
-      }
-      if (piecesList.get(i).equals("rookknight")){
-        board[Integer.parseInt(locationList.get(i).substring(1,2))][Integer.parseInt(locationList.get(i).substring(0,1))]=new RookKnight(colorList.get(i));
-      }
     }
 }
 
